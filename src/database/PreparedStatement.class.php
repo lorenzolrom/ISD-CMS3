@@ -16,6 +16,10 @@ namespace database;
 
 use exceptions\DatabaseException;
 
+/**
+ * Class PreparedStatement
+ * @package database
+ */
 class PreparedStatement
 {
     private $statement; // Stored SQL query statement

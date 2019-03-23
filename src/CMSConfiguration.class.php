@@ -15,6 +15,8 @@ abstract class CMSConfiguration
 {
     const CMS_CONFIG = [
         'siteTitle' => 'My Website',
+        'siteDescription' => 'Welcome to my website!',
+        'theme' => 'default',
 
         'baseURL' => 'http://www.my.domain',
         'baseURI' => '/',

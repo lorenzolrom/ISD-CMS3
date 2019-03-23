@@ -16,6 +16,10 @@ namespace database;
 
 use exceptions\DatabaseException;
 
+/**
+ * Class DatabaseConnection
+ * @package database
+ */
 class DatabaseConnection
 {
     const FETCH_ASSOC = \PDO::FETCH_ASSOC;

@@ -13,10 +13,13 @@
 
 namespace controllers;
 
-
+/**
+ * Class Controller
+ * @package controllers
+ */
 abstract class Controller
 {
-    private $uri;
+    protected $uri;
 
     public function __construct(string $uri)
     {

@@ -13,7 +13,10 @@
 
 namespace controllers;
 
-
+/**
+ * Class AdminController
+ * @package controllers
+ */
 class AdminController extends Controller
 {
 

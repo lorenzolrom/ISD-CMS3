@@ -14,8 +14,15 @@
 namespace controllers;
 
 
+use exceptions\PageNotFoundException;
 use factories\ControllerFactory;
+use views\pages\FatalErrorPage;
+use views\pages\PageNotFoundPage;
 
+/**
+ * Class FrontController
+ * @package controllers
+ */
 class FrontController
 {
     /**
@@ -37,12 +44,26 @@ class FrontController
         // Locate controller for page
         try
         {
-            $controller = ControllerFactory::getController($uri);
-            return $controller->getPage();
+            try
+            {
+                $controller = ControllerFactory::getController($uri);
+                return $controller->getPage();
+            }
+            catch (PageNotFoundException $e)
+            {
+                // Create new page not found page
+                $page = new PageNotFoundPage($e);
+                return $page->getHTML();
+            }
+            catch(\Exception $e)
+            {
+                $page = new FatalErrorPage($e);
+                return $page->getHTML();
+            }
         }
         catch(\Exception $e)
         {
-            die("Controller Not Found");
+            die($e->getMessage());
         }
     }
 }

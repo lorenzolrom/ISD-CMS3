@@ -1,0 +1,101 @@
+:root {
+    --title-color: #00008B;
+    --font-color: #333333;
+    --background-color: #FFFFFF;
+    --header-footer-background-color: #000000;
+    --header-footer-font-color: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 10pt;
+}
+
+body {
+    background-image: url("../media/body-bg.gif");
+    overflow-y: scroll;
+}
+
+#wrapper {
+    margin: auto;
+
+    display: flex;
+
+    width: 1024px;
+    min-height: 100vh;
+    flex-direction: column;
+
+    background-color: var(--background-color);
+
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--font-color);
+}
+
+header #header-greeting, header nav {
+    display: block;
+
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+
+    color: var(--header-footer-font-color);
+    font-size: .8rem;
+    font-weight: bold;
+    box-sizing: border-box;
+
+    background-color: var(--header-footer-background-color);
+}
+
+header #header-greeting {
+    padding: 0 5px;
+}
+
+header #header-banner {
+    display: block;
+    height: 100px;
+}
+
+header #header-logo {
+    height: 85px;
+    margin-left: 13px;
+    margin-top: 13px;
+}
+
+#main {
+    padding: 0 50px 20px;
+
+    flex: 1 0 auto;
+}
+
+#main h1 {
+    font-family: "Titillium 700", Arial, sans-serif;
+    color: var(--title-color);
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+footer {
+    display: block;
+    padding: 5px;
+    font-size: 1rem;
+    background-color: var(--header-footer-background-color);
+    color: var(--header-footer-font-color);
+    font-family: "Times New Roman", serif;
+}
+
+footer a {
+    color: var(--header-footer-font-color);
+}
+
+footer #footer-company {
+    float: left;
+}
+
+footer #footer-date {
+    float: right;
+}

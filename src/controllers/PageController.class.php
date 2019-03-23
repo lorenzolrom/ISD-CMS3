@@ -13,12 +13,25 @@
 
 namespace controllers;
 
+use database\PageDatabaseHandler;
+use factories\ViewFactory;
 
+/**
+ * Class PageController
+ * @package controllers
+ */
 class PageController extends Controller
 {
 
+    /**
+     * @return string
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\PageNotFoundException
+     * @throws \exceptions\ViewException
+     */
     public function getPage(): string
     {
-        return "Page";
+        $page = PageDatabaseHandler::selectByUri($this->uri);
+        return ViewFactory::getPageView($page)->getHTML();
     }
 }

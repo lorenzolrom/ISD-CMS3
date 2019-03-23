@@ -18,6 +18,10 @@ use controllers\AdminController;
 use controllers\Controller;
 use controllers\PageController;
 
+/**
+ * Class ControllerFactory
+ * @package factories
+ */
 class ControllerFactory
 {
     /**
@@ -36,9 +40,14 @@ class ControllerFactory
             case "admin":
                 return new AdminController($uri);
                 break;
+            case "node":
+                // TODO: create node controller for individual pieces of content
+                break;
             default:
                 return new PageController($uri);
                 break;
         }
+
+
     }
 }
