@@ -20,7 +20,7 @@ use views\View;
 
 abstract class ErrorPage extends HTML5Page
 {
-    public function __construct(\Exception $e)
+    public function __construct()
     {
         parent::__construct();
 
@@ -36,7 +36,5 @@ abstract class ErrorPage extends HTML5Page
 
         // Add error message
         $this->setVariable("mainContent", self::templateFileContents("ErrorMessage", View::TEMPLATE_ELEMENT));
-
-        // TODO: Footer/header
     }
 }

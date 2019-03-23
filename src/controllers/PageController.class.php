@@ -28,6 +28,8 @@ class PageController extends Controller
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\ElementNotFoundException
+     * @throws \exceptions\ContentNotFoundException
      */
     public function getPage(): string
     {

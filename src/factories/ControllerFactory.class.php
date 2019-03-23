@@ -40,14 +40,9 @@ class ControllerFactory
             case "admin":
                 return new AdminController($uri);
                 break;
-            case "node":
-                // TODO: create node controller for individual pieces of content
-                break;
             default:
                 return new PageController($uri);
                 break;
         }
-
-
     }
 }

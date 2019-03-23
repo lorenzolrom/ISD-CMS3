@@ -128,7 +128,7 @@ class Page
     /**
      * @return mixed
      */
-    public function getisOnNav()
+    public function getIsOnNav()
     {
         return $this->isOnNav;
     }

@@ -13,6 +13,8 @@
 
 namespace controllers;
 
+use exceptions\PageNotFoundException;
+
 /**
  * Class Controller
  * @package controllers
@@ -26,5 +28,9 @@ abstract class Controller
         $this->uri = $uri;
     }
 
+    /**
+     * @return string
+     * @throws PageNotFoundException
+     */
     abstract public function getPage(): string;
 }

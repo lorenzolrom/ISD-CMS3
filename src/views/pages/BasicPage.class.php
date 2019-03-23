@@ -34,6 +34,7 @@ class BasicPage extends HTML5Page
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\ContentNotFoundException
      */
     public function __construct(Page $page)
     {

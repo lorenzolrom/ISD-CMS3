@@ -18,7 +18,7 @@ class PageNotFoundPage extends ErrorPage
 {
     public function __construct(\Exception $e)
     {
-        parent::__construct($e);
+        parent::__construct();
 
         // Set tab title
         $this->setVariable("tabTitle", "Page Not Found");

@@ -78,6 +78,7 @@ class ViewFactory
      * @throws ViewException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ElementNotFoundException
+     * @throws \exceptions\ContentNotFoundException
      */
     public static function getPageView(Page $page): View
     {
