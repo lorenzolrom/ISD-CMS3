@@ -37,3 +37,50 @@ div.split > div {
     text-align: justify;
     text-justify: inter-word;
 }
+
+img.post-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid var(--title-color);
+    box-shadow: 2px 2px var(--title-color);
+}
+
+p.post-date {
+    font-style: italic;
+    margin-bottom: 10px;
+    margin-top: -5px;
+}
+
+div.post-body {
+    display: table;
+    width: 100%
+}
+
+div.post-body img.post-image, div.post-body div.post-content {
+    display: table-cell;
+    vertical-align: top;
+}
+
+div.post-body img.post-image {
+    margin-right: 20px;
+}
+
+div.post-list {
+    padding-top: 10px;
+    text-align: left;
+}
+
+a.post-thumbnail {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    text-align: center;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+
+a.post-thumbnail p {
+    color: var(--title-color);
+    font-weight: bold;
+}

@@ -7,40 +7,45 @@
  *
  * User: lromero
  * Date: 3/23/2019
- * Time: 10:09 AM
+ * Time: 5:22 PM
  */
 
 
 namespace views\pages;
 
 
+use models\Page;
 use views\elements\Footer;
 use views\elements\Header;
 
-abstract class ErrorPage extends HTML5Page
+/**
+ * Class HeaderFooterPage
+ *
+ * Page including the site's header and footer
+ *
+ * @package views\pages
+ */
+class HeaderFooterPage extends HTML5Page
 {
     /**
-     * ErrorPage constructor.
+     * CompleteSitePage constructor.
+     * @param Page|null $page
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
      */
-    public function __construct()
+    public function __construct(?Page $page = NULL)
     {
         parent::__construct();
 
-        // Set to a basic page
         $this->setVariable("bodyContent", self::templateFileContents("CompleteSitePage", self::TEMPLATE_PAGE));
-        $this->setVariable("mainContent", self::templateFileContents("BasicPage", self::TEMPLATE_PAGE));
+        $this->setVariable("siteDescription", \CMSConfiguration::CMS_CONFIG['siteDescription']);
 
         // Load header and footer
-        $header = new Header();
+        $header = new Header($page);
         $footer = new Footer();
 
         $this->setVariable("headerContent", $header->getHTML());
         $this->setVariable("footerContent", $footer->getHTML());
-
-        // Add error message
-        $this->setVariable("mainContent", self::templateFileContents("ErrorMessage", self::TEMPLATE_ELEMENT));
     }
 }

@@ -18,7 +18,6 @@ use controllers\AdminController;
 use controllers\Controller;
 use controllers\PageController;
 use controllers\PostController;
-use models\Post;
 
 /**
  * Class ControllerFactory
@@ -43,6 +42,9 @@ class ControllerFactory
                 return new AdminController($uri);
                 break;
             case "posts":
+                return new PostController($uri);
+                break;
+            case "category":
                 return new PostController($uri);
                 break;
             default:

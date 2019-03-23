@@ -36,9 +36,34 @@ class PostDatabaseHandler
         $handler->close();
 
         if($select->getRowCount() !== 1)
-            throw new PostNotFoundException(PostNotFoundException::MESSAGES[PostNotFoundException::PRIMARY_KEY_NOT_FOUND], PostNotFoundException::PRIMARY_KEY_NOT_FOUND);
+            throw new PostNotFoundException(PostNotFoundException::MESSAGES[PostNotFoundException::PRIMARY_KEY_NOT_FOUND] . ": $id", PostNotFoundException::PRIMARY_KEY_NOT_FOUND);
 
         return $select->fetchObject("models\Post");
+    }
+
+    /**
+     * @param bool $displayedOnly
+     * @return array
+     * @throws PostNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function selectAll(bool $displayedOnly = TRUE): array
+    {
+        $handler = new DatabaseConnection();
+
+        $select = $handler->prepare("SELECT id FROM cms_Post" . ($displayedOnly ? " WHERE displayed = 1" : "") . " ORDER BY title ASC");
+        $select->execute();
+
+        $handler->close();
+
+        $posts = array();
+
+        foreach($select->fetchAll(DatabaseConnection::FETCH_COLUMN, 0) as $id)
+        {
+            $posts[] = self::selectById($id);
+        }
+
+        return $posts;
     }
 
     /**
@@ -52,7 +77,7 @@ class PostDatabaseHandler
     {
         $handler = new DatabaseConnection();
 
-        $select = $handler->prepare("SELECT id FROM cms_Post WHERE category = ?" . ($displayedOnly ? " AND displayed = 1" : ""));
+        $select = $handler->prepare("SELECT id FROM cms_Post WHERE category = ?" . ($displayedOnly ? " AND displayed = 1" : "") . " ORDER BY title ASC");
         $select->bindParam(1, $categoryId, DatabaseConnection::PARAM_INT);
         $select->execute();
 

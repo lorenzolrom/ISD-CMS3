@@ -13,11 +13,7 @@
 
 namespace views\pages;
 
-use models\Page;
 use models\Post;
-use views\elements\Footer;
-use views\elements\Header;
-use views\View;
 
 /**
  * Class PostPage
@@ -26,7 +22,7 @@ use views\View;
  *
  * @package views\pages
  */
-class PostPage extends HTML5Page
+class PostPage extends HeaderFooterPage
 {
     /**
      * PostPage constructor.
@@ -38,17 +34,9 @@ class PostPage extends HTML5Page
     public function __construct(Post $post)
     {
         parent::__construct();
-        $this->setVariable("bodyContent", self::templateFileContents("CompleteSitePage", View::TEMPLATE_PAGE));
-
-        // Load header and footer
-        $header = new Header();
-        $footer = new Footer();
-
-        $this->setVariable("headerContent", $header->getHTML());
-        $this->setVariable("footerContent", $footer->getHTML());
 
         // Load the post template
-        $this->setVariable("mainContent", self::templateFileContents("PostPage", View::TEMPLATE_PAGE));
+        $this->setVariable("mainContent", self::templateFileContents("PostPage", self::TEMPLATE_PAGE));
 
         // Set post title
         $this->setVariable("tabTitle", $post->getTitle());

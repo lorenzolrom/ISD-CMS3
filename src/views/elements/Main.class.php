@@ -13,7 +13,6 @@
 
 namespace views\elements;
 
-use factories\ViewFactory;
 use views\View;
 
 class Main extends Element

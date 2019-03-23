@@ -13,8 +13,6 @@
 
 namespace views\pages;
 
-
-use factories\ViewFactory;
 use models\Page;
 
 /**
@@ -24,7 +22,7 @@ use models\Page;
  *
  * @package views\pages
  */
-class NoTitlePage extends CompleteSitePage
+class NoTitlePage extends DatabasePage
 {
     /**
      * NoTitlePage constructor.

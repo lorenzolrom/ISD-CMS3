@@ -40,4 +40,29 @@ class PostCategoryDatabaseHandler
 
         return $select->fetchObject("models\PostCategory");
     }
+
+    /**
+     * @param bool $displayedOnly
+     * @return PostCategory[]
+     * @throws \exceptions\DatabaseException
+     * @throws PostCategoryNotFoundException
+     */
+    public static function selectAll(bool $displayedOnly = TRUE): array
+    {
+        $handler = new DatabaseConnection();
+
+        $select = $handler->prepare("SELECT id FROM cms_PostCategory" . ($displayedOnly ? " WHERE displayed = 1" : "") . " ORDER BY title ASC");
+        $select->execute();
+
+        $handler->close();
+
+        $categories = array();
+
+        foreach($select->fetchAll(DatabaseConnection::FETCH_COLUMN, 0) as $id)
+        {
+            $categories[] = self::selectById($id);
+        }
+
+        return $categories;
+    }
 }

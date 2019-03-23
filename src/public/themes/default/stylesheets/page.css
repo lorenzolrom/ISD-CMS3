@@ -108,6 +108,15 @@ header #header-logo {
     border-bottom: 1px solid var(--title-color);
 }
 
+#content p {
+    padding-bottom: 10px;
+}
+
+#content ul {
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
 footer {
     display: block;
     padding: 5px;
@@ -127,4 +136,8 @@ footer #footer-company {
 
 footer #footer-date {
     float: right;
+}
+
+img.image-link {
+    cursor: pointer;
 }

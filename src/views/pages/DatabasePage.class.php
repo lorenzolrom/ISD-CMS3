@@ -15,18 +15,15 @@ namespace views\pages;
 
 use factories\ViewFactory;
 use models\Page;
-use views\elements\Footer;
-use views\elements\Header;
-use views\View;
 
 /**
  * Class CompleteSitePage
  *
- * A page with the site's header and footer
+ * Display for a page stored in the database
  *
  * @package views\pages
  */
-abstract class CompleteSitePage extends HTML5Page
+abstract class DatabasePage extends HeaderFooterPage
 {
     protected $page;
 
@@ -39,20 +36,9 @@ abstract class CompleteSitePage extends HTML5Page
      */
     public function __construct(Page $page)
     {
-        parent::__construct();
+        parent::__construct($page);
         $this->page = $page;
-
-        $this->setVariable("bodyContent", self::templateFileContents("CompleteSitePage", View::TEMPLATE_PAGE));
-
         $this->setVariable("tabTitle", $page->getTitle());
-        $this->setVariable("siteDescription", \CMSConfiguration::CMS_CONFIG['siteDescription']);
-
-        // Load header and footer
-        $header = new Header($page);
-        $footer = new Footer();
-
-        $this->setVariable("headerContent", $header->getHTML());
-        $this->setVariable("footerContent", $footer->getHTML());
     }
 
     /**

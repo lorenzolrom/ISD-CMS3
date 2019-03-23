@@ -12,7 +12,18 @@ function randomBanner()
     document.querySelector("#header-banner").style.backgroundImage = "url('/themes/default/media/banners/" + background + "')";
 }
 
+/**
+ * Add onclick listener to post-image to link to full-size image
+ */
+function addImageLinkListener()
+{
+    $('.image-link').click(function(){
+        window.location.href = this.src;
+    });
+}
+
 window.onload = function()
 {
     randomBanner();
+    addImageLinkListener();
 };

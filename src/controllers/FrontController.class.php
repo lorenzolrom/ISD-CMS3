@@ -13,11 +13,8 @@
 
 namespace controllers;
 
-
-use exceptions\PageNotFoundException;
 use factories\ControllerFactory;
 use views\pages\FatalErrorPage;
-use views\pages\PageNotFoundPage;
 
 /**
  * Class FrontController

@@ -53,6 +53,8 @@ class Header extends View
             $navigationLinks .= "<li><a href='{{@baseURI}}$pageURI' $current>$pageTitle</a></li>";
         }
 
+        $navigationLinks .= "<li><a href='{{@baseURI}}posts'>Projects</a></li>";
+
         $this->setVariable("navContent", $navigationLinks);
     }
 }

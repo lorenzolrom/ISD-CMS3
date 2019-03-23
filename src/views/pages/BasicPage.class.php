@@ -14,7 +14,6 @@
 namespace views\pages;
 
 use models\Page;
-use views\View;
 
 /**
  * Class BasicPage
@@ -23,7 +22,7 @@ use views\View;
  *
  * @package views
  */
-class BasicPage extends CompleteSitePage
+class BasicPage extends DatabasePage
 {
     /**
      * BasicPage constructor.
@@ -39,7 +38,7 @@ class BasicPage extends CompleteSitePage
         parent::__construct($page);
 
         // Import the BasicPage template
-        $this->setVariable("mainContent", self::templateFileContents("BasicPage", View::TEMPLATE_PAGE));
+        $this->setVariable("mainContent", self::templateFileContents("BasicPage", self::TEMPLATE_PAGE));
 
         // Set page title
         $this->setVariable("pageTitle", $page->getTitle());
