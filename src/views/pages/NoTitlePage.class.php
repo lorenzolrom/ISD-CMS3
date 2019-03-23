@@ -6,43 +6,38 @@
  * Content Management System 3
  *
  * User: lromero
- * Date: 3/22/2019
- * Time: 6:12 PM
+ * Date: 3/23/2019
+ * Time: 12:52 PM
  */
 
 
 namespace views\pages;
 
+
+use factories\ViewFactory;
 use models\Page;
-use views\View;
 
 /**
- * Class BasicPage
+ * Class NoTitlePage
  *
- * A basic page with a single content area
+ * A site page without an H1 title
  *
- * @package views
+ * @package views\pages
  */
-class BasicPage extends CompleteSitePage
+class NoTitlePage extends CompleteSitePage
 {
     /**
-     * BasicPage constructor.
+     * NoTitlePage constructor.
      * @param Page $page
-     * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\ContentNotFoundException
      */
     public function __construct(Page $page)
     {
         parent::__construct($page);
-
-        // Import the BasicPage template
-        $this->setVariable("mainContent", self::templateFileContents("BasicPage", View::TEMPLATE_PAGE));
-
-        // Set page title
-        $this->setVariable("pageTitle", $page->getTitle());
 
         $this->loadContent("mainContent");
     }

@@ -9,7 +9,7 @@ function randomBanner()
     let rand = Math.floor(Math.random() * Math.floor(limit) + 1);
     let background = rand.toString() + ".gif";
 
-    document.querySelector("#header-banner").style.backgroundImage = "url('../themes/default/media/banners/" + background + "')";
+    document.querySelector("#header-banner").style.backgroundImage = "url('/themes/default/media/banners/" + background + "')";
 }
 
 window.onload = function()

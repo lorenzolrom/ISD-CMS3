@@ -14,16 +14,45 @@
 namespace views\elements;
 
 
+use database\PageDatabaseHandler;
+use models\Page;
 use views\View;
 
 class Header extends View
 {
     /**
      * Header constructor.
+     * @param Page|null $currentPage Current page the user is on, for purpose of indicating current page on navigation
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
      */
-    public function __construct()
+    public function __construct(?Page $currentPage = NULL)
     {
         $this->setTemplateFromHTML("Header", View::TEMPLATE_ELEMENT);
+
+        // Generate navigation menu
+        $navigationLinks = "";
+
+        foreach(PageDatabaseHandler::selectAll(TRUE) as $page)
+        {
+            // Check if page has navTitle
+            $pageTitle = $page->getTitle();
+
+            if($page->getNavTitle() !== NULL)
+                $pageTitle = $page->getNavTitle();
+
+            $pageURI = $page->getUri();
+
+            // Is this page the current page?
+            if($currentPage !== NULL AND $currentPage->getId() == $page->getId())
+                $current = " class='current'";
+            else
+                $current = "";
+
+            $navigationLinks .= "<li><a href='{{@baseURI}}$pageURI' $current>$pageTitle</a></li>";
+        }
+
+        $this->setVariable("navContent", $navigationLinks);
     }
 }

@@ -28,6 +28,7 @@ class Page
     private $title;
     private $navTitle;
     private $isOnNav;
+    private $weight;
 
     /**
      * @return int
@@ -139,6 +140,22 @@ class Page
     public function setIsOnNav($isOnNav): void
     {
         $this->isOnNav = $isOnNav;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param mixed $weight
+     */
+    public function setWeight($weight): void
+    {
+        $this->weight = $weight;
     }
 
     /**

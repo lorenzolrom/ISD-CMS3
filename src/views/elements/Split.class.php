@@ -7,19 +7,19 @@
  *
  * User: lromero
  * Date: 3/23/2019
- * Time: 9:13 AM
+ * Time: 1:30 PM
  */
 
 
 namespace views\elements;
 
-use factories\ViewFactory;
+
 use views\View;
 
-class Main extends Element
+class Split extends Element
 {
     /**
-     * Main constructor.
+     * Split constructor.
      * @param \models\Element $element
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
@@ -28,8 +28,9 @@ class Main extends Element
     public function __construct(\models\Element $element)
     {
         parent::__construct($element);
-        $this->areas = ['content'];
-        $this->setTemplateFromHTML("Main", View::TEMPLATE_ELEMENT);
+
+        $this->areas = ['leftContent', 'rightContent'];
+        $this->setTemplateFromHTML("Split", View::TEMPLATE_ELEMENT);
 
         $this->loadContent();
     }

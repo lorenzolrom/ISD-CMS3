@@ -14,13 +14,18 @@
 namespace views\elements;
 
 
+use factories\ViewFactory;
 use views\View;
 
 abstract class Element extends View
 {
     protected $areas;
+    protected $element;
 
-    abstract function __construct(\models\Element $element);
+    function __construct(\models\Element $element)
+    {
+        $this->element = $element;
+    }
 
     /**
      * Returns list of valid content areas for this element
@@ -29,5 +34,27 @@ abstract class Element extends View
     public function getAreas(): array
     {
         return $this->areas;
+    }
+
+    /**
+     * Auto-loads content into specified areas for elements using the default process
+     * @throws \exceptions\ContentNotFoundException
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\ViewException
+     */
+    protected function loadContent()
+    {
+        // Load in content
+        foreach($this->areas as $area)
+        {
+            $areaContent = "";
+
+            foreach($this->element->getContent($area) as $content)
+            {
+                $areaContent .= ViewFactory::getContentView($content)->getHTML();
+            }
+
+            $this->setVariable($area, $areaContent);
+        }
     }
 }

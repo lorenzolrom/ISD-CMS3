@@ -49,12 +49,6 @@ class FrontController
                 $controller = ControllerFactory::getController($uri);
                 return $controller->getPage();
             }
-            catch (PageNotFoundException $e)
-            {
-                // Create new page not found page
-                $page = new PageNotFoundPage($e);
-                return $page->getHTML();
-            }
             catch(\Exception $e)
             {
                 $page = new FatalErrorPage($e);

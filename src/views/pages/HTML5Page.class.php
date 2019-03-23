@@ -22,7 +22,7 @@ use views\View;
  *
  * @package views
  */
-class HTML5Page extends View
+abstract class HTML5Page extends View
 {
     /**
      * BasePage constructor.

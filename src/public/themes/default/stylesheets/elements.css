@@ -1,0 +1,39 @@
+div.tri-banner {
+    display: block;
+    margin: 20px auto auto;
+    width: 100%;
+}
+
+div.tri-banner img {
+    display: inline-block;
+    width: 33.333%;
+    max-width: 100%;
+}
+
+img.welcome-message {
+    display: block;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 6px;
+}
+
+p.site-tagline {
+    padding-bottom: 20px;
+    text-align: center;
+    line-height: normal;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: #C00000;
+}
+
+div.split {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.split > div {
+    width: 47%;
+    vertical-align: top;
+    text-align: justify;
+    text-justify: inter-word;
+}

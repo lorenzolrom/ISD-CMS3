@@ -13,6 +13,8 @@
 
 namespace views\content;
 
+use views\View;
+
 /**
  * Class Image
  *
@@ -22,11 +24,17 @@ namespace views\content;
  */
 class Image extends Content
 {
+    /**
+     * Image constructor.
+     * @param \models\Content $content
+     * @throws \exceptions\ViewException
+     */
     public function __construct(\models\Content $content)
     {
         parent::__construct($content);
+        $this->setTemplateFromHTML("Image", View::TEMPLATE_CONTENT);
 
-        $imgAttributes = json_decode($content->getContent());
+        $imgAttributes = json_decode($content->getContent(), TRUE);
 
         // Set source
         $this->setVariable("imgSource", $imgAttributes['imgSource']);

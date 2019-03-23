@@ -14,7 +14,9 @@
 namespace controllers;
 
 use database\PageDatabaseHandler;
+use exceptions\PageNotFoundException;
 use factories\ViewFactory;
+use views\pages\PageNotFoundPage;
 
 /**
  * Class PageController
@@ -26,14 +28,23 @@ class PageController extends Controller
     /**
      * @return string
      * @throws \exceptions\DatabaseException
-     * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\ContentNotFoundException
+     * @throws PageNotFoundException
      */
     public function getPage(): string
     {
-        $page = PageDatabaseHandler::selectByUri($this->uri);
-        return ViewFactory::getPageView($page)->getHTML();
+        try
+        {
+            $page = PageDatabaseHandler::selectByUri($this->uri);
+            return ViewFactory::getPageView($page)->getHTML();
+        }
+        catch(PageNotFoundException $e)
+        {
+            // Create new page not found page
+            $page = new PageNotFoundPage($e);
+            return $page->getHTML();
+        }
     }
 }

@@ -20,12 +20,19 @@ use views\View;
 
 abstract class ErrorPage extends HTML5Page
 {
+    /**
+     * ErrorPage constructor.
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\PageNotFoundException
+     * @throws \exceptions\ViewException
+     */
     public function __construct()
     {
         parent::__construct();
 
         // Set to a basic page
-        $this->setVariable("bodyContent", self::templateFileContents("BasicPage", View::TEMPLATE_PAGE));
+        $this->setVariable("bodyContent", self::templateFileContents("CompleteSitePage", View::TEMPLATE_PAGE));
+        $this->setVariable("mainContent", self::templateFileContents("BasicPage", View::TEMPLATE_PAGE));
 
         // Load header and footer
         $header = new Header();

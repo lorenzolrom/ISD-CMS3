@@ -29,7 +29,7 @@ class PageDatabaseHandler
     {
         $handler = new DatabaseConnection();
 
-        $select = $handler->prepare("SELECT id, type, author, uri, title, navTitle, isOnNav FROM cms_Page WHERE id = ? LIMIT 1");
+        $select = $handler->prepare("SELECT id, type, author, uri, title, navTitle, isOnNav, weight FROM cms_Page WHERE id = ? LIMIT 1");
         $select->bindParam(1, $id, DatabaseConnection::PARAM_INT);
         $select->execute();
 
@@ -62,5 +62,31 @@ class PageDatabaseHandler
             throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::UNIQUE_KEY_NOT_FOUND] . ": $uri", PageNotFoundException::UNIQUE_KEY_NOT_FOUND);
 
         return self::selectById($select->fetchColumn());
+    }
+
+    /**
+     * @param bool $onNav
+     * @param bool $byWeight
+     * @return Page[]
+     * @throws PageNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function selectAll(bool $onNav = FALSE, bool $byWeight = TRUE): array
+    {
+        $handler = new DatabaseConnection();
+
+        $select = $handler->prepare("SELECT id FROM cms_Page" . ($onNav ? " WHERE isOnNav = 1" : "") . ($byWeight ? " ORDER BY weight ASC" : ""));
+        $select->execute();
+
+        $handler->close();
+
+        $pages = array();
+
+        foreach($select->fetchAll(DatabaseConnection::FETCH_COLUMN, 0) as $id)
+        {
+            $pages[] = self::selectById($id);
+        }
+
+        return $pages;
     }
 }

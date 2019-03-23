@@ -18,10 +18,14 @@ use models\Content;
 use models\Element;
 use models\Page;
 use views\content\Image;
+use views\content\Level2Heading;
 use views\content\Paragraph;
 use views\content\Raw;
 use views\elements\Main;
+use views\elements\Split;
+use views\elements\TriBanner;
 use views\pages\BasicPage;
+use views\pages\NoTitlePage;
 use views\View;
 
 /**
@@ -39,6 +43,9 @@ class ViewFactory
     {
         switch($content->getType())
         {
+            case "Level 2 Heading":
+                return new Level2Heading($content);
+                break;
             case "Image":
                 return new Image($content);
                 break;
@@ -67,6 +74,12 @@ class ViewFactory
             case "Main":
                 return new Main($element);
                 break;
+            case "Tri-Banner":
+                return new TriBanner($element);
+                break;
+            case "Split":
+                return new Split($element);
+                break;
             default:
                 throw new ViewException(ViewException::MESSAGES[ViewException::ELEMENT_NOT_FOUND], ViewException::ELEMENT_NOT_FOUND);
         }
@@ -79,6 +92,7 @@ class ViewFactory
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\ContentNotFoundException
+     * @throws \exceptions\PageNotFoundException
      */
     public static function getPageView(Page $page): View
     {
@@ -86,6 +100,9 @@ class ViewFactory
         {
             case "Basic":
                 return new BasicPage($page);
+                break;
+            case "No Title":
+                return new NoTitlePage($page);
                 break;
             default:
                 throw new ViewException(ViewException::MESSAGES[ViewException::PAGE_NOT_FOUND], ViewException::PAGE_NOT_FOUND);
