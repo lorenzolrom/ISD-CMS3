@@ -103,3 +103,41 @@ div.sidebar-left hr {
 div.sidebar-left img {
     padding-bottom: 10px;
 }
+
+ul.search-results li {
+    display: flex;
+    margin-top: 10px;
+}
+
+ul.search-results a {
+    text-decoration: none;
+}
+
+ul.search-results li a.post-search-result img.post-image{
+    height: 40px;
+    width: 50px;
+}
+
+ul.search-results li a.post-search-result h3 {
+    display: inline;
+    vertical-align: top;
+    margin-left: 10px;
+    font-size: 1rem !important;
+}
+
+ul.search-results li a.page-search-result h3 {
+    font-size: 1rem !important;
+}
+
+ul.search-results li a.page-search-result p {
+    font-size: .8rem;
+    font-weight: normal;
+    font-style: italic;
+    color: var(--font-color);
+    margin-left: 10px;
+}
+
+ul.search-results li a h3 {
+    text-decoration: underline;
+    color: var(--title-color) !important;
+}

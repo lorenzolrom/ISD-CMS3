@@ -15,6 +15,7 @@ namespace models;
 
 
 use database\ContentDatabaseHandler;
+use database\PageDatabaseHandler;
 
 class Element
 {
@@ -78,6 +79,16 @@ class Element
     public function getPage(): int
     {
         return $this->page;
+    }
+
+    /**
+     * @return Page
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\PageNotFoundException
+     */
+    public function getPageObject(): Page
+    {
+        return PageDatabaseHandler::selectById($this->page);
     }
 
     /**

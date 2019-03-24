@@ -14,6 +14,8 @@
 namespace models;
 
 
+use database\ElementDatabaseHandler;
+
 class Content
 {
     private $id;
@@ -79,6 +81,16 @@ class Content
     public function getElement(): int
     {
         return $this->element;
+    }
+
+    /**
+     * @return Element
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\ElementNotFoundException
+     */
+    public function getElementObject(): Element
+    {
+        return ElementDatabaseHandler::selectById($this->element);
     }
 
     /**

@@ -72,4 +72,32 @@ class ContentDatabaseHandler
 
         return $content;
     }
+
+    /**
+     * @param string $filter
+     * @return Content[]
+     * @throws ContentNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function selectByContent(string $filter): array
+    {
+        $handler = new DatabaseConnection();
+
+        $filter = "%$filter%";
+
+        $select = $handler->prepare("SELECT id FROM cms_Content WHERE content LIKE ?");
+        $select->bindParam(1, $filter, DatabaseConnection::PARAM_STR);
+        $select->execute();
+
+        $handler->close();
+
+        $content = array();
+
+        foreach($select->fetchAll(DatabaseConnection::FETCH_COLUMN, 0) as $id)
+        {
+            $content[] = self::selectById($id);
+        }
+
+        return $content;
+    }
 }

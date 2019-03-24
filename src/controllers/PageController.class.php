@@ -15,7 +15,6 @@ namespace controllers;
 
 use database\DoorwayDatabaseHandler;
 use database\PageDatabaseHandler;
-use exceptions\DatabaseException;
 use exceptions\DoorwayNotFoundException;
 use exceptions\PageNotFoundException;
 use factories\ViewFactory;
@@ -35,6 +34,7 @@ class PageController extends Controller
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\ContentNotFoundException
      * @throws PageNotFoundException
+     * @throws \exceptions\PostNotFoundException
      */
     public function getPage(): string
     {

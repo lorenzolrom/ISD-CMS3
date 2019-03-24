@@ -32,6 +32,7 @@ class NoTitlePage extends DatabasePage
      * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
      * @throws \exceptions\ContentNotFoundException
+     * @throws \exceptions\PostNotFoundException
      */
     public function __construct(Page $page)
     {

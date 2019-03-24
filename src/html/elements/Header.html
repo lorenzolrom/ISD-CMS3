@@ -3,6 +3,9 @@
     <div id="header-banner">
         <img id="header-logo" src="{{@baseURI}}themes/{{@enabledTheme}}/media/site-logo.png" alt="{{@siteDescription}}"/>
     </div>
+    <form id="header-search" method="get" action="{{@baseURI}}search">
+        <input autocomplete="off" name="query" type="text" placeholder="Search Website">
+    </form>
     <ul id="header-navigation">
         {{@navContent}}
     </ul>

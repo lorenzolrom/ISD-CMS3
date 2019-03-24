@@ -16,6 +16,7 @@ namespace views\elements;
 
 use controllers\FrontController;
 use database\PageDatabaseHandler;
+use exceptions\PageNotFoundException;
 use models\Page;
 use views\View;
 
@@ -57,8 +58,19 @@ class Header extends View
         // Add static navigation links
         $uri = FrontController::getURI();
 
-        $navigationLinks .= "<li><a href='{{@baseURI}}posts'" . ($uri == "posts" ? " class='current'" : "") . ">Projects</a></li>";
+        // Determine the current page is related to displaying posts
+        $isPost = FALSE;
 
+        $uriParts = explode('/', $uri);
+        if(sizeof($uriParts) > 0)
+        {
+            if($uriParts[0] == "posts" OR $uriParts[0] == "category")
+                $isPost = TRUE;
+        }
+
+        $navigationLinks .= "<li><a href='{{@baseURI}}posts'" . ($isPost ? " class='current'" : "") . ">Projects</a></li>";
+
+        // Set final navigation menu
         $this->setVariable("navContent", $navigationLinks);
 
         // Set Header Greeting

@@ -34,6 +34,7 @@ class PostCategoryPage extends HeaderFooterPage
 
         $this->setVariable("mainContent", self::templateFileContents("PostCategoryPage", self::TEMPLATE_PAGE));
 
+        $this->setVariable("tabTitle", $category->getTitle());
         $this->setVariable("categoryName", $category->getTitle());
 
         // Build Post List

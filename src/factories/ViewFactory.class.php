@@ -108,6 +108,7 @@ class ViewFactory
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\PageNotFoundException
+     * @throws \exceptions\PostNotFoundException
      */
     public static function getPageView(Page $page): View
     {

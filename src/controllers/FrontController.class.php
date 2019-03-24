@@ -61,7 +61,7 @@ class FrontController
         $requestedURL .= "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
         // Produce final resource identifier
-        $uri = strtolower(rtrim(explode(\CMSConfiguration::CMS_CONFIG['baseURL'] . \CMSConfiguration::CMS_CONFIG['baseURI'], $requestedURL)[1], "/"));
+        $uri = strtolower(rtrim(explode(\CMSConfiguration::CMS_CONFIG['baseURL'] . \CMSConfiguration::CMS_CONFIG['baseURI'], explode('?', $requestedURL)[0])[1], "/"));
 
         return $uri;
     }

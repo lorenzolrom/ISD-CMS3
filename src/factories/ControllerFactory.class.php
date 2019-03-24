@@ -18,6 +18,7 @@ use controllers\AdminController;
 use controllers\Controller;
 use controllers\PageController;
 use controllers\PostController;
+use controllers\SearchController;
 
 /**
  * Class ControllerFactory
@@ -46,6 +47,9 @@ class ControllerFactory
                 break;
             case "category":
                 return new PostController($uri);
+                break;
+            case "search":
+                return new SearchController($uri);
                 break;
             default:
                 return new PageController($uri);

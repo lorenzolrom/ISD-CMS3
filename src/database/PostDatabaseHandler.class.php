@@ -118,4 +118,33 @@ class PostDatabaseHandler
 
         return $posts;
     }
+
+    /**
+     * @param string $filter
+     * @return Post[]
+     * @throws PostNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function selectByContent(string $filter): array
+    {
+        $handler = new DatabaseConnection();
+
+        // Add wildcards
+        $filter = "%$filter%";
+
+        $select = $handler->prepare("SELECT id FROM cms_Post WHERE content LIKE ?");
+        $select->bindParam(1, $filter, DatabaseConnection::PARAM_STR);
+        $select->execute();
+
+        $handler->close();
+
+        $posts = array();
+
+        foreach($select->fetchAll(DatabaseConnection::FETCH_COLUMN, 0) as $id)
+        {
+            $posts[] = self::selectById($id);
+        }
+
+        return $posts;
+    }
 }
