@@ -14,6 +14,7 @@
 namespace views\elements;
 
 
+use controllers\FrontController;
 use database\PageDatabaseHandler;
 use models\Page;
 use views\View;
@@ -53,7 +54,10 @@ class Header extends View
             $navigationLinks .= "<li><a href='{{@baseURI}}$pageURI' $current>$pageTitle</a></li>";
         }
 
-        $navigationLinks .= "<li><a href='{{@baseURI}}posts'>Projects</a></li>";
+        // Add static navigation links
+        $uri = FrontController::getURI();
+
+        $navigationLinks .= "<li><a href='{{@baseURI}}posts'" . ($uri == "posts" ? " class='current'" : "") . ">Projects</a></li>";
 
         $this->setVariable("navContent", $navigationLinks);
 

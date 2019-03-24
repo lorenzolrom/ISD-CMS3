@@ -27,23 +27,12 @@ class FrontController
      */
     public static function getPage(): string
     {
-        // Create string of URL requested by browser
-        if(isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS' == 'on'])
-            $requestedURL = "https";
-        else
-            $requestedURL = "http";
-
-        $requestedURL .= "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-        // Produce final resource identifier
-        $uri = strtolower(rtrim(explode(\CMSConfiguration::CMS_CONFIG['baseURL'] . \CMSConfiguration::CMS_CONFIG['baseURI'], $requestedURL)[1], "/"));
-
         // Locate controller for page
         try
         {
             try
             {
-                $controller = ControllerFactory::getController($uri);
+                $controller = ControllerFactory::getController(self::getURI());
                 return $controller->getPage();
             }
             catch(\Exception $e)
@@ -56,5 +45,24 @@ class FrontController
         {
             die($e->getMessage());
         }
+    }
+
+    /**
+     * @return string
+     */
+    public static function getURI(): string
+    {
+        // Create string of URL requested by browser
+        if(isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS' == 'on'])
+            $requestedURL = "https";
+        else
+            $requestedURL = "http";
+
+        $requestedURL .= "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+        // Produce final resource identifier
+        $uri = strtolower(rtrim(explode(\CMSConfiguration::CMS_CONFIG['baseURL'] . \CMSConfiguration::CMS_CONFIG['baseURI'], $requestedURL)[1], "/"));
+
+        return $uri;
     }
 }
