@@ -56,5 +56,19 @@ class Header extends View
         $navigationLinks .= "<li><a href='{{@baseURI}}posts'>Projects</a></li>";
 
         $this->setVariable("navContent", $navigationLinks);
+
+        // Set Header Greeting
+        $hour = date("H");
+
+        if($hour < "12")
+            $headerGreeting = "Good morning; have a nice day.";
+        else if($hour > "12" AND $hour < "17")
+            $headerGreeting = "Good afternoon; hope your day is going well.";
+        else if($hour >= "17")
+            $headerGreeting = "Good evening; hope you had a nice day.";
+        else
+            $headerGreeting = "Welcome to the site!";
+
+        $this->setVariable("headerGreeting", $headerGreeting);
     }
 }
