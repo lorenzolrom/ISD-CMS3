@@ -84,3 +84,22 @@ a.post-thumbnail p {
     color: var(--title-color);
     font-weight: bold;
 }
+
+div.sidebar-left-wrapper {
+    display: flex;
+}
+
+div.sidebar-left {
+    display: inline-block;
+    padding-right: 25px;
+    text-align: center;
+}
+
+div.sidebar-left hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+div.sidebar-left img {
+    padding-bottom: 10px;
+}

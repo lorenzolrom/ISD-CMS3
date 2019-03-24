@@ -108,6 +108,12 @@ header #header-logo {
     border-bottom: 1px solid var(--title-color);
 }
 
+#content h3 {
+    font-weight: bold;
+    font-size: 14pt;
+    color: var(--font-color);
+}
+
 #content p {
     padding-bottom: 10px;
 }
@@ -115,6 +121,15 @@ header #header-logo {
 #content ul {
     padding-left: 20px;
     padding-bottom: 10px;
+}
+
+#content .non-bold {
+    font-weight: normal;
+}
+
+#content a {
+    color: var(--title-color);
+    font-weight: bold;
 }
 
 footer {

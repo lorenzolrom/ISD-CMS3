@@ -15,7 +15,6 @@ namespace views\pages;
 
 
 use database\PostDatabaseHandler;
-use models\Page;
 use models\PostCategory;
 use views\content\Post;
 

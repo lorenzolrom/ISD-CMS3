@@ -13,7 +13,10 @@
 
 namespace controllers;
 
+use database\DoorwayDatabaseHandler;
 use database\PageDatabaseHandler;
+use exceptions\DatabaseException;
+use exceptions\DoorwayNotFoundException;
 use exceptions\PageNotFoundException;
 use factories\ViewFactory;
 use views\pages\PageNotFoundPage;
@@ -37,8 +40,25 @@ class PageController extends Controller
     {
         try
         {
-            $page = PageDatabaseHandler::selectByUri($this->uri);
-            return ViewFactory::getPageView($page)->getHTML();
+            try
+            {
+                $page = PageDatabaseHandler::selectByUri($this->uri);
+                return ViewFactory::getPageView($page)->getHTML();
+            }
+            catch(PageNotFoundException $e)
+            {
+                // Attempt to locate a doorway
+                try
+                {
+                    $doorway = DoorwayDatabaseHandler::selectByUri($this->uri);
+                    header("Location: " . $doorway->getDestination());
+                    exit;
+                }
+                catch (DoorwayNotFoundException $de)
+                {
+                    throw $e;
+                }
+            }
         }
         catch(PageNotFoundException $e)
         {

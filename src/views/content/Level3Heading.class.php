@@ -6,33 +6,31 @@
  * Content Management System 3
  *
  * User: lromero
- * Date: 3/22/2019
- * Time: 7:01 PM
+ * Date: 3/23/2019
+ * Time: 1:37 PM
  */
 
 
 namespace views\content;
 
-/**
- * Class Raw
- *
- * Raw HTML to render to user directly
- *
- * @package views\content
- */
-class Raw extends Content
+
+use views\View;
+
+class Level3Heading extends Content
 {
     /**
-     * Raw constructor.
+     * Level3Heading constructor.
      * @param \models\Content $content
      * @throws \exceptions\ViewException
      */
     public function __construct(\models\Content $content)
     {
         parent::__construct($content);
-        $this->setTemplateFromHTML("Raw", self::TEMPLATE_CONTENT);
+        $this->setTemplateFromHTML("Level3Heading", View::TEMPLATE_CONTENT);
 
         // Raw replace of content
-        $this->setVariable("content", $content->getContent());
+        $pAttributes = json_decode($content->getContent(), TRUE);
+
+        $this->setVariable("content", $pAttributes['content']);
     }
 }

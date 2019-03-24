@@ -31,6 +31,7 @@ class TriBanner extends Element
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\PostNotFoundException
      */
     public function __construct(\models\Element $element)
     {

@@ -7,19 +7,17 @@
  *
  * User: lromero
  * Date: 3/23/2019
- * Time: 1:30 PM
+ * Time: 8:37 PM
  */
 
 
 namespace views\elements;
 
 
-use views\View;
-
-class Split extends Element
+class LeftSidebarMain extends Element
 {
     /**
-     * Split constructor.
+     * LeftSidebarMain constructor.
      * @param \models\Element $element
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
@@ -29,9 +27,8 @@ class Split extends Element
     public function __construct(\models\Element $element)
     {
         parent::__construct($element);
-
-        $this->areas = ['leftContent', 'rightContent'];
-        $this->setTemplateFromHTML("Split", View::TEMPLATE_ELEMENT);
+        $this->areas = ['sidebarContent', 'content'];
+        $this->setTemplateFromHTML("LeftSidebarMain", self::TEMPLATE_ELEMENT);
 
         $this->loadContent();
     }

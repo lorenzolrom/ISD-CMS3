@@ -20,8 +20,10 @@ use models\Page;
 use views\content\FeaturedPostList;
 use views\content\Image;
 use views\content\Level2Heading;
+use views\content\Level3Heading;
 use views\content\Paragraph;
 use views\content\Raw;
+use views\elements\LeftSidebarMain;
 use views\elements\Main;
 use views\elements\Split;
 use views\elements\TriBanner;
@@ -49,6 +51,9 @@ class ViewFactory
             case "Level 2 Heading":
                 return new Level2Heading($content);
                 break;
+            case "Level 3 Heading":
+                return new Level3Heading($content);
+                break;
             case "Image":
                 return new Image($content);
                 break;
@@ -72,6 +77,7 @@ class ViewFactory
      * @throws ViewException
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
+     * @throws \exceptions\PostNotFoundException
      */
     public static function getElementView(Element $element): \views\elements\Element
     {
@@ -85,6 +91,9 @@ class ViewFactory
                 break;
             case "Split":
                 return new Split($element);
+                break;
+            case "Left Sidebar Main":
+                return new LeftSidebarMain($element);
                 break;
             default:
                 throw new ViewException(ViewException::MESSAGES[ViewException::ELEMENT_NOT_FOUND], ViewException::ELEMENT_NOT_FOUND);

@@ -41,6 +41,7 @@ abstract class Element extends View
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\PostNotFoundException
      */
     protected function loadContent()
     {
