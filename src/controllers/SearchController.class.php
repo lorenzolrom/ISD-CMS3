@@ -72,6 +72,16 @@ class SearchController extends Controller
 
             foreach($contents as $content)
             {
+                // Check for JSON tags being caught in search
+                if($json = json_decode($content->getContent(), TRUE))
+                {
+                    if(in_array($query, array_keys($json))) // Potential false positive from JSON tag
+                    {
+                        if(!strpos($json[$query], $query)) // Make sure query actually exists inside the tag
+                            continue;
+                    }
+                }
+
                 $page = $content->getElementObject()->getPageObject();
                 $results['pages'][$page->getUri()][] = $content;
             }
