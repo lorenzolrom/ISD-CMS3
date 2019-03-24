@@ -17,6 +17,7 @@ use exceptions\ViewException;
 use models\Content;
 use models\Element;
 use models\Page;
+use views\content\FeaturedPostList;
 use views\content\Image;
 use views\content\Level2Heading;
 use views\content\Paragraph;
@@ -38,6 +39,8 @@ class ViewFactory
      * @param Content $content
      * @return View
      * @throws ViewException
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\PostNotFoundException
      */
     public static function getContentView(Content $content): View
     {
@@ -51,6 +54,9 @@ class ViewFactory
                 break;
             case "Paragraph":
                 return new Paragraph($content);
+                break;
+            case "Featured Post List":
+                return new FeaturedPostList($content);
                 break;
             case "Raw":
                 return new Raw($content);
@@ -69,7 +75,7 @@ class ViewFactory
      */
     public static function getElementView(Element $element): \views\elements\Element
     {
-        switch($element->getName())
+        switch($element->getType())
         {
             case "Main":
                 return new Main($element);

@@ -29,7 +29,7 @@ class ElementDatabaseHandler
     {
         $handler = new DatabaseConnection();
 
-        $select = $handler->prepare("SELECT id, name, page, weight FROM cms_Element WHERE id = ? LIMIT 1");
+        $select = $handler->prepare("SELECT id, name, type, page, weight FROM cms_Element WHERE id = ? LIMIT 1");
         $select->bindParam(1, $id, DatabaseConnection::PARAM_INT);
         $select->execute();
 

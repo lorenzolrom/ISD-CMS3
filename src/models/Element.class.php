@@ -20,6 +20,7 @@ class Element
 {
     private $id;
     private $name;
+    private $type;
     private $page;
     private $weight;
 
@@ -53,6 +54,22 @@ class Element
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 
     /**

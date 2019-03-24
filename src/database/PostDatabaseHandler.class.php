@@ -104,7 +104,7 @@ class PostDatabaseHandler
     {
         $handler = new DatabaseConnection();
 
-        $select = $handler->prepare("SELECT id FROM cms_Post WHERE featured = 1" . ($displayedOnly ? " AND displayed = 1" : "") . (($limit !== NULL) ? " LIMIT $limit" : ""));
+        $select = $handler->prepare("SELECT id FROM cms_Post WHERE featured = 1" . ($displayedOnly ? " AND displayed = 1" : "") . (($limit !== NULL) ? " ORDER BY RAND() LIMIT $limit" : ""));
         $select->execute();
 
         $handler->close();
