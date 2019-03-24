@@ -1,9 +1,11 @@
 :root {
     --title-color: #00008B;
     --font-color: #333333;
+    --accent-color: #e3e3e3;
     --background-color: #FFFFFF;
     --header-footer-background-color: #000000;
     --header-footer-font-color: #FFFFFF;
+    --box-shadow: 0 3px 7px #444;
 }
 
 * {
@@ -26,6 +28,7 @@ body {
     flex-direction: column;
 
     background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
 
     font-family: Arial, sans-serif;
     font-weight: 400;
@@ -49,6 +52,7 @@ header #header-greeting, header #header-navigation {
     font-family: Verdana, Arial, sans-serif;
 
     background-color: var(--header-footer-background-color);
+    box-shadow: var(--box-shadow);
 }
 
 header #header-navigation li {
@@ -86,6 +90,7 @@ header #header-logo {
     height: 79px;
     margin-left: 11px;
     margin-top: 11px;
+    filter: drop-shadow(var(--box-shadow));
 }
 
 header #header-search {
@@ -93,6 +98,13 @@ header #header-search {
     display: inline-block;
     margin-right: 2px;
     margin-top: 2px;
+}
+
+header #header-search input[type='text'] {
+    border: 1px var(--accent-color);
+    padding: 2px;
+    color: var(--font-color);
+    border-radius: 5px;
 }
 
 #content {
@@ -163,4 +175,66 @@ footer #footer-date {
 
 img.image-link {
     cursor: pointer;
+}
+
+@media screen and (max-device-width: 1024px)
+{
+    div#wrapper {
+        width: 100%;
+    }
+}
+
+@media screen and (max-device-width: 760px)
+{
+    div.post-list {
+        text-align: center !important;
+    }
+}
+
+@media screen and (max-device-width: 600px)
+{
+    header #header-logo {
+        display: block;
+        margin: auto;
+        padding-top: 11px;
+        text-align: center;
+    }
+
+    header #header-greeting {
+        text-align: center;
+    }
+    
+    #content {
+        padding: 10px 25px;
+    }
+    ul#header-navigation {
+        height: auto;
+        text-align: center;
+    }
+
+    header #header-navigation li a {
+        font-size: 1rem;
+    }
+
+    header #header-search {
+        float: none;
+        display: block;
+        margin: auto;
+        text-align: center;
+        background-color: var(--header-footer-background-color);
+        padding-top: 2px;
+
+    }
+
+    #content h1 {
+        text-align: center;
+    }
+    
+    footer {
+        text-align: center;
+    }
+
+    footer span {
+        display: block;
+    }
 }

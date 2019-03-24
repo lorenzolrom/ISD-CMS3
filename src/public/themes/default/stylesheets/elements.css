@@ -15,6 +15,7 @@ img.welcome-message {
     margin: auto;
     padding-top: 5px;
     padding-bottom: 6px;
+    max-width: 100%;
 }
 
 p.site-tagline {
@@ -43,7 +44,8 @@ img.post-image {
     height: 150px;
     object-fit: cover;
     border: 1px solid var(--title-color);
-    box-shadow: 2px 2px var(--title-color);
+    box-shadow: 2px 3px 3px var(--title-color);
+    border-radius: 5px;
 }
 
 p.post-date {
@@ -140,4 +142,32 @@ ul.search-results li a.page-search-result p {
 ul.search-results li a h3 {
     text-decoration: underline;
     color: var(--title-color) !important;
+}
+
+@media screen and (max-device-width: 600px) {
+    div.split {
+        display: block;
+    }
+
+    div.split > div {
+        display: block;
+        width: 100%;
+    }
+
+    div.sidebar-left-wrapper, div.sidebar-left {
+        display: block;
+    }
+
+    p.post-date {
+        text-align: center;
+    }
+
+    div.post-body {
+        display: block;
+    }
+
+    div.post-body img.post-image,  div.post-body div.post-content {
+        display: block;
+        margin: auto auto 10px;
+    }
 }
