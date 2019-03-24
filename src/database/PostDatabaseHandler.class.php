@@ -132,8 +132,8 @@ class PostDatabaseHandler
         // Add wildcards
         $filter = "%$filter%";
 
-        $select = $handler->prepare("SELECT id FROM cms_Post WHERE content LIKE ?");
-        $select->bindParam(1, $filter, DatabaseConnection::PARAM_STR);
+        $select = $handler->prepare("SELECT id FROM cms_Post WHERE title LIKE :filter OR content LIKE :filter");
+        $select->bindParam('filter', $filter, DatabaseConnection::PARAM_STR);
         $select->execute();
 
         $handler->close();

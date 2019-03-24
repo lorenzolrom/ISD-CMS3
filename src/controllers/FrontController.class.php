@@ -53,7 +53,7 @@ class FrontController
     public static function getURI(): string
     {
         // Create string of URL requested by browser
-        if(isset($_SERVER['HTTPS']) AND $_SERVER['HTTPS' == 'on'])
+        if(isset($_SERVER['HTTPS']))
             $requestedURL = "https";
         else
             $requestedURL = "http";

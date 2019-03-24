@@ -16,7 +16,6 @@ namespace views\elements;
 
 use controllers\FrontController;
 use database\PageDatabaseHandler;
-use exceptions\PageNotFoundException;
 use models\Page;
 use views\View;
 
