@@ -18,6 +18,7 @@ use admin\views\pages\LoginPage;
 use database\TokenDatabaseHandler;
 use database\UserDatabaseHandler;
 use exceptions\SecurityException;
+use exceptions\TokenNotFoundException;
 use exceptions\UserNotFoundException;
 
 class LoginController extends Controller
@@ -31,6 +32,30 @@ class LoginController extends Controller
      */
     public function getPage(): string
     {
+        // Log user out?
+        if($this->uriParts[0] == "logout")
+        {
+            // Check for cookie
+            if(isset($_COOKIE[\CMSConfiguration::CMS_CONFIG['cookieName']]))
+            {
+                // locate token
+                try
+                {
+                    $token = TokenDatabaseHandler::selectByToken($_COOKIE[\CMSConfiguration::CMS_CONFIG['cookieName']]);
+                    $token->setExpired(1);
+                }
+                catch(TokenNotFoundException $e)
+                {
+                    // Do nothing, destroy token
+                }
+            }
+
+            // Destroy cookie
+            setcookie(\CMSConfiguration::CMS_CONFIG['cookieName'], "", time() - 3600, \CMSConfiguration::CMS_CONFIG['baseURI']);
+            header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "login?NOTICE=Successfully Logged Out");
+            exit;
+        }
+
         $page = new LoginPage();
 
         if(isset($_POST['username']) AND isset($_POST['password']))

@@ -14,12 +14,12 @@
 namespace admin\views\pages;
 
 
-class Dashboard extends UserDocument
+class HomePage extends UserDocument
 {
     public function __construct()
     {
         parent::__construct();
-        $this->setVariable("tabTitle", "Dashboard");
+        $this->setVariable("tabTitle", "Home");
         $this->setActionLinks(array(
             array(
                 'title' => "My Account",

@@ -29,6 +29,14 @@ class Header extends AdminView
     {
         $this->setTemplateFromHTML("Header", self::ADMIN_TEMPLATE_ELEMENT);
 
+        // Display user's name
+        if($user->getDisplayName() !== NULL)
+            $userDisplayName = $user->getDisplayName();
+        else
+            $userDisplayName = $user->getFirstName() . " " . $user->getLastName();
+
+        $this->setVariable("userDisplayName", $userDisplayName);
+
         // Add navigation links
         $navigationContent = "";
 
@@ -45,11 +53,10 @@ class Header extends AdminView
         if(in_array($user->getRole(), array('editor', 'administrator')))
         {
             $pageLink = new MenuLink('Pages', 'pages');
-            $contentLink = new MenuLink('Content', 'content');
             $doorwayLink = new MenuLink('Doorways', 'doorways');
             $fileLink = new MenuLink('Files', 'files');
 
-            $navigationContent .= $pageLink->getHTML() . $contentLink->getHTML() . $doorwayLink->getHTML() . $fileLink->getHTML();
+            $navigationContent .= $pageLink->getHTML() . $doorwayLink->getHTML() . $fileLink->getHTML();
         }
 
         // Control Panel (administrator)

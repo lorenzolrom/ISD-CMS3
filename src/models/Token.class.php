@@ -105,7 +105,7 @@ class Token
      */
     public function setExpired(int $expired): bool
     {
-        return TokenDatabaseHandler::updateExpired($expired);
+        return TokenDatabaseHandler::updateExpired($expired, $this->token);
     }
 
     /**

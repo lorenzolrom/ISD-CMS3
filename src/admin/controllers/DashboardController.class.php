@@ -14,7 +14,7 @@
 namespace admin\controllers;
 
 
-use admin\views\pages\Dashboard;
+use admin\views\pages\HomePage;
 
 class DashboardController extends Controller
 {
@@ -26,7 +26,7 @@ class DashboardController extends Controller
      */
     public function getPage(): string
     {
-        $page = new Dashboard();
+        $page = new HomePage();
         return $page->getHTML();
     }
 }

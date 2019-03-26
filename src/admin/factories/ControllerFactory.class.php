@@ -37,6 +37,7 @@ class ControllerFactory
             case "":
                 return new DashboardController($uriParts);
                 break;
+            case "logout":
             case "login":
                 return new LoginController($uriParts);
                 break;

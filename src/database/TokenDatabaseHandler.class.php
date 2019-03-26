@@ -68,15 +68,17 @@ class TokenDatabaseHandler
 
     /**
      * @param int $expired
+     * @param string $token
      * @return bool
      * @throws \exceptions\DatabaseException
      */
-    public static function updateExpired(int $expired): bool
+    public static function updateExpired(int $expired, string $token): bool
     {
         $handler = new DatabaseConnection();
 
         $update = $handler->prepare("UPDATE cms_Token SET expired = ? WHERE token = ?");
         $update->bindParam(1, $expired, DatabaseConnection::PARAM_INT);
+        $update->bindParam(2, $token, DatabaseConnection::PARAM_STR);
         $update->execute();
 
         $handler->close();
