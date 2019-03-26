@@ -15,8 +15,6 @@ namespace admin\views\pages;
 
 use admin\controllers\SessionValidationController;
 use admin\views\AdminView;
-use database\TokenDatabaseHandler;
-use exceptions\TokenNotFoundException;
 
 /**
  * Class AuthenticatedPage

@@ -21,6 +21,7 @@ class DashboardController extends Controller
 
     /**
      * @return string
+     * @throws \exceptions\ViewException
      */
     public function getPage(): string
     {
