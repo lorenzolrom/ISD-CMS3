@@ -1,6 +1,9 @@
 :root {
     --primary-color: #54A4ED;
     --secondary-color: #D3D3D3;
+    --body-background: #F3F3F3;
+    --border-color: #777777;
+    --wrapper-background: #E3E3E3;
     --light-gray: #C3C3C3;
     --shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     --error: #DC3232;
@@ -15,53 +18,149 @@
 * {
     margin: 0;
     padding: 0;
-    font-size: 12pt;
+    font-family: Arial, sans-serif;
 }
 
-div#notifications {
-    position: relative;
-    display: none;
-    padding: 10px 12px;
-    margin-bottom: 10px;
-    background-color: #FFFFFF;
-    text-align: left;
-    box-shadow: var(--shadow);
-    box-sizing: border-box;
-    top: 15px;
-    right: 15px;
-    min-width: 400px;
+body {
+    background-color: var(--body-background);
+}
+
+div#wrapper {
+    margin: auto;
+    min-width: 600px;
+    width: 1024px;
     max-width: 100%;
+    background-color: var(--wrapper-background);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: 2px outset var(--border-color);
+    border-radius: 5px;
 }
 
-div#notifications.notifications-error {
-    border-left: 4px solid var(--error);
-}
-
-div#notifications.notifications-notice {
-    border-left: 4px solid var(--notice);
-}
-
-div#notifications div#notifications-dismiss {
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    cursor: pointer;
-    color: var(--light-gray);
-    text-align: center;
-    width: 15px;
-    height: 15px;
-    vertical-align: middle;
-    line-height: 15px;
-    font-size: 1rem;
+header div#software-name {
+    color: #000000;
+    font-size: 12pt;
     font-weight: 600;
+    margin-left: 20px;
+    margin-top: 15px;
+    padding-right: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: inline-block;
 }
 
-div#notifications ul li {
+header {
+    position: relative;
+    display: block;
+    height: 100px;
+}
+
+header div#site-title {
+    font-family: "Times New Roman", serif;
+    color: #777;
+    text-transform: uppercase;
+    margin-left: 50px;
+}
+
+header  ul#header-navigation {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 5px;
+}
+
+header ul#header-navigation li {
+    display: inline;
+}
+
+header ul#header-navigation li a {
+    color: var(--border-color);
+    text-decoration: none;
+    font-size: 8pt;
+    font-family: Verdana, Arial, sans-serif;
+    font-weight: 600;
+    padding: 0 10px;
+    border-left: 1px solid #FFFFFF;
+}
+
+header ul#header-navigation li:first-child a {
+    border-left: none;
+}
+
+div#content {
+    display: flex;
+    height: calc(100vh - 125px);
+    flex: 1 0 auto;
+}
+
+div#content div#sidebar {
+    display: inline-block;
+    float: left;
+    width: 180px;
+    height: 100%;
+    font-size: 9pt;
+    font-family: Verdana, Arial, sans-serif;
+}
+
+div#content div#sidebar h2 {
+    margin-left: 5px;
+    font-size: 10pt;
+    font-weight: 600;
+    padding-bottom: 5px;
+    font-family: Verdana, Arial, sans-serif;
+}
+
+div#content div#sidebar ul {
+    background-color: #F1F1F1;
+    display: block;
+    padding: 5px 7px;
+}
+
+div#content div#sidebar ul li {
     list-style-type: none;
-    font-size: 1rem;
 }
 
-div#notifications h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
+div#content div#sidebar ul li a {
+    display: block;
+    text-decoration: none;
+    color: #000000;
+}
+
+div#content div#sidebar ul li a::before {
+    content: "> ";
+    color: var(--border-color);
+    font-size: 8pt;
+    vertical-align: top;
+}
+
+div#content div#main {
+    display: block;
+    width: 839px;
+    max-width: 839px;
+    background-color: #FFFFFF;
+    padding: 10px;
+    font-family: Verdana, Arial, sans-serif;
+    overflow-y: scroll;
+    position: relative;
+}
+
+div#content div#main h1 {
+    font-size: 14pt;
+    border-bottom: 1px solid #888888;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+footer {
+    display: block;
+    height: 20px;
+    box-sizing: border-box;
+    padding: 5px;
+    font-family: Arial, sans-serif;
+}
+
+footer p {
+    font-size: 8pt;
+    padding: 0 5px;
+    color: var(--border-color);
 }

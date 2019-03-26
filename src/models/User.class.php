@@ -155,17 +155,17 @@ class User
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getRole(): ?int
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
     /**
-     * @param int $role
+     * @param string $role
      */
-    public function setRole(?int $role): void
+    public function setRole(?string $role): void
     {
         $this->role = $role;
     }

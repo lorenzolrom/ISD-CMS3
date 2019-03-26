@@ -1,3 +1,7 @@
+form#login-window * {
+    font-family: "Open Sans", Arial, sans-serif;
+}
+
 form#login-window {
     display: block;
     padding: 15px 0 25px 0;
@@ -7,7 +11,6 @@ form#login-window {
     box-shadow: var(--shadow);
     text-align: center;
     margin: 200px auto auto;
-    font-family: "Open Sans", Arial, sans-serif;
 }
 
 span#login-title {

@@ -53,11 +53,12 @@ class TokenDatabaseHandler
         $handler = new DatabaseConnection();
 
         $token = hash('SHA512', openssl_random_pseudo_bytes(2048));
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
 
         $create = $handler->prepare("INSERT INTO cms_Token (token, user, issueTime, expireTime, ipAddress) VALUES (:token, :user, NOW(), NOW() + INTERVAL 1 HOUR, :ipAddress)");
         $create->bindParam('token', $token, DatabaseConnection::PARAM_STR);
         $create->bindParam('user', $user->getId(), DatabaseConnection::PARAM_INT);
-        $create->bindParam('ipAddress', $_SERVER['REMOTE_ADDR'], DatabaseConnection::PARAM_STR);
+        $create->bindParam('ipAddress', $ipAddress, DatabaseConnection::PARAM_STR);
         $create->execute();
 
         $handler->close();

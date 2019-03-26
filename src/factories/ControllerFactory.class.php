@@ -39,7 +39,7 @@ class ControllerFactory
 
         switch($uriFirst)
         {
-            case "user":
+            case rtrim(\CMSConfiguration::CMS_CONFIG['adminURI'], '/'):
                 return new AdminController($uri);
                 break;
             case "posts":

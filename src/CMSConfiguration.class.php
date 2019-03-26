@@ -23,6 +23,8 @@ abstract class CMSConfiguration
 
         'cookieName' => 'CMS3_COOKIE',
 
+        'adminURI' => 'user/',
+
         'databaseHost' => 'my.database.server',
         'databaseName' => 'my.database',
         'databaseUser' => 'my.username',

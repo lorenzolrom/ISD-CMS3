@@ -27,7 +27,7 @@ class SessionValidationController
         // Is cookie set?  If not direct to login
         if(!isset($_COOKIE[\CMSConfiguration::CMS_CONFIG['cookieName']]))
         {
-            header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . "user/login");
+            header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "login");
             exit;
         }
 
@@ -53,7 +53,7 @@ class SessionValidationController
         catch(SecurityException $e)
         {
             setcookie(\CMSConfiguration::CMS_CONFIG['cookieName'], "", time() - 3600, \CMSConfiguration::CMS_CONFIG['baseURI']);
-            header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . "user/login?NOTICE={$e->getMessage()}&NEXT=" . explode('?', $_SERVER['REQUEST_URI'])[0]);
+            header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "login?NOTICE={$e->getMessage()}&NEXT=" . explode('?', $_SERVER['REQUEST_URI'])[0]);
             exit;
         }
     }

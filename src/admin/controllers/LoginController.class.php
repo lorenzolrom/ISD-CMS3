@@ -49,7 +49,7 @@ class LoginController extends Controller
 
                     setcookie(\CMSConfiguration::CMS_CONFIG['cookieName'], $token->getToken(), 0, \CMSConfiguration::CMS_CONFIG['baseURI']);
 
-                    $next = \CMSConfiguration::CMS_CONFIG['baseURI'] . "user";
+                    $next = \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'];
 
                     if(isset($_GET['NEXT']))
                         $next = $_GET['NEXT'];

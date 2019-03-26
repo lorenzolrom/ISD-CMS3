@@ -1,7 +1,18 @@
-<header>
-
-</header>
-
-<footer>
-
-</footer>
+<div id="wrapper">
+    {{@headerContent}}
+    <div id="content">
+        <div id="sidebar">
+            <h2>Actions</h2>
+            <ul>
+                {{@sidebarLinks}}
+            </ul>
+        </div>
+        <div id="main">
+            <h1>{{@tabTitle}}</h1>
+            {{@mainContent}}
+        </div>
+    </div>
+    <footer>
+        <p>CMS3 &copy; 2019 LLR Technologies | Information Systems Development</p>
+    </footer>
+</div>

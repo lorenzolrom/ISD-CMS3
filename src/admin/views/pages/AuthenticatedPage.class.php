@@ -15,6 +15,7 @@ namespace admin\views\pages;
 
 use admin\controllers\SessionValidationController;
 use admin\views\AdminView;
+use exceptions\SecurityException;
 
 /**
  * Class AuthenticatedPage
@@ -25,8 +26,21 @@ use admin\views\AdminView;
  */
 class AuthenticatedPage extends AdminView
 {
-    public function __construct()
+    protected $user;
+
+    /**
+     * AuthenticatedPage constructor.
+     * @param array|null $roles Roles to evaluate.  Optional.
+     * @throws SecurityException
+     */
+    public function __construct(?array $roles = NULL)
     {
-        SessionValidationController::validateSession();
+        $this->user = SessionValidationController::validateSession();
+
+        // If role requirements were set, validate them
+        if($roles !== NULL AND !in_array($this->user->getRole(), $roles))
+        {
+            throw new SecurityException(SecurityException::MESSAGE[SecurityException::USER_DOES_NOT_HAVE_REQUIRED_ROLE], SecurityException::USER_DOES_NOT_HAVE_REQUIRED_ROLE);
+        }
     }
 }

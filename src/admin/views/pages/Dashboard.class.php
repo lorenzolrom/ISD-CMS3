@@ -6,15 +6,25 @@
  * Content Management System 3
  *
  * User: lromero
- * Date: 3/24/2019
- * Time: 6:43 PM
+ * Date: 3/26/2019
+ * Time: 7:13 AM
  */
 
 
 namespace admin\views\pages;
 
 
-class Dashboard extends AuthenticatedPage
+class Dashboard extends UserDocument
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setVariable("tabTitle", "Dashboard");
+        $this->setActionLinks(array(
+            array(
+                'title' => "My Account",
+                'href' => 'account'
+            )
+        ));
+    }
 }
