@@ -157,7 +157,7 @@ class User
     /**
      * @return int
      */
-    public function getRole(): int
+    public function getRole(): ?int
     {
         return $this->role;
     }
@@ -165,10 +165,21 @@ class User
     /**
      * @param int $role
      */
-    public function setRole(int $role): void
+    public function setRole(?int $role): void
     {
         $this->role = $role;
     }
 
+    /**
+     * Validate if the supplied password is correct
+     * @param string $password
+     * @return bool
+     */
+    public function isCorrectPassword(string $password): bool
+    {
+        if(hash('SHA512', hash('SHA512', $password)) == $this->password)
+            return TRUE;
 
+        return FALSE;
+    }
 }

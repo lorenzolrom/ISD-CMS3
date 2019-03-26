@@ -1,0 +1,67 @@
+:root {
+    --primary-color: #54A4ED;
+    --secondary-color: #D3D3D3;
+    --light-gray: #C3C3C3;
+    --shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    --error: #DC3232;
+    --notice: #FFBA00;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+}
+
+div#notifications {
+    position: relative;
+    display: none;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    text-align: left;
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+    top: 15px;
+    right: 15px;
+    min-width: 400px;
+    max-width: 100%;
+}
+
+div#notifications.notifications-error {
+    border-left: 4px solid var(--error);
+}
+
+div#notifications.notifications-notice {
+    border-left: 4px solid var(--notice);
+}
+
+div#notifications div#notifications-dismiss {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    cursor: pointer;
+    color: var(--light-gray);
+    text-align: center;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    line-height: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+div#notifications ul li {
+    list-style-type: none;
+    font-size: 1rem;
+}
+
+div#notifications h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}

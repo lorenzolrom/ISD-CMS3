@@ -126,6 +126,7 @@ header #header-search input[type='text'] {
     font-size: 16pt;
     line-height: 1.5;
     border-bottom: 1px solid var(--title-color);
+    margin-bottom: 10px;
 }
 
 #content h3 {

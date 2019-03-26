@@ -39,7 +39,7 @@ class ControllerFactory
 
         switch($uriFirst)
         {
-            case "admin":
+            case "user":
                 return new AdminController($uri);
                 break;
             case "posts":

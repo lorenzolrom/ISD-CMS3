@@ -13,6 +13,8 @@
 
 namespace controllers;
 
+use admin\factories\ControllerFactory;
+
 /**
  * Class AdminController
  * @package controllers
@@ -22,6 +24,10 @@ class AdminController extends Controller
 
     public function getPage(): string
     {
-        return "Admin";
+        // Turn URI into array
+        $uriParts = explode('/', $this->uri);
+        array_shift($uriParts); // remove 'admin'
+
+        return ControllerFactory::getController($uriParts)->getPage();
     }
 }
