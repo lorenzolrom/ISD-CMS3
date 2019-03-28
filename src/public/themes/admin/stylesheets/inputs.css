@@ -20,3 +20,9 @@ div.button-bar {
 {
     color: #000000;
 }
+
+.required::after {
+    content: "*";
+    font-weight: 600;
+    color: #CC0000;
+}
