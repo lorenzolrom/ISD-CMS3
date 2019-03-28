@@ -26,15 +26,6 @@ class Role
     {
         return $this->code;
     }
-
-    /**
-     * @param string $code
-     */
-    public function setCode(string $code): void
-    {
-        $this->code = $code;
-    }
-
     /**
      * @return string
      */
@@ -42,14 +33,5 @@ class Role
     {
         return $this->displayName;
     }
-
-    /**
-     * @param string $displayName
-     */
-    public function setDisplayName(string $displayName): void
-    {
-        $this->displayName = $displayName;
-    }
-
 
 }

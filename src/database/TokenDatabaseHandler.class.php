@@ -85,4 +85,22 @@ class TokenDatabaseHandler
 
         return $update->getRowCount() === 1;
     }
+
+    /**
+     * @param string $token
+     * @return bool
+     * @throws \exceptions\DatabaseException
+     */
+    public static function updateExpireTime(string $token): bool
+    {
+        $handler = new DatabaseConnection();
+
+        $update = $handler->prepare("UPDATE cms_Token SET expireTime = NOW() + INTERVAL 1 HOUR WHERE token = ?");
+        $update->bindParam(1, $token, DatabaseConnection::PARAM_STR);
+        $update->execute();
+
+        $handler->close();
+
+        return $update->getRowCount() === 1;
+    }
 }

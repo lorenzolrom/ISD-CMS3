@@ -1,4 +1,5 @@
 <div id="wrapper">
+    <div id="veil"></div>
     {{@headerContent}}
     <div id="content">
         <div id="sidebar">
@@ -8,6 +9,7 @@
             </ul>
         </div>
         <div id="main">
+            {{@notifications}}
             <h1>{{@tabTitle}}</h1>
             {{@mainContent}}
         </div>

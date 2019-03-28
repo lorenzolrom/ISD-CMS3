@@ -1,5 +1,5 @@
 form#login-window * {
-    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 1.2rem !important;
 }
 
 form#login-window {

@@ -44,9 +44,8 @@ class Header extends AdminView
         if(in_array($user->getRole(), array('author', 'editor', 'administrator')))
         {
             $postLink = new MenuLink('Posts', 'posts');
-            $categoryLink = new MenuLink('Categories', 'categories');
 
-            $navigationContent .= $postLink->getHTML() . $categoryLink->getHTML();
+            $navigationContent .= $postLink->getHTML();
         }
 
         // Pages, Content, Doorways, Files (editor, administrator)

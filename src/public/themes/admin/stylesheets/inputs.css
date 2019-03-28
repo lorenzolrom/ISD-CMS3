@@ -1,0 +1,22 @@
+div.button-bar {
+    border-bottom: 1px solid #888888;
+    padding: 0 0 13px 0;
+}
+
+.button, .button-noveil {
+    font-weight: normal;
+    background-color: var(--wrapper-background);
+    box-shadow: var(--l1-shadow);
+    color: var(--border-color);
+    margin-bottom: 5px;
+    font-size: .8rem;
+    width: auto;
+    padding: 2px 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover, .button-noveil:hover
+{
+    color: #000000;
+}

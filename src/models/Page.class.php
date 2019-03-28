@@ -39,27 +39,11 @@ class Page
     }
 
     /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return mixed
      */
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type): void
-    {
-        $this->type = $type;
     }
 
     /**
@@ -71,27 +55,11 @@ class Page
     }
 
     /**
-     * @param int|null $author
-     */
-    public function setAuthor(?int $author): void
-    {
-        $this->author = $author;
-    }
-
-    /**
      * @return string
      */
     public function getUri(): string
     {
         return $this->uri;
-    }
-
-    /**
-     * @param string $uri
-     */
-    public function setUri(string $uri): void
-    {
-        $this->uri = $uri;
     }
 
     /**
@@ -103,27 +71,11 @@ class Page
     }
 
     /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    /**
      * @return mixed
      */
     public function getNavTitle()
     {
         return $this->navTitle;
-    }
-
-    /**
-     * @param mixed $navTitle
-     */
-    public function setNavTitle($navTitle): void
-    {
-        $this->navTitle = $navTitle;
     }
 
     /**
@@ -135,27 +87,11 @@ class Page
     }
 
     /**
-     * @param mixed $isOnNav
-     */
-    public function setIsOnNav($isOnNav): void
-    {
-        $this->isOnNav = $isOnNav;
-    }
-
-    /**
      * @return mixed
      */
     public function getWeight()
     {
         return $this->weight;
-    }
-
-    /**
-     * @param mixed $weight
-     */
-    public function setWeight($weight): void
-    {
-        $this->weight = $weight;
     }
 
     /**

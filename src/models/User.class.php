@@ -35,27 +35,11 @@ class User
     }
 
     /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getUsername(): string
     {
         return $this->username;
-    }
-
-    /**
-     * @param string $username
-     */
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
     }
 
     /**
@@ -67,27 +51,11 @@ class User
     }
 
     /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
-    /**
      * @return string
      */
     public function getFirstName(): string
     {
         return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
     }
 
     /**
@@ -99,27 +67,11 @@ class User
     }
 
     /**
-     * @param string $lastName
-     */
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
      * @return string|null
      */
     public function getDisplayName(): ?string
     {
         return $this->displayName;
-    }
-
-    /**
-     * @param string|null $displayName
-     */
-    public function setDisplayName(?string $displayName): void
-    {
-        $this->displayName = $displayName;
     }
 
     /**
@@ -131,14 +83,6 @@ class User
     }
 
     /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
      * @return int
      */
     public function getDisabled(): int
@@ -147,27 +91,11 @@ class User
     }
 
     /**
-     * @param int $disabled
-     */
-    public function setDisabled(int $disabled): void
-    {
-        $this->disabled = $disabled;
-    }
-
-    /**
      * @return string
      */
     public function getRole(): ?string
     {
         return $this->role;
-    }
-
-    /**
-     * @param string $role
-     */
-    public function setRole(?string $role): void
-    {
-        $this->role = $role;
     }
 
     /**

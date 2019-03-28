@@ -35,27 +35,11 @@ class Token
     }
 
     /**
-     * @param string $token
-     */
-    public function setToken(string $token): void
-    {
-        $this->token = $token;
-    }
-
-    /**
      * @return int
      */
     public function getUser(): int
     {
         return $this->user;
-    }
-
-    /**
-     * @param int $user
-     */
-    public function setUser(int $user): void
-    {
-        $this->user = $user;
     }
 
     /**
@@ -67,27 +51,11 @@ class Token
     }
 
     /**
-     * @param string $issueTime
-     */
-    public function setIssueTime(string $issueTime): void
-    {
-        $this->issueTime = $issueTime;
-    }
-
-    /**
      * @return string
      */
     public function getExpireTime(): string
     {
         return $this->expireTime;
-    }
-
-    /**
-     * @param string $expireTime
-     */
-    public function setExpireTime(string $expireTime): void
-    {
-        $this->expireTime = $expireTime;
     }
 
     /**
@@ -117,14 +85,6 @@ class Token
     }
 
     /**
-     * @param string $ipAddress
-     */
-    public function setIpAddress(string $ipAddress): void
-    {
-        $this->ipAddress = $ipAddress;
-    }
-
-    /**
      * @return bool
      * @throws SecurityException
      * @throws \exceptions\DatabaseException
@@ -142,6 +102,17 @@ class Token
         }
 
         return TRUE;
+    }
+
+    /**
+     * Updates this token's expire time to one hour after the current time
+     *
+     * @return bool
+     * @throws \exceptions\DatabaseException
+     */
+    public function updateExpireTime(): bool
+    {
+        return TokenDatabaseHandler::updateExpireTime($this->token);
     }
 
 }

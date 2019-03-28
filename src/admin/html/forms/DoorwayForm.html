@@ -1,0 +1,26 @@
+<div class="button-bar">
+    <span id="doorway" class="button form-submit-button">Save</span>
+    <a class="button" href="{{@cancelURI}}">Cancel</a>
+</div>
+<form id="doorway-form" class="table-form" method="post">
+    <h2 class="region-title">Doorway Profile</h2>
+    <table class="table-display">
+        <tbody>
+            <tr>
+                <td class="required">URI</td>
+                <td><input type="text" name="uri" value="{{@uri}}"></td>
+                <td>Destination</td>
+                <td><input type="text" name="destination" value="{{@destination}}"></td>
+            </tr>
+            <tr>
+                <td class="required">Enabled</td>
+                <td>
+                    <select name="enabled">
+                        <option value="1">Yes</option>
+                        <option value="0" {{@enabledNo}}>No</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

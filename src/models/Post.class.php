@@ -41,27 +41,11 @@ class Post
     }
 
     /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return int|null
      */
     public function getCategory(): ?int
     {
         return $this->category;
-    }
-
-    /**
-     * @param int|null $category
-     */
-    public function setCategory(?int $category): void
-    {
-        $this->category = $category;
     }
 
     /**
@@ -73,27 +57,11 @@ class Post
     }
 
     /**
-     * @param int|null $author
-     */
-    public function setAuthor(?int $author): void
-    {
-        $this->author = $author;
-    }
-
-    /**
      * @return string
      */
     public function getDate(): string
     {
         return $this->date;
-    }
-
-    /**
-     * @param string $date
-     */
-    public function setDate(string $date): void
-    {
-        $this->date = $date;
     }
 
     /**
@@ -105,27 +73,11 @@ class Post
     }
 
     /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    /**
      * @return string
      */
     public function getContent(): string
     {
         return $this->content;
-    }
-
-    /**
-     * @param string $content
-     */
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
     }
 
     /**
@@ -137,27 +89,11 @@ class Post
     }
 
     /**
-     * @param string $previewImage
-     */
-    public function setPreviewImage(string $previewImage): void
-    {
-        $this->previewImage = $previewImage;
-    }
-
-    /**
      * @return int
      */
     public function getDisplayed(): int
     {
         return $this->displayed;
-    }
-
-    /**
-     * @param int $displayed
-     */
-    public function setDisplayed(int $displayed): void
-    {
-        $this->displayed = $displayed;
     }
 
     /**
@@ -167,14 +103,5 @@ class Post
     {
         return $this->featured;
     }
-
-    /**
-     * @param int $featured
-     */
-    public function setFeatured(int $featured): void
-    {
-        $this->featured = $featured;
-    }
-
 
 }

@@ -36,14 +36,6 @@ class Content
     }
 
     /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getType(): string
@@ -52,27 +44,11 @@ class Content
     }
 
     /**
-     * @param string $type
-     */
-    public function setType(string $type): void
-    {
-        $this->type = $type;
-    }
-
-    /**
      * @return int|null
      */
     public function getAuthor(): ?int
     {
         return $this->author;
-    }
-
-    /**
-     * @param int|null $author
-     */
-    public function setAuthor(?int $author): void
-    {
-        $this->author = $author;
     }
 
     /**
@@ -94,27 +70,11 @@ class Content
     }
 
     /**
-     * @param int $element
-     */
-    public function setElement(int $element): void
-    {
-        $this->element = $element;
-    }
-
-    /**
      * @return string
      */
     public function getArea(): string
     {
         return $this->area;
-    }
-
-    /**
-     * @param string $area
-     */
-    public function setArea(string $area): void
-    {
-        $this->area = $area;
     }
 
     /**
@@ -126,14 +86,6 @@ class Content
     }
 
     /**
-     * @param mixed $content
-     */
-    public function setContent($content): void
-    {
-        $this->content = $content;
-    }
-
-    /**
      * @return int
      */
     public function getWeight(): int
@@ -142,27 +94,11 @@ class Content
     }
 
     /**
-     * @param int $weight
-     */
-    public function setWeight(int $weight): void
-    {
-        $this->weight = $weight;
-    }
-
-    /**
      * @return string|null
      */
     public function getClasses(): ?string
     {
         return $this->classes;
-    }
-
-    /**
-     * @param string|null $classes
-     */
-    public function setClasses(?string $classes): void
-    {
-        $this->classes = $classes;
     }
 
 }

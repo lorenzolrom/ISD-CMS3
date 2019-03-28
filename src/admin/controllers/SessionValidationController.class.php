@@ -38,6 +38,7 @@ class SessionValidationController
             {
                 $token = TokenDatabaseHandler::selectByToken($_COOKIE[\CMSConfiguration::CMS_CONFIG['cookieName']]);
                 $token->isValid();
+                $token->updateExpireTime();
 
                 return UserDatabaseHandler::selectById($token->getUser());
             }

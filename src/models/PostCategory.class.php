@@ -36,27 +36,11 @@ class PostCategory
     }
 
     /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getTitle(): string
     {
         return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
     }
 
     /**
@@ -68,28 +52,10 @@ class PostCategory
     }
 
     /**
-     * @param string $previewImage
-     */
-    public function setPreviewImage(string $previewImage): void
-    {
-        $this->previewImage = $previewImage;
-    }
-
-    /**
      * @return string
      */
     public function getDisplayed(): string
     {
         return $this->displayed;
     }
-
-    /**
-     * @param string $displayed
-     */
-    public function setDisplayed(string $displayed): void
-    {
-        $this->displayed = $displayed;
-    }
-
-
 }

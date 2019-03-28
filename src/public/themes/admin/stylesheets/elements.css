@@ -5,7 +5,7 @@ div#notifications {
     margin-bottom: 10px;
     background-color: #FFFFFF;
     text-align: left;
-    box-shadow: var(--shadow);
+    box-shadow: var(--l2-shadow);
     box-sizing: border-box;
     top: 15px;
     right: 15px;
@@ -44,4 +44,69 @@ div#notifications ul li {
 div#notifications h3 {
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+div#main div#notifications {
+    right: auto;
+    top: auto;
+}
+
+input.list-table-filter {
+    margin-bottom: 5px;
+}
+
+table.list-table {
+    width: 100%;
+    box-shadow: var(--l1-shadow);
+}
+
+table.list-table, table.list-table th, table.list-table td {
+    border: 1px solid var(--wrapper-background);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table.list-table tbody tr th:first-child, table.list-table tbody tr th:last-child, table.list-table tbody tr th:nth-child(2) {
+    width: 25px;
+}
+
+table.list-table tbody tr th {
+    background-color: var(--border-color);
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+table.list-table tbody tr th, table.list-table tbody tr td {
+    padding: 2px 5px;
+}
+
+h2.region-title {
+    display: block;
+    background-color: var(--wrapper-background);
+    box-shadow: var(--l1-shadow);
+    font-weight: bold;
+    color: var(--border-color);
+    padding: 2px;
+    margin-top: 10px;
+}
+
+table.table-display {
+    border-spacing: 20px 5px;
+}
+
+table.table-display * {
+}
+
+table.table-display tbody tr {
+    vertical-align: top;
+}
+
+table.table-display tbody tr td:nth-child(2n+1) {
+    font-weight: 600;
+    text-align: right;
+    min-width: 110px;
+}
+
+table.table-display tbody tr td:nth-child(2n) {
+    min-width: 160px;
 }

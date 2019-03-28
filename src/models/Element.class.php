@@ -34,14 +34,6 @@ class Element
     }
 
     /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getName(): string
@@ -50,27 +42,11 @@ class Element
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return mixed
      */
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type): void
-    {
-        $this->type = $type;
     }
 
     /**
@@ -92,27 +68,11 @@ class Element
     }
 
     /**
-     * @param int $page
-     */
-    public function setPage(int $page): void
-    {
-        $this->page = $page;
-    }
-
-    /**
      * @return int
      */
     public function getWeight(): int
     {
         return $this->weight;
-    }
-
-    /**
-     * @param int $weight
-     */
-    public function setWeight(int $weight): void
-    {
-        $this->weight = $weight;
     }
 
     /**
