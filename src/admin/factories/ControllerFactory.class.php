@@ -17,6 +17,7 @@ namespace admin\factories;
 use admin\controllers\DashboardController;
 use admin\controllers\DoorwaysController;
 use admin\controllers\LoginController;
+use admin\controllers\PageController;
 use controllers\Controller;
 use exceptions\PageNotFoundException;
 
@@ -41,6 +42,9 @@ class ControllerFactory
             case "logout":
             case "login":
                 return new LoginController($uriParts);
+                break;
+            case "pages":
+                return new PageController($uriParts);
                 break;
             case "doorways":
                 return new DoorwaysController($uriParts);

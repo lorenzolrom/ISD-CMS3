@@ -29,8 +29,8 @@ class DoorwayForm extends Form
 
         if($doorway !== NULL)
         {
-            $this->setVariable("uri", $doorway->getUri());
-            $this->setVariable("destination", $doorway->getDestination());
+            $this->setVariable("uri", htmlentities($doorway->getUri()));
+            $this->setVariable("destination", htmlentities($doorway->getDestination()));
 
             if($doorway->getEnabled() == 0)
                 $this->setVariable("enabledNo", self::SELECTED);

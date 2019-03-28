@@ -32,7 +32,7 @@ class ListTableItem extends AdminView
 
         foreach($cells as $cell)
         {
-            $cellString .= "<td>$cell</td>\n";
+            $cellString .= "<td>" . htmlentities($cell) . "</td>\n";
         }
 
         $this->setVariable("id", $id); // Set the unique identifier for item represented by this row

@@ -71,7 +71,7 @@ class PageDatabaseHandler
      * @throws PageNotFoundException
      * @throws \exceptions\DatabaseException
      */
-    public static function selectAll(bool $onNav = FALSE, bool $byWeight = TRUE): array
+    public static function select(bool $onNav = FALSE, bool $byWeight = TRUE): array
     {
         $handler = new DatabaseConnection();
 
@@ -88,5 +88,111 @@ class PageDatabaseHandler
         }
 
         return $pages;
+    }
+
+    /**
+     * @param string $uri
+     * @return bool
+     */
+    public static function uriInUse(string $uri): bool
+    {
+        try
+        {
+            $handler = new DatabaseConnection();
+
+            $select = $handler->prepare("SELECT id FROM cms_Page WHERE uri = ? LIMIT 1");
+            $select->bindParam(1, $uri, DatabaseConnection::PARAM_STR);
+            $select->execute();
+
+            $handler->close();
+
+            return $select->getRowCount() === 1;
+        }
+        catch(\Exception $e)
+        {
+            return TRUE;
+        }
+    }
+
+    /**
+     * @param string $type
+     * @param int|null $author
+     * @param string $uri
+     * @param string $title
+     * @param string|null $navTitle
+     * @param int $isOnNav
+     * @param int $weight
+     * @return Page
+     * @throws PageNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function insert(string $type, ?int $author, string $uri, string $title, ?string $navTitle, int $isOnNav, int $weight): Page
+    {
+        $handler = new DatabaseConnection();
+
+        $insert = $handler->prepare("INSERT INTO cms_Page (type, author, uri, title, navTitle, isOnNav, weight) VALUES (:type, :author, :uri, :title, :navTitle, :isOnNav, :weight)");
+        $insert->bindParam('type', $type, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('author', $author, DatabaseConnection::PARAM_INT);
+        $insert->bindParam('uri', $uri, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('title', $title, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('navTitle', $navTitle, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('isOnNav', $isOnNav, DatabaseConnection::PARAM_INT);
+        $insert->bindParam('weight', $weight, DatabaseConnection::PARAM_INT);
+        $insert->execute();
+
+        $id = $handler->getLastInsertId();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
+
+    /**
+     * @param int $id
+     * @param string $type
+     * @param string $uri
+     * @param string $title
+     * @param string|null $navTitle
+     * @param int $isOnNav
+     * @param int $weight
+     * @return Page
+     * @throws PageNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function update(int $id, string $type, string $uri, string $title, ?string $navTitle, int $isOnNav, int $weight): Page
+    {
+        $handler = new DatabaseConnection();
+
+        $update = $handler->prepare("UPDATE cms_Page SET type = :type, uri = :uri, title = :title, navTitle = :navTitle, isOnNav = :isOnNav, weight = :weight WHERE id = :id");
+        $update->bindParam('type', $type, DatabaseConnection::PARAM_STR);
+        $update->bindParam('uri', $uri, DatabaseConnection::PARAM_STR);
+        $update->bindParam('title', $title, DatabaseConnection::PARAM_STR);
+        $update->bindParam('navTitle', $navTitle, DatabaseConnection::PARAM_STR);
+        $update->bindParam('isOnNav', $isOnNav, DatabaseConnection::PARAM_INT);
+        $update->bindParam('weight', $weight, DatabaseConnection::PARAM_INT);
+        $update->bindParam('id', $id, DatabaseConnection::PARAM_INT);
+        $update->execute();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \exceptions\DatabaseException
+     */
+    public static function delete(int $id): bool
+    {
+        $handler = new DatabaseConnection();
+
+        $delete = $handler->prepare("DELETE FROM cms_Page WHERE id = ?");
+        $delete->bindParam(1, $id, DatabaseConnection::PARAM_INT);
+        $delete->execute();
+
+        $handler->close();
+
+        return $delete->getRowCount() === 1;
     }
 }

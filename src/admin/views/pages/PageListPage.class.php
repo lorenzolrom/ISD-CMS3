@@ -6,37 +6,37 @@
  * Content Management System 3
  *
  * User: lromero
- * Date: 3/26/2019
- * Time: 1:35 PM
+ * Date: 3/27/2019
+ * Time: 9:27 PM
  */
 
 
 namespace admin\views\pages;
 
 
-use admin\views\elements\DoorwayListTable;
+use admin\views\elements\PageListTable;
 
-class DoorwayListPage extends UserDocument
+class PageListPage extends UserDocument
 {
     /**
-     * DoorwayListPage constructor.
+     * PageListPage constructor.
      * @throws \exceptions\DatabaseException
-     * @throws \exceptions\DoorwayNotFoundException
+     * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\SecurityException
      * @throws \exceptions\ViewException
      */
     public function __construct()
     {
-        parent::__construct(array('editor', 'administrator'));
+        parent::__construct(array('editor','administrator'));
 
-        $this->setVariable("tabTitle", "Doorways");
+        $this->setVariable("tabTitle", 'Pages');
 
-        $list = new DoorwayListTable();
+        $list = new PageListTable();
         $this->setVariable("mainContent", $list->getHTML());
         $this->setActionLinks(array(
             array(
-                'title' => "New Doorway",
-                'href' => 'doorways/new'
+                'title' => "New Page",
+                'href' => "pages/new"
             )
         ));
     }

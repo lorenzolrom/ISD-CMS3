@@ -110,4 +110,17 @@ class User
 
         return FALSE;
     }
+
+    /**
+     * Return display name if it is set, first + last name if it is not
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        if($this->displayName !== NULL)
+            return $this->displayName;
+
+        return $this->firstName . " " . $this->lastName;
+    }
 }

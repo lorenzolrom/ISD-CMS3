@@ -20,12 +20,11 @@ class DoorwayListTable extends ListTable
 {
     /**
      * DoorwayListTable constructor.
-     * @param string $itemURI
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\DoorwayNotFoundException
      * @throws \exceptions\ViewException
      */
-    public function __construct(string $itemURI)
+    public function __construct()
     {
         $rows = array();
 
@@ -40,7 +39,7 @@ class DoorwayListTable extends ListTable
             );
         }
 
-        parent::__construct($itemURI, $rows);
+        parent::__construct("doorways", $rows);
         $this->setHeader(array('URI', 'Destination'));
     }
 }

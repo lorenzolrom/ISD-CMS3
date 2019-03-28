@@ -1,0 +1,42 @@
+<div class="button-bar">
+    <span id="page" class="button form-submit-button">Save</span>
+    <a class="button" href="{{@cancelURI}}">Cancel</a>
+</div>
+<form id="page-form" class="table-form" method="post">
+    <h2 class="region-title">Page Profile</h2>
+    <table class="table-display">
+        <tbody>
+            <tr>
+                <td class="required">URI</td>
+                <td><input type="text" name="uri" value="{{@uri}}"></td>
+            </tr>
+            <tr>
+                <td class="required">Title</td>
+                <td><input type="text" name="title" value="{{@title}}"></td>
+                <td>Title (Navigation)</td>
+                <td><input type="text" name="navTitle" value="{{@navTitle}}"></td>
+            </tr>
+            <tr>
+                <td class="required">Type</td>
+                <td>
+                    <select name="type">
+                        {{@typeSelect}}
+                    </select>
+                </td>
+                <td>Author</td>
+                <td>{{@authorName}}</td>
+            </tr>
+            <tr>
+                <td class="required">Show On Navigation</td>
+                <td>
+                    <select name="isOnNav">
+                        <option value="1">Yes</option>
+                        <option value="0" {{@isOnNavNo}}>No</option>
+                    </select>
+                </td>
+                <td class="required">Weight</td>
+                <td><input type="text" name="weight" value="{{@weight}}"></td>
+            </tr>
+        </tbody>
+    </table>
+</form>

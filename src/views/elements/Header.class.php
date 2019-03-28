@@ -35,7 +35,7 @@ class Header extends View
         // Generate navigation menu
         $navigationLinks = "";
 
-        foreach(PageDatabaseHandler::selectAll(TRUE) as $page)
+        foreach(PageDatabaseHandler::select(TRUE) as $page)
         {
             // Check if page has navTitle
             $pageTitle = $page->getTitle();
