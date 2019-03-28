@@ -26,3 +26,11 @@ div.button-bar {
     font-weight: 600;
     color: #CC0000;
 }
+
+input.list-table-filter {
+    margin-bottom: 5px;
+}
+
+h2.region-title+input.list-table-filter {
+    margin-top: 10px;
+}

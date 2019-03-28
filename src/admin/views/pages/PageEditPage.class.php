@@ -28,6 +28,6 @@ class PageEditPage extends UserDocument
         $form = new PageForm($page);
         $this->setVariable("mainContent", $form->getHTML());
 
-        $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}pages");
+        $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}pages/view/{$page->getId()}");
     }
 }

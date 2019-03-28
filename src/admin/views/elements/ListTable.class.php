@@ -25,9 +25,10 @@ abstract class ListTable extends AdminView
      * ListTable constructor.
      * @param string $itemURI URI to the resource this is listing
      * @param array $rows array of items to display in the list
+     * @param bool $view Should we use the 'view' template instead of 'edit'
      * @throws \exceptions\ViewException
      */
-    public function __construct(string $itemURI, array $rows)
+    public function __construct(string $itemURI, array $rows, bool $view = FALSE)
     {
         $this->itemURI = $itemURI;
         $this->setTemplateFromHTML("ListTable", self::ADMIN_TEMPLATE_ELEMENT);
@@ -36,7 +37,7 @@ abstract class ListTable extends AdminView
 
         foreach($rows as $row)
         {
-            $item = new ListTableItem($row['id'], $row['cells']);
+            $item = new ListTableItem($row['id'], $row['cells'], $view);
             $rowString .= $item->getTemplate();
         }
 
@@ -60,7 +61,7 @@ abstract class ListTable extends AdminView
      */
     protected function setHeader(array $headers)
     {
-        $headerString = "<th>ID</th>\n";
+        $headerString = "";
 
         foreach($headers as $header)
         {

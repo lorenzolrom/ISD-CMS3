@@ -51,10 +51,6 @@ div#main div#notifications {
     top: auto;
 }
 
-input.list-table-filter {
-    margin-bottom: 5px;
-}
-
 table.list-table {
     width: 100%;
     box-shadow: var(--l1-shadow);
@@ -66,7 +62,7 @@ table.list-table, table.list-table th, table.list-table td {
     text-align: center;
 }
 
-table.list-table tbody tr th:first-child, table.list-table tbody tr th:last-child, table.list-table tbody tr th:nth-child(2) {
+table.list-table tbody tr th:first-child, table.list-table tbody tr th:last-child {
     width: 25px;
 }
 

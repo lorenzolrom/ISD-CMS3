@@ -41,7 +41,7 @@ class PageListTable extends ListTable
             );
         }
 
-        parent::__construct("pages", $rows);
+        parent::__construct("pages", $rows, TRUE);
         $this->setHeader(array('Title', 'URI', 'Type', 'Weight'));
     }
 }

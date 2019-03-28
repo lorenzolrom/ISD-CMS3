@@ -43,7 +43,7 @@ function filterTableList(input)
     for(let i = 0; i < rows.length; i++)
     {
         // Get second cell (after edit link)
-        let cell = rows[i].getElementsByTagName("td")[2];
+        let cell = rows[i].getElementsByTagName("td")[1];
 
         if(cell)
         {

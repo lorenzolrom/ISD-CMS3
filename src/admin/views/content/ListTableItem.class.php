@@ -22,11 +22,15 @@ class ListTableItem extends AdminView
      * ListTableItem constructor.
      * @param mixed $id Unique identifier for this row
      * @param array $cells
+     * @param bool $view Should we use the 'view' template instead of 'element'
      * @throws \exceptions\ViewException
      */
-    public function __construct($id, array $cells)
+    public function __construct($id, array $cells, bool $view = FALSE)
     {
-        $this->setTemplateFromHTML("ListTableItem", self::ADMIN_TEMPLATE_CONTENT);
+        if($view)
+            $this->setTemplateFromHTML("ListTableViewItem", self::ADMIN_TEMPLATE_CONTENT);
+        else
+            $this->setTemplateFromHTML("ListTableItem", self::ADMIN_TEMPLATE_CONTENT);
 
         $cellString = "";
 

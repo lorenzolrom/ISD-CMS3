@@ -18,6 +18,7 @@ use admin\views\pages\AuthenticatedPage;
 use admin\views\pages\PageEditPage;
 use admin\views\pages\PageListPage;
 use admin\views\pages\PageNewPage;
+use admin\views\pages\PageViewPage;
 use database\PageDatabaseHandler;
 use exceptions\PageNotFoundException;
 use exceptions\ValidationException;
@@ -32,6 +33,8 @@ class PageController extends Controller
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\SecurityException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\UserNotFoundException
+     * @throws \exceptions\ElementNotFoundException
      */
     public function getPage(): string
     {
@@ -50,12 +53,32 @@ class PageController extends Controller
                 $this->deletePage();
                 return "";
                 break;
+            case "view":
+                return $this->viewPage();
+                break;
             case "edit":
                 return $this->getEditPage();
                 break;
             default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);
         }
+    }
+
+    /**
+     * @return string
+     * @throws PageNotFoundException
+     * @throws \exceptions\DatabaseException
+     * @throws \exceptions\SecurityException
+     * @throws \exceptions\UserNotFoundException
+     * @throws \exceptions\ViewException
+     * @throws \exceptions\ElementNotFoundException
+     */
+    private function viewPage(): string
+    {
+        $id = array_shift($this->uriParts);
+        $page = PageDatabaseHandler::selectById(intval($id));
+        $view = new PageViewPage($page);
+        return $view->getHTML();
     }
 
     /**
@@ -110,7 +133,7 @@ class PageController extends Controller
             else
             {
                 PageDatabaseHandler::update($page->getId(), $_POST['type'], trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], intval($_POST['isOnNav']), intval($_POST['weight']));
-                header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages?NOTICE=Page Updated");
+                header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages/view/{$page->getId()}?NOTICE=Page Updated");
                 exit;
             }
         }
