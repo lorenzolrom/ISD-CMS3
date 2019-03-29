@@ -20,6 +20,7 @@ use admin\controllers\DoorwaysController;
 use admin\controllers\ElementController;
 use admin\controllers\LoginController;
 use admin\controllers\PageController;
+use admin\controllers\PostController;
 use controllers\Controller;
 use exceptions\PageNotFoundException;
 
@@ -56,6 +57,9 @@ class ControllerFactory
                 break;
             case "doorways":
                 return new DoorwaysController($uriParts);
+                break;
+            case "posts":
+                return new PostController($uriParts);
                 break;
             default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);

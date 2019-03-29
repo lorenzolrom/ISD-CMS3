@@ -35,8 +35,8 @@ class ElementListTable extends ListTable
             $rows[] = array(
                 'id' => $element->getId(),
                 'cells' => array(
-                    'name' => htmlentities($element->getName()),
-                    'type' => htmlentities($element->getType()),
+                    'name' => $element->getName(),
+                    'type' => $element->getType(),
                     'weight' => $element->getWeight()
                 )
             );

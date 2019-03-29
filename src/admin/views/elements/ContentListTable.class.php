@@ -35,8 +35,8 @@ class ContentListTable extends ListTable
             $rows[] = array(
                 'id' => $content->getId(),
                 'cells' => array(
-                    'name' => htmlentities($content->getName()),
-                    'area' => htmlentities($content->getArea()),
+                    'name' => $content->getName(),
+                    'area' => $content->getArea(),
                     'weight' => $content->getWeight()
                 )
             );

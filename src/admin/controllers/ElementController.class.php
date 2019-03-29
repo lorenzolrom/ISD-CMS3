@@ -56,7 +56,7 @@ class ElementController extends Controller
             case "delete":
                 $this->deleteElement();
                 return "";
-            default;
+            default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);
         }
     }

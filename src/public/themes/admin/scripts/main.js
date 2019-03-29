@@ -121,6 +121,7 @@ $(document).ready(function(){
     formSubmitButtonSetup();
     confirmButtonSetup();
     buttonSetup();
+    datePickerSetup();
     tinymceSetup();
 
     // Fade in notifications if they are present

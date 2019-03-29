@@ -22,4 +22,15 @@ class ValidationException extends \Exception
     const VALUE_ALREADY_TAKEN = 3;
     const VALUE_IS_NULL = 4;
     const VALUE_IS_NOT_VALID = 5;
+
+    /**
+     * @param string $date
+     * @param string $format
+     * @return bool
+     */
+    public static function validDate(string $date, string $format = "Y-m-d"): bool
+    {
+        $d = \DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
 }

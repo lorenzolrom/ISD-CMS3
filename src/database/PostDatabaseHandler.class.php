@@ -43,7 +43,7 @@ class PostDatabaseHandler
 
     /**
      * @param bool $displayedOnly
-     * @return array
+     * @return Post[]
      * @throws PostNotFoundException
      * @throws \exceptions\DatabaseException
      */
@@ -146,5 +146,93 @@ class PostDatabaseHandler
         }
 
         return $posts;
+    }
+
+    /**
+     * @param int|null $category
+     * @param int|null $author
+     * @param string $date
+     * @param string $title
+     * @param string $content
+     * @param string $previewImage
+     * @param int $displayed
+     * @param int $featured
+     * @return Post
+     * @throws PostNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function insert(?int $category, ?int $author, string $date, string $title, string $content, string $previewImage, int $displayed, int $featured): Post
+    {
+        $handler = new DatabaseConnection();
+
+        $insert = $handler->prepare("INSERT INTO cms_Post (category, author, date, title, content, previewImage, displayed, featured) VALUES (:category, :author, :date, :title, :content, :previewImage, :displayed, :featured)");
+        $insert->bindParam('category', $category, DatabaseConnection::PARAM_INT);
+        $insert->bindParam('author', $author, DatabaseConnection::PARAM_INT);
+        $insert->bindParam('date', $date, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('title', $title, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('content', $content, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('previewImage', $previewImage, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('displayed', $displayed, DatabaseConnection::PARAM_INT);
+        $insert->bindParam('featured', $featured, DatabaseConnection::PARAM_INT);
+        $insert->execute();
+
+        $id = $handler->getLastInsertId();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
+
+    /**
+     * @param int $id
+     * @param int|null $category
+     * @param int|null $author
+     * @param string $date
+     * @param string $title
+     * @param string $content
+     * @param string $previewImage
+     * @param int $displayed
+     * @param int $featured
+     * @return Post
+     * @throws PostNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function update(int $id, ?int $category, ?int $author, string $date, string $title, string $content, string $previewImage, int $displayed, int $featured): Post
+    {
+        $handler = new DatabaseConnection();
+
+        $update = $handler->prepare("UPDATE cms_Post SET category = :category, author = :author, date = :date, title = :title, content = :content, previewImage = :previewImage, displayed = :displayed, featured = :featured WHERE id = :id");
+        $update->bindParam('category', $category, DatabaseConnection::PARAM_INT);
+        $update->bindParam('id', $id, DatabaseConnection::PARAM_INT);
+        $update->bindParam('author', $author, DatabaseConnection::PARAM_INT);
+        $update->bindParam('date', $date, DatabaseConnection::PARAM_STR);
+        $update->bindParam('title', $title, DatabaseConnection::PARAM_STR);
+        $update->bindParam('content', $content, DatabaseConnection::PARAM_STR);
+        $update->bindParam('previewImage', $previewImage, DatabaseConnection::PARAM_STR);
+        $update->bindParam('displayed', $displayed, DatabaseConnection::PARAM_INT);
+        $update->bindParam('featured', $featured, DatabaseConnection::PARAM_INT);
+        $update->execute();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \exceptions\DatabaseException
+     */
+    public static function delete(int $id): bool
+    {
+        $handler = new DatabaseConnection();
+
+        $delete = $handler->prepare("DELETE FROM cms_Post WHERE id = ?");
+        $delete->bindParam(1, $id, DatabaseConnection::PARAM_INT);
+        $delete->execute();
+
+        $handler->close();
+
+        return $delete->getRowCount() === 1;
     }
 }

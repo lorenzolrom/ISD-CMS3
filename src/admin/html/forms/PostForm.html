@@ -1,0 +1,50 @@
+<div class="button-bar">
+    <span class="button form-submit-button" id="post">Save</span>
+    <a href="{{@cancelURI}}" class="button">Cancel</a>
+</div>
+<form class="table-form" id="post-form" method="post">
+    <h2 class="region-title">Post Profile</h2>
+    <table class="table-display">
+        <tbody>
+            <tr>
+                <td class="required">Title</td>
+                <td><input type="text" name="title" value="{{@title}}"></td>
+                <td class="required">Date</td>
+                <td><input type="text" class="date-input" autocomplete="off" name="date" value="{{@date}}"></td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select name="category">
+                        <option value="">--NONE--</option>
+                        {{@categorySelect}}
+                    </select>
+                </td>
+                <td class="required">Preview Image</td>
+                <td><input type="text" name="previewImage" value="{{@previewImage}}"></td>
+            </tr>
+            <tr>
+                <td class="required">Displayed</td>
+                <td>
+                    <select name="displayed">
+                        <option value="1">Yes</option>
+                        <option value="0" {{@displayedNo}}>No</option>
+                    </select>
+                </td>
+                <td class="required">Featured</td>
+                <td>
+                    <select name="featured">
+                        <option value="0">No</option>
+                        <option value="1" {{@featuredYes}}>Yes</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="required">Content</td>
+                <td colspan=3>
+                    <textarea name="content" id="content-editor">{{@content}}</textarea>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

@@ -40,6 +40,7 @@ class PostController extends Controller
      * @throws \exceptions\ViewException
      * @throws \exceptions\PostCategoryNotFoundException
      * @throws PostNotFoundException
+     * @throws \exceptions\UserNotFoundException
      */
     public function getPage(): string
     {
@@ -66,6 +67,7 @@ class PostController extends Controller
      * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\PostCategoryNotFoundException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\UserNotFoundException
      */
     private function processPostRequest(array $uriParts): string
     {

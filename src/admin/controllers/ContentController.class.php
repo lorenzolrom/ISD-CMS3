@@ -54,7 +54,7 @@ class ContentController extends Controller
                 $this->deleteContent();
                 return "";
                 break;
-            default;
+            default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);
         }
     }

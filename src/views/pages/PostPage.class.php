@@ -13,6 +13,7 @@
 
 namespace views\pages;
 
+use database\UserDatabaseHandler;
 use models\Post;
 
 /**
@@ -30,6 +31,7 @@ class PostPage extends HeaderFooterPage
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
+     * @throws \exceptions\UserNotFoundException
      */
     public function __construct(Post $post)
     {
@@ -56,8 +58,8 @@ class PostPage extends HeaderFooterPage
             $this->setVariable("postAuthorName", "Anonymous");
         else
         {
-            // TODO: implement UserDatabaseHandler and get the author
-            $this->setVariable("postAuthorName", "TBD");
+            $author = UserDatabaseHandler::selectById($post->getAuthor());
+            $this->setVariable("postAuthorName", $author->getName());
         }
     }
 }

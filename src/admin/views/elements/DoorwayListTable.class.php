@@ -33,8 +33,8 @@ class DoorwayListTable extends ListTable
             $rows[] = array(
                 'id' => $doorway->getId(),
                 'cells' => array(
-                    'uri' => htmlentities($doorway->getUri()),
-                    'destination' => htmlentities($doorway->getDestination())
+                    'uri' => $doorway->getUri(),
+                    'destination' => $doorway->getDestination()
                 )
             );
         }

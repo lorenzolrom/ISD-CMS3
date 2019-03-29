@@ -64,6 +64,10 @@ div.post-body img.post-image, div.post-body div.post-content {
     vertical-align: top;
 }
 
+div.post-content {
+    width: 100%;
+}
+
 div.post-body img.post-image {
     margin-right: 20px;
 }
@@ -95,6 +99,10 @@ div.sidebar-left {
     display: inline-block;
     padding-right: 25px;
     text-align: center;
+}
+
+div.sidebar-left p {
+    padding-bottom: 10px;
 }
 
 div.sidebar-left hr {
