@@ -47,7 +47,6 @@ abstract class DatabasePage extends HeaderFooterPage
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\ViewException
-     * @throws \exceptions\PostNotFoundException
      */
     protected function loadContent(string $target)
     {

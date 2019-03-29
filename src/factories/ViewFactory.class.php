@@ -17,17 +17,11 @@ use exceptions\ViewException;
 use models\Content;
 use models\Element;
 use models\Page;
-use views\content\FeaturedPostList;
-use views\content\Image;
-use views\content\Level2Heading;
-use views\content\Level3Heading;
-use views\content\Paragraph;
-use views\content\Raw;
 use views\elements\LeftSidebarMain;
 use views\elements\Main;
 use views\elements\Split;
-use views\elements\TriBanner;
 use views\pages\BasicPage;
+use views\pages\HomePage;
 use views\pages\NoTitlePage;
 use views\View;
 
@@ -40,35 +34,10 @@ class ViewFactory
     /**
      * @param Content $content
      * @return View
-     * @throws ViewException
-     * @throws \exceptions\DatabaseException
-     * @throws \exceptions\PostNotFoundException
      */
     public static function getContentView(Content $content): View
     {
-        switch($content->getType())
-        {
-            case "Level 2 Heading":
-                return new Level2Heading($content);
-                break;
-            case "Level 3 Heading":
-                return new Level3Heading($content);
-                break;
-            case "Image":
-                return new Image($content);
-                break;
-            case "Paragraph":
-                return new Paragraph($content);
-                break;
-            case "Featured Post List":
-                return new FeaturedPostList($content);
-                break;
-            case "Raw":
-                return new Raw($content);
-                break;
-            default:
-                throw new ViewException(ViewException::MESSAGES[ViewException::VIEW_NOT_FOUND], ViewException::VIEW_NOT_FOUND);
-        }
+        return new \views\content\Content($content);
     }
 
     /**
@@ -77,7 +46,6 @@ class ViewFactory
      * @throws ViewException
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
-     * @throws \exceptions\PostNotFoundException
      */
     public static function getElementView(Element $element): \views\elements\Element
     {
@@ -85,9 +53,6 @@ class ViewFactory
         {
             case "Main":
                 return new Main($element);
-                break;
-            case "Tri-Banner":
-                return new TriBanner($element);
                 break;
             case "Split":
                 return new Split($element);
@@ -104,11 +69,10 @@ class ViewFactory
      * @param Page $page
      * @return View
      * @throws ViewException
+     * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ElementNotFoundException
-     * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\PageNotFoundException
-     * @throws \exceptions\PostNotFoundException
      */
     public static function getPageView(Page $page): View
     {
@@ -119,6 +83,9 @@ class ViewFactory
                 break;
             case "No Title":
                 return new NoTitlePage($page);
+                break;
+            case "Home":
+                return new HomePage($page);
                 break;
             default:
                 throw new ViewException(ViewException::MESSAGES[ViewException::PAGE_NOT_FOUND], ViewException::PAGE_NOT_FOUND);

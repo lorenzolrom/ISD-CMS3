@@ -24,7 +24,7 @@ use exceptions\ValidationException;
 class Page
 {
     // Valid page types
-    const TYPES = array('Basic', 'No Title');
+    const TYPES = array('Basic', 'No Title', 'Home');
 
     const FIELDS = array('type', 'uri', 'title', 'navTitle', 'isOnNav', 'weight');
 

@@ -53,7 +53,7 @@ class PageForm extends Form
 
         foreach(Page::TYPES as $pageType)
         {
-            if($page !== NULL AND $page->getType() == $pageType)
+            if(($page !== NULL AND $page->getType() == $pageType) OR (isset($_POST['type']) AND $_POST['type'] == $pageType))
                 $selected = self::SELECTED;
             else
                 $selected = "";

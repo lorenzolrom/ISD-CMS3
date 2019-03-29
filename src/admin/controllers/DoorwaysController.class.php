@@ -79,7 +79,7 @@ class DoorwaysController extends Controller
             }
             else
             {
-                DoorwayDatabaseHandler::insert($_POST['uri'], $_POST['destination'], intval($_POST['enabled']));
+                DoorwayDatabaseHandler::insert($_POST['uri'], $_POST['destination'], (int)$_POST['enabled']);
                 header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "doorways?NOTICE=Doorway Created");
                 exit;
             }
@@ -98,7 +98,7 @@ class DoorwaysController extends Controller
     private function getEditPage(): string
     {
         $id = array_shift($this->uriParts);
-        $doorway = DoorwayDatabaseHandler::selectById(intval($id));
+        $doorway = DoorwayDatabaseHandler::selectById((int)$id);
         $page = new DoorwayEditPage($doorway);
 
         if(!empty($_POST))
@@ -111,7 +111,7 @@ class DoorwaysController extends Controller
             }
             else
             {
-                DoorwayDatabaseHandler::update($doorway->getId(), $_POST['uri'], $_POST['destination'], intval($_POST['enabled']));
+                DoorwayDatabaseHandler::update($doorway->getId(), $_POST['uri'], $_POST['destination'], (int)$_POST['enabled']);
                 header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "doorways?NOTICE=Doorway Updated");
                 exit;
             }
@@ -128,7 +128,7 @@ class DoorwaysController extends Controller
     private function deleteDoorway()
     {
         $id = array_shift($this->uriParts);
-        $doorway = DoorwayDatabaseHandler::selectById(intval($id));
+        $doorway = DoorwayDatabaseHandler::selectById((int)$id);
 
         AuthenticatedPage::validateRoles(SessionValidationController::validateSession(), array('editor', 'administrator'));
 
@@ -157,7 +157,7 @@ class DoorwaysController extends Controller
             $destination = $_POST['destination'];
 
         if(isset($_POST['enabled']))
-            $enabled = intval($_POST['enabled']);
+            $enabled = (int)$_POST['enabled'];
 
         // If we are editing a doorway and the URI has not changed do not validate it
         if($doorway === NULL OR $doorway->getUri() != $uri)

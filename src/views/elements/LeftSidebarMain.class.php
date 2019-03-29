@@ -16,18 +16,19 @@ namespace views\elements;
 
 class LeftSidebarMain extends Element
 {
+    const AREAS = array('sidebarContent', 'content');
+
     /**
      * LeftSidebarMain constructor.
      * @param \models\Element $element
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ViewException
-     * @throws \exceptions\PostNotFoundException
      */
     public function __construct(\models\Element $element)
     {
         parent::__construct($element);
-        $this->areas = ['sidebarContent', 'content'];
+        $this->areas = self::AREAS;
         $this->setTemplateFromHTML("LeftSidebarMain", self::TEMPLATE_ELEMENT);
 
         $this->loadContent();

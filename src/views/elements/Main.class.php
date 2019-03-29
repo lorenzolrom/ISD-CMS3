@@ -17,18 +17,19 @@ use views\View;
 
 class Main extends Element
 {
+    const AREAS = array('content');
+
     /**
      * Main constructor.
      * @param \models\Element $element
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ViewException
-     * @throws \exceptions\PostNotFoundException
      */
     public function __construct(\models\Element $element)
     {
         parent::__construct($element);
-        $this->areas = ['content'];
+        $this->areas = self::AREAS;
         $this->setTemplateFromHTML("Main", View::TEMPLATE_ELEMENT);
 
         $this->loadContent();

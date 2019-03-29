@@ -31,15 +31,15 @@ class PageView extends AdminView
     {
         $this->setTemplateFromHTML("PageView", self::ADMIN_TEMPLATE_ELEMENT);
 
-        $this->setVariable("uri", $page->getUri());
-        $this->setVariable("title", $page->getTitle());
-        $this->setVariable("navTitle", $page->getNavTitle());
+        $this->setVariable("uri", htmlentities($page->getUri()));
+        $this->setVariable("title", htmlentities($page->getTitle()));
+        $this->setVariable("navTitle", htmlentities($page->getNavTitle()));
         $this->setVariable("type", $page->getType());
         $this->setVariable("isOnNav", ($page->getIsOnNav() == 1 ? "Yes" : "No"));
         $this->setVariable("weight", $page->getWeight());
 
         if($page->getAuthor() !== NULL)
-            $this->setVariable("authorName", UserDatabaseHandler::selectById($page->getAuthor())->getName());
+            $this->setVariable("authorName", htmlentities(UserDatabaseHandler::selectById($page->getAuthor())->getName()));
 
         $elementList = new ElementListTable($page);
         $this->setVariable("elementList", $elementList->getHTML());

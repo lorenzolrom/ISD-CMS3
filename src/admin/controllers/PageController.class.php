@@ -76,7 +76,7 @@ class PageController extends Controller
     private function viewPage(): string
     {
         $id = array_shift($this->uriParts);
-        $page = PageDatabaseHandler::selectById(intval($id));
+        $page = PageDatabaseHandler::selectById((int)$id);
         $view = new PageViewPage($page);
         return $view->getHTML();
     }
@@ -102,8 +102,8 @@ class PageController extends Controller
             }
             else
             {
-                PageDatabaseHandler::insert($_POST['type'], SessionValidationController::validateSession()->getId(), trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], intval($_POST['isOnNav']), intval($_POST['weight']));
-                header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages?NOTICE=Page Created");
+                $newPage = PageDatabaseHandler::insert($_POST['type'], SessionValidationController::validateSession()->getId(), trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight']);
+                header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages/view/{$newPage->getId()}?NOTICE=Page Created");
                 exit;
             }
         }
@@ -121,7 +121,7 @@ class PageController extends Controller
     private function getEditPage(): string
     {
         $id = array_shift($this->uriParts);
-        $page = PageDatabaseHandler::selectById(intval($id));
+        $page = PageDatabaseHandler::selectById((int)$id);
         $editPage = new PageEditPage($page);
 
         if(!empty($_POST))
@@ -132,7 +132,7 @@ class PageController extends Controller
                 $editPage->setErrors($errors);
             else
             {
-                PageDatabaseHandler::update($page->getId(), $_POST['type'], trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], intval($_POST['isOnNav']), intval($_POST['weight']));
+                PageDatabaseHandler::update($page->getId(), $_POST['type'], trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight']);
                 header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages/view/{$page->getId()}?NOTICE=Page Updated");
                 exit;
             }
@@ -149,7 +149,7 @@ class PageController extends Controller
     private function deletePage()
     {
         $id = array_shift($this->uriParts);
-        $page = PageDatabaseHandler::selectById(intval($id));
+        $page = PageDatabaseHandler::selectById((int)$id);
 
         AuthenticatedPage::validateRoles(SessionValidationController::validateSession(), array('editor', 'administrator'));
 
@@ -229,7 +229,7 @@ class PageController extends Controller
         // Is On Nav
         try
         {
-            Page::validateIsOnNav(intval($fields['isOnNav']));
+            Page::validateIsOnNav((int)$fields['isOnNav']);
         }
         catch(ValidationException $e)
         {
@@ -239,7 +239,7 @@ class PageController extends Controller
         // Weight
         try
         {
-            Page::validateWeight(intval($fields['weight']));
+            Page::validateWeight((int)$fields['weight']);
         }
         catch(ValidationException $e)
         {

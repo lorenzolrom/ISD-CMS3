@@ -18,19 +18,19 @@ use views\View;
 
 class Split extends Element
 {
+    const AREAS = array('leftContent', 'rightContent');
     /**
      * Split constructor.
      * @param \models\Element $element
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
      * @throws \exceptions\ViewException
-     * @throws \exceptions\PostNotFoundException
      */
     public function __construct(\models\Element $element)
     {
         parent::__construct($element);
 
-        $this->areas = ['leftContent', 'rightContent'];
+        $this->areas = self::AREAS;
         $this->setTemplateFromHTML("Split", View::TEMPLATE_ELEMENT);
 
         $this->loadContent();

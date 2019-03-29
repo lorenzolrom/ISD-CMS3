@@ -16,7 +16,7 @@ namespace views\content;
 
 use views\View;
 
-abstract class Content extends View
+class Content extends View
 {
     protected $content;
 
@@ -26,7 +26,7 @@ abstract class Content extends View
      */
     public function __construct(\models\Content $content)
     {
-        $this->content = $content;
+        $this->setTemplate($content->getContent());
     }
 
     /**
@@ -34,19 +34,6 @@ abstract class Content extends View
      */
     public function getHTML(): string
     {
-        $this->setClasses();
         return parent::getHTML();
-    }
-
-    /**
-     * Adds custom classes from database, if specified
-     */
-    private function setClasses()
-    {
-        // Replace classes if they exist
-        if($this->content->getClasses() !== NULL)
-        {
-            $this->setVariable("classes", " class='{$this->content->getClasses()}'");
-        }
     }
 }

@@ -67,4 +67,74 @@ class ElementDatabaseHandler
 
         return $elements;
     }
+
+    /**
+     * @param string $name
+     * @param string $type
+     * @param int $page
+     * @param int $weight
+     * @return Element
+     * @throws ElementNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function insert(string $name, string $type, int $page, int $weight): Element
+    {
+        $handler = new DatabaseConnection();
+
+        $insert = $handler->prepare("INSERT INTO cms_Element (name, type, page, weight) VALUES (:name, :type, :page, :weight)");
+        $insert->bindParam('name', $name, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('type', $type, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('page', $page, DatabaseConnection::PARAM_INT);
+        $insert->bindParam('weight', (int)$weight, DatabaseConnection::PARAM_INT);
+        $insert->execute();
+
+        $id = $handler->getLastInsertId();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \exceptions\DatabaseException
+     */
+    public static function delete(int $id): bool
+    {
+        $handler = new DatabaseConnection();
+
+        $delete = $handler->prepare("DELETE FROM cms_Element WHERE id = ?");
+        $delete->bindParam(1, $id, DatabaseConnection::PARAM_INT);
+        $delete->execute();
+
+        $handler->close();
+
+        return $delete->getRowCount() === 1;
+    }
+
+    /**
+     * @param int $id
+     * @param string $name
+     * @param string $type
+     * @param int $weight
+     * @return Element
+     * @throws ElementNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function update(int $id, string $name, string $type, int $weight): Element
+    {
+        $handler = new DatabaseConnection();
+
+        $update = $handler->prepare("UPDATE cms_Element SET name = :name, type = :type, weight = :weight WHERE id = :id");
+        $update->bindParam('name', $name, DatabaseConnection::PARAM_STR);
+        $update->bindParam('type', $type, DatabaseConnection::PARAM_STR);
+        $update->bindParam('weight', $weight, DatabaseConnection::PARAM_INT);
+        $update->bindParam('id', $id, DatabaseConnection::PARAM_INT);
+        $update->execute();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
 }

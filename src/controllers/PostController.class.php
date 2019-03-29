@@ -78,7 +78,7 @@ class PostController extends Controller
             }
             else if (sizeof($uriParts) == 1)
             {
-                $post = PostDatabaseHandler::selectById(intval(array_shift($uriParts)));
+                $post = PostDatabaseHandler::selectById((int)(array_shift($uriParts)));
                 $page = new PostPage($post);
                 return $page->getHTML();
             }
@@ -108,7 +108,7 @@ class PostController extends Controller
         {
             if(sizeof($uriParts) == 1)
             {
-                $category = PostCategoryDatabaseHandler::selectById(intval(array_shift($uriParts)));
+                $category = PostCategoryDatabaseHandler::selectById((int)(array_shift($uriParts)));
 
                 $page = new PostCategoryPage($category);
                 return $page->getHTML();

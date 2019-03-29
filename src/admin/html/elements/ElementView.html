@@ -1,0 +1,23 @@
+<h2 class="region-title">Element Profile</h2>
+<table class="table-display">
+    <tbody>
+        <tr>
+            <td>Page URI</td>
+            <td>{{@pageURI}}</td>
+            <td>Page Title</td>
+            <td><a href="{{@baseURI}}{{@adminURI}}pages/view/{{@pageId}}">{{@pageTitle}}</a></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{@name}}</td>
+            <td>Type</td>
+            <td>{{@type}}</td>
+        </tr>
+        <tr>
+            <td>Weight</td>
+            <td>{{@weight}}</td>
+        </tr>
+    </tbody>
+</table>
+<h2 class="region-title">Element Contents</h2>
+{{@contentList}}

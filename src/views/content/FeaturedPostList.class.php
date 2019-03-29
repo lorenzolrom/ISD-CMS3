@@ -15,33 +15,37 @@ namespace views\content;
 
 
 use database\PostDatabaseHandler;
+use exceptions\PostNotFoundException;
+use views\View;
 
-class FeaturedPostList extends Content
+class FeaturedPostList extends View
 {
     /**
      * FeaturedPosts constructor.
-     * @param \models\Content $content
+     * @param int $count
      * @throws \exceptions\DatabaseException
-     * @throws \exceptions\PostNotFoundException
      * @throws \exceptions\ViewException
      */
-    public function __construct(\models\Content $content)
+    public function __construct(int $count)
     {
-        parent::__construct($content);
         $this->setTemplateFromHTML("FeaturedPostList", self::TEMPLATE_CONTENT);
 
         // Get number of featured posts to display
-        $listAttributes = json_decode($content->getContent(), TRUE);
-        $count = $listAttributes['count'];
 
         // Create list
 
         $postList = "";
 
-        foreach(PostDatabaseHandler::selectByFeatured(intval($count)) as $post)
+        try
         {
-            $view = new Post($post);
-            $postList .= $view->getHTML();
+            foreach (PostDatabaseHandler::selectByFeatured((int)$count) as $post) {
+                $view = new Post($post);
+                $postList .= $view->getHTML();
+            }
+        }
+        catch(PostNotFoundException $e)
+        {
+            // Ignore
         }
 
         $this->setVariable("postList", $postList);

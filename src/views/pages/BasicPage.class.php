@@ -32,7 +32,6 @@ class BasicPage extends DatabasePage
      * @throws \exceptions\ElementNotFoundException
      * @throws \exceptions\PageNotFoundException
      * @throws \exceptions\ViewException
-     * @throws \exceptions\PostNotFoundException
      */
     public function __construct(Page $page)
     {

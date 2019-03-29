@@ -39,7 +39,7 @@ class PreparedStatement
      * @param mixed $parameter Parameter to bind
      * @param int $parameterType Type of parameter to bind
      */
-    public function bindParam($index, &$parameter, int $parameterType)
+    public function bindParam($index, $parameter, int $parameterType)
     {
         $this->statement->bindParam($index, $parameter, $parameterType);
     }
@@ -66,7 +66,7 @@ class PreparedStatement
         }
         catch(\PDOException $e)
         {
-            throw new DatabaseException(DatabaseException::MESSAGES[DatabaseException::PREPARED_QUERY_FAILED], DatabaseException::PREPARED_QUERY_FAILED, $e);
+            throw new DatabaseException(DatabaseException::MESSAGES[DatabaseException::PREPARED_QUERY_FAILED] . $e->getMessage(), DatabaseException::PREPARED_QUERY_FAILED, $e);
         }
     }
 

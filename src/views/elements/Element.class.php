@@ -40,8 +40,6 @@ abstract class Element extends View
      * Auto-loads content into specified areas for elements using the default process
      * @throws \exceptions\ContentNotFoundException
      * @throws \exceptions\DatabaseException
-     * @throws \exceptions\ViewException
-     * @throws \exceptions\PostNotFoundException
      */
     protected function loadContent()
     {

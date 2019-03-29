@@ -16,9 +16,21 @@ namespace models;
 
 use database\ContentDatabaseHandler;
 use database\PageDatabaseHandler;
+use exceptions\ValidationException;
 
 class Element
 {
+    const TYPES = array('Main', 'Left Sidebar Main', 'Split');
+
+    const FIELDS = array('name', 'type', 'weight');
+
+    const MESSAGES = array(
+        'NAME_LENGTH_ERROR' => "Name Must Be Between 1 and 64 Characters",
+        'NAME_NOT_VALID' => "Name Must Contain Only Letters, Numbers, or '-'",
+        'TYPE_INVALID' => "Type Not Valid",
+        'WEIGHT_INVALID' => "Weight Is Not Valid"
+    );
+
     private $id;
     private $name;
     private $type;
@@ -84,5 +96,52 @@ class Element
     public function getContent(string $area = NULL): array
     {
         return ContentDatabaseHandler::selectByElement($this->id, $area);
+    }
+
+    /**
+     * @param string|null $name
+     * @return bool
+     * @throws ValidationException
+     */
+    public static function validateName(?string $name): bool
+    {
+        if($name === NULL)
+            throw new ValidationException(self::MESSAGES['NAME_LENGTH_ERROR'], ValidationException::VALUE_IS_NULL);
+        else if(strlen($name) < 1)
+            throw new ValidationException(self::MESSAGES['NAME_LENGTH_ERROR'], ValidationException::VALUE_TOO_SHORT);
+        else if(strlen($name) > 64)
+            throw new ValidationException(self::MESSAGES['NAME_LENGTH_ERROR'], ValidationException::VALUE_TOO_LONG);
+        else if(!preg_match("/^[A-Za-z0-9\-\s\/]+$/",$name))
+            throw new ValidationException(self::MESSAGES['NAME_NOT_VALID'], ValidationException::VALUE_IS_NOT_VALID);
+
+        return TRUE;
+    }
+
+    /**
+     * @param string|null $type
+     * @return bool
+     * @throws ValidationException
+     */
+    public static function validateType(?string $type): bool
+    {
+        if($type === NULL)
+            throw new ValidationException(self::MESSAGES['TYPE_INVALID'], ValidationException::VALUE_IS_NULL);
+        else if(!in_array($type, self::TYPES))
+            throw new ValidationException(self::MESSAGES['TYPE_INVALID'], ValidationException::VALUE_IS_NOT_VALID);
+
+        return TRUE;
+    }
+
+    /**
+     * @param int|null $weight
+     * @return bool
+     * @throws ValidationException
+     */
+    public static function validateWeight(?int $weight): bool
+    {
+        if($weight === NULL)
+            throw new ValidationException(self::MESSAGES['WEIGHT_INVALID'], ValidationException::VALUE_IS_NOT_VALID);
+
+        return TRUE;
     }
 }

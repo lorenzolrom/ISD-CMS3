@@ -14,8 +14,10 @@
 namespace admin\factories;
 
 
+use admin\controllers\ContentController;
 use admin\controllers\DashboardController;
 use admin\controllers\DoorwaysController;
+use admin\controllers\ElementController;
 use admin\controllers\LoginController;
 use admin\controllers\PageController;
 use controllers\Controller;
@@ -45,6 +47,12 @@ class ControllerFactory
                 break;
             case "pages":
                 return new PageController($uriParts);
+                break;
+            case "content":
+                return new ContentController($uriParts);
+                break;
+            case "elements":
+                return new ElementController($uriParts);
                 break;
             case "doorways":
                 return new DoorwaysController($uriParts);

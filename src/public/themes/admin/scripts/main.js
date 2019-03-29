@@ -101,6 +101,16 @@ function unveil()
     $('#veil').hide();
 }
 
+function tinymceSetup()
+{
+    tinymce.init({
+        selector: 'textarea#content-editor',
+        height: 500,
+        plugins: "code image lists link",
+        toolbar: "formatselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | link image"
+    });
+}
+
 /**
  * Setup document
  */
@@ -111,6 +121,7 @@ $(document).ready(function(){
     formSubmitButtonSetup();
     confirmButtonSetup();
     buttonSetup();
+    tinymceSetup();
 
     // Fade in notifications if they are present
     $('#notifications').fadeIn();

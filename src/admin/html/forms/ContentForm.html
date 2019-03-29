@@ -1,0 +1,43 @@
+<div class="button-bar">
+    <span class="button form-submit-button" id="content">Save</span>
+    <a href="{{@cancelURI}}" class="button">Cancel</a>
+</div>
+<form class="table-form" id="content-form" method="post">
+    <h2 class="region-title">Content Profile</h2>
+    <table class="table-display">
+        <tbody>
+        <tr>
+            <td>Page URI</td>
+            <td>{{@pageURI}}</td>
+            <td>Page Title</td>
+            <td>{{@pageTitle}}</td>
+        </tr>
+        <tr>
+            <td>Element Name</td>
+            <td>{{@elementName}}</td>
+            <td>Author</td>
+            <td>{{@author}}</td>
+        </tr>
+        <tr>
+            <td class="required">Name</td>
+            <td><input type="text" name="name" value="{{@name}}"></td>
+            <td class="required">Weight</td>
+            <td><input type="text" name="weight" value="{{@weight}}"></td>
+        </tr>
+        <tr>
+            <td class="required">Element Area</td>
+            <td>
+                <select name="area">
+                    {{@areaSelect}}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="required">Content</td>
+            <td colspan=3>
+                <textarea name="content" id="content-editor">{{@content}}</textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
