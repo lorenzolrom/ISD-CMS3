@@ -72,6 +72,12 @@ class SearchController extends Controller
 
             foreach($contents as $content)
             {
+                // Make sure query is not matching an html tag
+                if(!strpos(strip_tags(strtolower($content->getContent())), strtolower($query)))
+                {
+                    continue;
+                }
+
                 $page = $content->getElementObject()->getPageObject();
                 $results['pages'][$page->getUri()][] = $content;
             }

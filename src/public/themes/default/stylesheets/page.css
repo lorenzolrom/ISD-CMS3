@@ -135,9 +135,6 @@ header #header-search input[type='text'] {
     color: var(--font-color);
 }
 
-#content p {
-    padding-bottom: 10px;
-}
 
 #content ul {
     padding-left: 20px;
