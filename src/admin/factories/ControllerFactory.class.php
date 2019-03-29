@@ -14,6 +14,7 @@
 namespace admin\factories;
 
 
+use admin\controllers\AccountController;
 use admin\controllers\FileController;
 use admin\controllers\PostCategoryController;
 use admin\controllers\ContentController;
@@ -68,6 +69,9 @@ class ControllerFactory
                 break;
             case "files":
                 return new FileController($uriParts);
+                break;
+            case "account":
+                return new AccountController($uriParts);
                 break;
             default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);

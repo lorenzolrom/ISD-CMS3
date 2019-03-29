@@ -22,8 +22,8 @@ class HomePage extends UserDocument
         $this->setVariable("tabTitle", "Home");
         $this->setActionLinks(array(
             array(
-                'title' => "My Account",
-                'href' => 'account'
+                'title' => "Change Password",
+                'href' => 'account/changepassword'
             )
         ));
     }

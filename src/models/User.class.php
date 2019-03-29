@@ -105,7 +105,7 @@ class User
      */
     public function isCorrectPassword(string $password): bool
     {
-        if(hash('SHA512', hash('SHA512', $password)) == $this->password)
+        if(self::hashPassword($password) == $this->password)
             return TRUE;
 
         return FALSE;
@@ -122,5 +122,15 @@ class User
             return $this->displayName;
 
         return $this->firstName . " " . $this->lastName;
+    }
+
+    /**
+     * Double SHA512 the provided string
+     * @param string $password
+     * @return string
+     */
+    public static function hashPassword(string $password): string
+    {
+        return hash('SHA512', hash('SHA512', $password));
     }
 }

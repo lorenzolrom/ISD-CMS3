@@ -62,4 +62,25 @@ class UserDatabaseHandler
 
         return self::selectById($select->fetchColumn());
     }
+
+    /**
+     * @param int $id
+     * @param string $password
+     * @return User
+     * @throws UserNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function updatePassword(int $id, string $password): User
+    {
+        $handler = new DatabaseConnection();
+
+        $update = $handler->prepare("UPDATE cms_User SET password = :password WHERE id = :id");
+        $update->bindParam("password", $password, DatabaseConnection::PARAM_STR);
+        $update->bindParam("id", $id, DatabaseConnection::PARAM_INT);
+        $update->execute();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
 }
