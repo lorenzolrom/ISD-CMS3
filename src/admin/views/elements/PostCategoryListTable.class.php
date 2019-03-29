@@ -28,7 +28,7 @@ class PostCategoryListTable extends ListTable
     {
         $rows = array();
 
-        foreach(PostCategoryDatabaseHandler::selectAll() as $category)
+        foreach(PostCategoryDatabaseHandler::selectAll(FALSE) as $category)
         {
             $rows[] = array(
                 'id' => $category->getId(),

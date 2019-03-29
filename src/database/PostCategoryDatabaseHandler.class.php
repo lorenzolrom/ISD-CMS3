@@ -65,4 +65,72 @@ class PostCategoryDatabaseHandler
 
         return $categories;
     }
+
+    /**
+     * @param string $title
+     * @param string $previewImage
+     * @param int $displayed
+     * @return PostCategory
+     * @throws PostCategoryNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function insert(string $title, string $previewImage, int $displayed): PostCategory
+    {
+        $handler = new DatabaseConnection();
+
+        $insert = $handler->prepare("INSERT INTO cms_PostCategory (title, previewImage, displayed) VALUES (:title, :previewImage, :displayed)");
+        $insert->bindParam('title', $title, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('previewImage', $previewImage, DatabaseConnection::PARAM_STR);
+        $insert->bindParam('displayed', $displayed, DatabaseConnection::PARAM_INT);
+        $insert->execute();
+
+        $id = $handler->getLastInsertId();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
+
+    /**
+     * @param int $id
+     * @param string $title
+     * @param string $previewImage
+     * @param int $displayed
+     * @return PostCategory
+     * @throws PostCategoryNotFoundException
+     * @throws \exceptions\DatabaseException
+     */
+    public static function update(int $id, string $title, string $previewImage, int $displayed): PostCategory
+    {
+        $handler = new DatabaseConnection();
+
+        $update = $handler->prepare("UPDATE cms_PostCategory SET title = :title, previewImage = :previewImage, displayed = :displayed WHERE id = :id");
+        $update->bindParam('title', $title, DatabaseConnection::PARAM_STR);
+        $update->bindParam('previewImage', $previewImage, DatabaseConnection::PARAM_STR);
+        $update->bindParam('displayed', $displayed, DatabaseConnection::PARAM_INT);
+        $update->bindParam('id', $id, DatabaseConnection::PARAM_INT);
+        $update->execute();
+
+        $handler->close();
+
+        return self::selectById($id);
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws \exceptions\DatabaseException
+     */
+    public static function delete(int $id): bool
+    {
+        $handler = new DatabaseConnection();
+
+        $delete = $handler->prepare("DELETE FROM cms_PostCategory WHERE id = ?");
+        $delete->bindParam(1, $id, DatabaseConnection::PARAM_INT);
+        $delete->execute();
+
+        $handler->close();
+
+        return $delete->getRowCount() === 1;
+    }
 }

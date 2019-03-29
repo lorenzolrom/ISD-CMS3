@@ -14,10 +14,11 @@
 namespace admin\factories;
 
 
-use admin\controllers\CategoryController;
+use admin\controllers\FileController;
+use admin\controllers\PostCategoryController;
 use admin\controllers\ContentController;
 use admin\controllers\DashboardController;
-use admin\controllers\DoorwaysController;
+use admin\controllers\DoorwayController;
 use admin\controllers\ElementController;
 use admin\controllers\LoginController;
 use admin\controllers\PageController;
@@ -57,13 +58,16 @@ class ControllerFactory
                 return new ElementController($uriParts);
                 break;
             case "doorways":
-                return new DoorwaysController($uriParts);
+                return new DoorwayController($uriParts);
                 break;
             case "posts":
                 return new PostController($uriParts);
                 break;
             case "categories":
-                return new CategoryController($uriParts);
+                return new PostCategoryController($uriParts);
+                break;
+            case "files":
+                return new FileController($uriParts);
                 break;
             default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);

@@ -22,7 +22,7 @@ use exceptions\PageNotFoundException;
 use exceptions\ValidationException;
 use models\Doorway;
 
-class DoorwaysController extends Controller
+class DoorwayController extends Controller
 {
 
     /**
