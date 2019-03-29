@@ -14,6 +14,7 @@
 namespace admin\factories;
 
 
+use admin\controllers\CategoryController;
 use admin\controllers\ContentController;
 use admin\controllers\DashboardController;
 use admin\controllers\DoorwaysController;
@@ -60,6 +61,9 @@ class ControllerFactory
                 break;
             case "posts":
                 return new PostController($uriParts);
+                break;
+            case "categories":
+                return new CategoryController($uriParts);
                 break;
             default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);
