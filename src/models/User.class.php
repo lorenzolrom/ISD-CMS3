@@ -35,7 +35,7 @@ class User
         'USERNAME_INVALID' => "Username Must Only Contain Letters And Numbers",
         'FIRST_NAME_INVALID' => "First Name Must Only Contain Letters And '-'",
         'LAST_NAME_INVALID' => "Last Name Must Only Contain Letters And '-'",
-        'DISPLAY_NAME_INVALID' => "Display Name Must Only Contain Letters, Numbers, '-' and '.'",
+        'DISPLAY_NAME_INVALID' => "Display Name Must Only Contain Letters, Numbers, '-',  '.', '(', and ')'",
         'EMAIL_ALREADY_TAKEN' => "Email Already In Use"
     );
 
@@ -223,7 +223,7 @@ class User
      */
     public static function validateDisplayName(?string $displayName): bool
     {
-        if($displayName !== NULL AND strlen($displayName) !== 0 AND !preg_match("/^[A-Za-z0-9.\-\s\/]+$/",$displayName))
+        if($displayName !== NULL AND strlen($displayName) !== 0 AND !preg_match("/^[A-Za-z0-9().\-\s\/]+$/",$displayName))
             throw new ValidationException(self::MESSAGES['DISPLAY_NAME_INVALID'], ValidationException::VALUE_IS_NOT_VALID);
 
         return TRUE;

@@ -106,8 +106,8 @@ function tinymceSetup()
     tinymce.init({
         selector: 'textarea#content-editor',
         height: 500,
-        plugins: "code image lists link",
-        toolbar: "formatselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | link image"
+        plugins: "code image lists link textcolor",
+        toolbar: "formatselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | link image | forecolor backcolor"
     });
 }
 
