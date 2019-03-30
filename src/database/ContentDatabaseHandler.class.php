@@ -85,7 +85,7 @@ class ContentDatabaseHandler
 
         $filter = "%$filter%";
 
-        $select = $handler->prepare("SELECT id FROM cms_Content WHERE content LIKE ?");
+        $select = $handler->prepare("SELECT id FROM cms_Content WHERE content LIKE ? AND element IN (SELECT id FROM cms_Element WHERE page IN (SELECT id FROM cms_Page WHERE protected = 0))");
         $select->bindParam(1, $filter, DatabaseConnection::PARAM_STR);
         $select->execute();
 
