@@ -34,6 +34,15 @@
                         <option value="0" {{@isOnNavNo}}>No</option>
                     </select>
                 </td>
+                <td class="required">Protected</td>
+                <td>
+                    <select name="protected">
+                        <option value="0">No</option>
+                        <option value="1" {{@protectedYes}}>Yes</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td class="required">Weight</td>
                 <td><input type="text" name="weight" value="{{@weight}}"></td>
             </tr>

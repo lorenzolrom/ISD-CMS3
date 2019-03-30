@@ -13,6 +13,7 @@
 
 namespace controllers;
 
+use admin\controllers\SessionValidationController;
 use database\DoorwayDatabaseHandler;
 use database\PageDatabaseHandler;
 use exceptions\DoorwayNotFoundException;
@@ -42,6 +43,10 @@ class PageController extends Controller
             try
             {
                 $page = PageDatabaseHandler::selectByUri($this->uri);
+
+                if($page->getProtected())
+                    SessionValidationController::validateSession();
+
                 return ViewFactory::getPageView($page)->getHTML();
             }
             catch(PageNotFoundException $e)

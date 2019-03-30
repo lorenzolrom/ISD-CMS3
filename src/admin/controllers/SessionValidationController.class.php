@@ -27,7 +27,7 @@ class SessionValidationController
         // Is cookie set?  If not direct to login
         if(!isset($_COOKIE[\CMSConfiguration::CMS_CONFIG['cookieName']]))
         {
-            header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "login");
+            header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "login?NEXT=" . explode('?', $_SERVER['REQUEST_URI'])[0]);
             exit;
         }
 

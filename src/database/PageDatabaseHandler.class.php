@@ -29,7 +29,7 @@ class PageDatabaseHandler
     {
         $handler = new DatabaseConnection();
 
-        $select = $handler->prepare("SELECT id, type, author, uri, title, navTitle, isOnNav, weight FROM cms_Page WHERE id = ? LIMIT 1");
+        $select = $handler->prepare("SELECT id, type, author, uri, title, navTitle, isOnNav, weight, protected FROM cms_Page WHERE id = ? LIMIT 1");
         $select->bindParam(1, $id, DatabaseConnection::PARAM_INT);
         $select->execute();
 
@@ -122,15 +122,16 @@ class PageDatabaseHandler
      * @param string|null $navTitle
      * @param int $isOnNav
      * @param int $weight
+     * @param int $protected
      * @return Page
      * @throws PageNotFoundException
      * @throws \exceptions\DatabaseException
      */
-    public static function insert(string $type, ?int $author, string $uri, string $title, ?string $navTitle, int $isOnNav, int $weight): Page
+    public static function insert(string $type, ?int $author, string $uri, string $title, ?string $navTitle, int $isOnNav, int $weight, int $protected): Page
     {
         $handler = new DatabaseConnection();
 
-        $insert = $handler->prepare("INSERT INTO cms_Page (type, author, uri, title, navTitle, isOnNav, weight) VALUES (:type, :author, :uri, :title, :navTitle, :isOnNav, :weight)");
+        $insert = $handler->prepare("INSERT INTO cms_Page (type, author, uri, title, navTitle, isOnNav, weight, protected) VALUES (:type, :author, :uri, :title, :navTitle, :isOnNav, :weight, :protected)");
         $insert->bindParam('type', $type, DatabaseConnection::PARAM_STR);
         $insert->bindParam('author', $author, DatabaseConnection::PARAM_INT);
         $insert->bindParam('uri', $uri, DatabaseConnection::PARAM_STR);
@@ -138,6 +139,7 @@ class PageDatabaseHandler
         $insert->bindParam('navTitle', $navTitle, DatabaseConnection::PARAM_STR);
         $insert->bindParam('isOnNav', $isOnNav, DatabaseConnection::PARAM_INT);
         $insert->bindParam('weight', $weight, DatabaseConnection::PARAM_INT);
+        $insert->bindParam('protected', $protected, DatabaseConnection::PARAM_INT);
         $insert->execute();
 
         $id = $handler->getLastInsertId();
@@ -155,21 +157,23 @@ class PageDatabaseHandler
      * @param string|null $navTitle
      * @param int $isOnNav
      * @param int $weight
+     * @param int $protected
      * @return Page
      * @throws PageNotFoundException
      * @throws \exceptions\DatabaseException
      */
-    public static function update(int $id, string $type, string $uri, string $title, ?string $navTitle, int $isOnNav, int $weight): Page
+    public static function update(int $id, string $type, string $uri, string $title, ?string $navTitle, int $isOnNav, int $weight, int $protected): Page
     {
         $handler = new DatabaseConnection();
 
-        $update = $handler->prepare("UPDATE cms_Page SET type = :type, uri = :uri, title = :title, navTitle = :navTitle, isOnNav = :isOnNav, weight = :weight WHERE id = :id");
+        $update = $handler->prepare("UPDATE cms_Page SET type = :type, uri = :uri, title = :title, navTitle = :navTitle, isOnNav = :isOnNav, weight = :weight, protected = :protected WHERE id = :id");
         $update->bindParam('type', $type, DatabaseConnection::PARAM_STR);
         $update->bindParam('uri', $uri, DatabaseConnection::PARAM_STR);
         $update->bindParam('title', $title, DatabaseConnection::PARAM_STR);
         $update->bindParam('navTitle', $navTitle, DatabaseConnection::PARAM_STR);
         $update->bindParam('isOnNav', $isOnNav, DatabaseConnection::PARAM_INT);
         $update->bindParam('weight', $weight, DatabaseConnection::PARAM_INT);
+        $update->bindParam('protected', $protected, DatabaseConnection::PARAM_INT);
         $update->bindParam('id', $id, DatabaseConnection::PARAM_INT);
         $update->execute();
 

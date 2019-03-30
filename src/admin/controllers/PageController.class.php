@@ -102,7 +102,7 @@ class PageController extends Controller
             }
             else
             {
-                $newPage = PageDatabaseHandler::insert($_POST['type'], SessionValidationController::validateSession()->getId(), trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight']);
+                $newPage = PageDatabaseHandler::insert($_POST['type'], SessionValidationController::validateSession()->getId(), trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight'], (int)$_POST['protected']);
                 header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages/view/{$newPage->getId()}?NOTICE=Page Created");
                 exit;
             }
@@ -132,7 +132,7 @@ class PageController extends Controller
                 $editPage->setErrors($errors);
             else
             {
-                PageDatabaseHandler::update($page->getId(), $_POST['type'], trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight']);
+                PageDatabaseHandler::update($page->getId(), $_POST['type'], trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight'], (int)$_POST['protected']);
                 header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages/view/{$page->getId()}?NOTICE=Page Updated");
                 exit;
             }
@@ -240,6 +240,16 @@ class PageController extends Controller
         try
         {
             Page::validateWeight((int)$fields['weight']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        // Protected
+        try
+        {
+            Page::validateProtected((int)$fields['protected']);
         }
         catch(ValidationException $e)
         {

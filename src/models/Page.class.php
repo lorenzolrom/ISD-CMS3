@@ -26,7 +26,7 @@ class Page
     // Valid page types
     const TYPES = array('Basic', 'No Title', 'Home');
 
-    const FIELDS = array('type', 'uri', 'title', 'navTitle', 'isOnNav', 'weight');
+    const FIELDS = array('type', 'uri', 'title', 'navTitle', 'isOnNav', 'weight', 'protected');
 
     const MESSAGES = array(
         'TYPE_INVALID' => 'Type Not Valid',
@@ -36,7 +36,8 @@ class Page
         'TITLE_LENGTH_ERROR' => 'Title Must Be Between 1 And 64 Characters',
         'NAV_TITLE_LENGTH_ERROR' => 'Nav Title Must Be Between 1 and 64 Characters',
         'IS_ON_NAV_NOT_VALID' => 'Is On Nav Not Valid',
-        'WEIGHT_NOT_VALID' => 'Weight Must Be An Integer'
+        'WEIGHT_NOT_VALID' => 'Weight Must Be An Integer',
+        'PROTECTED_NOT_VALID' => 'Protected Not Valid'
     );
 
     private $id;
@@ -47,6 +48,7 @@ class Page
     private $navTitle;
     private $isOnNav;
     private $weight;
+    private $protected;
 
     /**
      * @return int
@@ -110,6 +112,14 @@ class Page
     public function getWeight()
     {
         return $this->weight;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProtected(): int
+    {
+        return $this->protected;
     }
 
     /**
@@ -215,6 +225,19 @@ class Page
     {
         if($weight === NULL)
             throw new ValidationException(self::MESSAGES['WEIGHT_NOT_VALID'], ValidationException::VALUE_IS_NULL);
+
+        return TRUE;
+    }
+
+    /**
+     * @param int|null $protected
+     * @return bool
+     * @throws ValidationException
+     */
+    public static function validateProtected(?int $protected): bool
+    {
+        if($protected === NULL)
+            throw new ValidationException(self::MESSAGES['PROTECTED_NOT_VALID'], ValidationException::VALUE_IS_NULL);
 
         return TRUE;
     }
