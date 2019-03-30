@@ -1,0 +1,48 @@
+<div class="button-bar">
+    <span class="button form-submit-button" id="user">Save</span>
+    <a href="{{@baseURI}}{{@adminURI}}cpanel/users" class="button">Cancel</a>
+</div>
+<form class="table-form" id="user-form" method="post">
+    <h2 class="region-title">User Profile</h2>
+    <table class="table-display">
+        <tbody>
+        <tr>
+            <td class="required">Username</td>
+            <td><input type="text" name="username" value="{{@username}}"></td>
+            <td class="required">Role</td>
+            <td>
+                <select name="role">
+                    {{@roleSelect}}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="required">First Name</td>
+            <td><input type="text" name="firstName" value="{{@firstName}}"></td>
+            <td class="required">Last Name</td>
+            <td><input type="text" name="lastName" value="{{@lastName}}"></td>
+        </tr>
+        <tr>
+            <td class="required">Email Address</td>
+            <td><input type="text" name="email" value="{{@email}}"></td>
+            <td>Display Name</td>
+            <td><input type="text" name="displayName" value="{{@displayName}}"></td>
+        </tr>
+        <tr>
+            <td class="{{@passwordRequired}}">Password</td>
+            <td><input type="password" name="password"></td>
+            <td class="{{@passwordRequired}}">Confirm</td>
+            <td><input type="password" name="confirm"></td>
+        </tr>
+        <tr>
+            <td class="required">Disabled</td>
+            <td>
+                <select name="disabled">
+                    <option value="0">No</option>
+                    <option value="1" {{@disabledYes}}>Yes</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

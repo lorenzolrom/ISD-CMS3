@@ -16,6 +16,8 @@ namespace models;
 
 class Role
 {
+    const ROLES = array('user', 'editor', 'administrator', 'author');
+
     private $code;
     private $displayName;
 

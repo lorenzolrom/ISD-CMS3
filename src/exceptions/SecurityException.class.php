@@ -22,6 +22,7 @@ class SecurityException extends \Exception
     const TOKEN_NOT_VALID = 504;
     const TOKEN_EXPIRED = 505;
     const USER_DOES_NOT_HAVE_REQUIRED_ROLE = 506;
+    const USER_IS_DISABLED = 507;
 
     const MESSAGE = array(
         self::USERNAME_NOT_FOUND => 'Username or Password is Incorrect',
@@ -29,6 +30,7 @@ class SecurityException extends \Exception
         self::USER_NOT_LOGGED_IN => 'Please Sign In',
         self::TOKEN_NOT_VALID => 'Please Sign In',
         self::TOKEN_EXPIRED => 'Session Expired',
-        self::USER_DOES_NOT_HAVE_REQUIRED_ROLE => 'You Do Not Have Permission to View This Page'
+        self::USER_DOES_NOT_HAVE_REQUIRED_ROLE => 'You Do Not Have Permission to View This Page',
+        self::USER_IS_DISABLED => 'Username or Password is Incorrect'
     );
 }

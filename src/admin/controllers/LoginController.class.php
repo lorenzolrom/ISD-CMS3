@@ -67,6 +67,9 @@ class LoginController extends Controller
                 {
                     $user = UserDatabaseHandler::selectByUsername($_POST['username']);
 
+                    if($user->getDisabled())
+                        throw new SecurityException(SecurityException::MESSAGE[SecurityException::USER_IS_DISABLED], SecurityException::USER_IS_DISABLED);
+
                     if(!$user->isCorrectPassword($_POST['password']))
                         throw new SecurityException(SecurityException::MESSAGE[SecurityException::PASSWORD_IS_WRONG], SecurityException::PASSWORD_IS_WRONG);
 

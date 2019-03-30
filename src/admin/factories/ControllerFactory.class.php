@@ -15,6 +15,7 @@ namespace admin\factories;
 
 
 use admin\controllers\AccountController;
+use admin\controllers\CPanelController;
 use admin\controllers\FileController;
 use admin\controllers\PostCategoryController;
 use admin\controllers\ContentController;
@@ -72,6 +73,9 @@ class ControllerFactory
                 break;
             case "account":
                 return new AccountController($uriParts);
+                break;
+            case "cpanel":
+                return new CPanelController($uriParts);
                 break;
             default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);
