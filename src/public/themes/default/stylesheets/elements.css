@@ -39,13 +39,21 @@ div.split > div {
     text-justify: inter-word;
 }
 
-img.post-image {
+img.post-image, img.image{
     width: 200px;
     height: 150px;
     object-fit: cover;
     border: 1px solid var(--title-color);
     box-shadow: 2px 3px 3px var(--title-color);
     border-radius: 5px;
+}
+
+img.image {
+    width: auto;
+    height: auto;
+    max-width: 300px;
+    margin: auto;
+    display: block;
 }
 
 p.post-date {
@@ -150,6 +158,10 @@ ul.search-results li a.page-search-result p {
 ul.search-results li a h3 {
     text-decoration: underline;
     color: var(--title-color) !important;
+}
+
+div.main p {
+    padding-bottom: 10px;
 }
 
 @media screen and (max-device-width: 600px) {

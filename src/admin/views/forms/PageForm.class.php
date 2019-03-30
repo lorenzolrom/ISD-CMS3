@@ -37,6 +37,8 @@ class PageForm extends Form
 
             if($page->getIsOnNav() == 0)
                 $this->setVariable("isOnNavNo", self::SELECTED);
+            if($page->getProtected() == 1)
+                $this->setVariable("protectedYes", self::SELECTED);
 
             if($page->getAuthor() !== NULL)
             {
