@@ -86,8 +86,11 @@ header div#user, header div#user * {
 }
 
 header div#user a {
-    text-decoration: underline;
     color: var(--error);
+}
+
+header div#user a:hover {
+    text-decoration: underline;
 }
 
 header div#site-title {
