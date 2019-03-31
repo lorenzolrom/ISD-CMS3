@@ -54,6 +54,7 @@ div#main div#notifications {
 table.list-table {
     width: 100%;
     box-shadow: var(--l1-shadow);
+    margin-bottom: 10px;
 }
 
 table.list-table, table.list-table th, table.list-table td {
