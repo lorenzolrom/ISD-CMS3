@@ -71,6 +71,10 @@ function buttonSetup()
     $('.button').click(function(){
         veil();
     });
+
+    $('.image-button').click(function(){
+        veil();
+    });
 }
 
 function formSubmitButtonSetup()
