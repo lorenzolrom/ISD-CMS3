@@ -21,7 +21,12 @@
                     </select>
                 </td>
                 <td class="required">Preview Image</td>
-                <td><input type="text" name="previewImage" value="{{@previewImage}}"></td>
+                <td>
+                    <select name="previewImage">
+                        <option value="">--SELECT--</option>
+                        {{@previewImageSelect}}
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td class="required">Displayed</td>

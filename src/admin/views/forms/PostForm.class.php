@@ -15,6 +15,7 @@ namespace admin\views\forms;
 
 
 use database\PostCategoryDatabaseHandler;
+use files\FileLister;
 use models\Post;
 
 class PostForm extends Form
@@ -35,7 +36,6 @@ class PostForm extends Form
         {
             $this->setVariable("title", htmlentities($post->getTitle()));
             $this->setVariable("date", $post->getDate());
-            $this->setVariable("previewImage", htmlentities($post->getPreviewImage()));
             $this->setVariable("content", $post->getContent());
 
             if(!$post->getDisplayed())
@@ -55,7 +55,20 @@ class PostForm extends Form
             else
                 $selected = "";
 
-            $categorySelect .= "<option value='{$category->getId()}' $selected>{$category->getTitle()}</option>";
+            $categorySelect .= "<option value='{$category->getId()}' $selected>{$category->getTitle()}</option>\n";
+        }
+
+        // Generate Preview Image List
+        $previewImageSelect = "";
+
+        foreach(FileLister::getUploadedFilesByType(FileLister::FILETYPE_IMAGE) as $image)
+        {
+            if(($post !== NULL AND $post->getPreviewImage() == $image) OR (isset($_POST['previewImage']) AND $_POST['previewImage'] == $image))
+                $selected = self::SELECTED;
+            else
+                $selected = "";
+
+            $previewImageSelect .= "<option value='$image' $selected>$image</option>\n";
         }
 
         if(isset($_POST['displayed']) AND $_POST['displayed'] == 0)
@@ -64,5 +77,6 @@ class PostForm extends Form
             $this->setVariable("featuredYes", self::SELECTED);
 
         $this->setVariable("categorySelect", $categorySelect);
+        $this->setVariable("previewImageSelect", $previewImageSelect);
     }
 }

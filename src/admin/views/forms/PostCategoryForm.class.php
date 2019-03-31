@@ -14,6 +14,7 @@
 namespace admin\views\forms;
 
 
+use files\FileLister;
 use models\PostCategory;
 
 class PostCategoryForm extends Form
@@ -30,10 +31,24 @@ class PostCategoryForm extends Form
         if($category !== NULL)
         {
             $this->setVariable("title", htmlentities($category->getTitle()));
-            $this->setVariable("previewImage", htmlentities($category->getPreviewImage()));
+
+            // Generate Preview Image List
+            $previewImageSelect = "";
+
+            foreach(FileLister::getUploadedFilesByType(FileLister::FILETYPE_IMAGE) as $image)
+            {
+                if(($category !== NULL AND $category->getPreviewImage() == $image) OR (isset($_POST['previewImage']) AND $_POST['previewImage'] == $image))
+                    $selected = self::SELECTED;
+                else
+                    $selected = "";
+
+                $previewImageSelect .= "<option value='$image' $selected>$image</option>\n";
+            }
 
             if($category->getDisplayed() == 0)
                 $this->setVariable("displayedNo", self::SELECTED);
+
+            $this->setVariable("previewImageSelect", $previewImageSelect);
         }
     }
 

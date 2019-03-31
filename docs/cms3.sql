@@ -113,6 +113,6 @@ CREATE TABLE cms_Post (
 
 INSERT INTO cms_Role (code, displayName) VALUES ('administrator', 'Site Administrator'),
                                                 ('editor', 'Content Editor'),
-                                                ('author', 'Content Author'),
+                                                ('author', 'Post Author'),
                                                 ('user', 'User');
 

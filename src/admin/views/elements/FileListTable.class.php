@@ -16,6 +16,7 @@ namespace admin\views\elements;
 
 use admin\views\AdminView;
 use admin\views\content\ListTableFileItem;
+use files\FileLister;
 
 class FileListTable extends AdminView
 {
@@ -27,17 +28,9 @@ class FileListTable extends AdminView
     {
         $this->setTemplateFromHTML("ListTable", self::ADMIN_TEMPLATE_ELEMENT);
 
-        $files = array();
-
-        foreach(scandir(dirname(__FILE__) . "/../../../public/site/files") as $file)
-        {
-            if(!in_array($file, array('.', '..')))
-                $files[] = $file;
-        }
-
         $rowString = "";
 
-        foreach($files as $file)
+        foreach(FileLister::getUploadedFileList() as $file)
         {
             $item = new ListTableFileItem($file);
             $rowString .= $item->getHTML();
