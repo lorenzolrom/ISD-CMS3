@@ -23,6 +23,23 @@ div.button-bar {
 
 .table-button {
     padding: 2px;
+    box-shadow: none;
+    margin-bottom: 0;
+    display: block;
+    background-color: #FFFFFF;
+    font-size: 1.2rem;
+}
+
+.go-button {
+    color: var(--success);
+}
+
+.edit-button {
+    color: var(--notice);
+}
+
+.delete-button {
+    color: var(--error);
 }
 
 .required::after {
