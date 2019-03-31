@@ -13,5 +13,5 @@
 
 abstract class CMSVersion
 {
-    const CURRENT_VERSION = "3.1.5E";
+    const CURRENT_VERSION = "3.1.5F";
 }
