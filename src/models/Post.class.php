@@ -32,7 +32,7 @@ class Post
         'CATEGORY_NOT_VALID' => "Category Not Valid",
         'DATE_NOT_VALID' => "Date Not Valid",
         'TITLE_LENGTH_ERROR' => "Title Must Be Between 1 and 64 Characters",
-        'TITLE_NOT_VALID' => "Title Must Contain Only Letters, Numbers, or '-'",
+        'TITLE_NOT_VALID' => "Name Must Contain Only Letters, Numbers, '.', '&', or '-'",
         'CONTENT_REQUIRED' => "Content Required",
         'DISPLAYED_NOT_VALID' => "Displayed Not Valid",
         'FEATURED_NOT_VALID' => "Featured Not Valid",
@@ -185,7 +185,7 @@ class Post
             throw new ValidationException(self::MESSAGES['TITLE_LENGTH_ERROR'], ValidationException::VALUE_TOO_SHORT);
         else if(strlen($title) > 64)
             throw new ValidationException(self::MESSAGES['TITLE_LENGTH_ERROR'], ValidationException::VALUE_TOO_LONG);
-        else if(!preg_match("/^[A-Za-z0-9\-\s\/]+$/",$title))
+        else if(!preg_match("/^[A-Za-z0-9.&\-\s\/]+$/",$title))
             throw new ValidationException(self::MESSAGES['TITLE_NOT_VALID'], ValidationException::VALUE_IS_NOT_VALID);
 
         return TRUE;

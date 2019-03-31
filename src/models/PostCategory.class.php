@@ -27,7 +27,7 @@ class PostCategory
     const FIELDS = array('title', 'previewImage', 'displayed');
     const MESSAGES = array(
         'TITLE_LENGTH_ERROR' => 'Title Must Be Between 1 And 64 Characters',
-        'TITLE_NOT_VALID' => "Name Must Contain Only Letters, Numbers, or '-'",
+        'TITLE_NOT_VALID' => "Name Must Contain Only Letters, Numbers, '.', '&', or '-'",
         'PREVIEW_IMAGE_REQUIRED' => 'Preview Image Required',
         'DISPLAYED_NOT_VALID' => 'Displayed Not Valid'
     );
@@ -82,7 +82,7 @@ class PostCategory
             throw new ValidationException(self::MESSAGES['TITLE_LENGTH_ERROR'], ValidationException::VALUE_TOO_SHORT);
         else if(strlen($title) > 64)
             throw new ValidationException(self::MESSAGES['TITLE_LENGTH_ERROR'], ValidationException::VALUE_TOO_LONG);
-        else if(!preg_match("/^[A-Za-z0-9\-\s\/]+$/",$title))
+        else if(!preg_match("/^[A-Za-z0-9.&\-\s\/]+$/",$title))
             throw new ValidationException(self::MESSAGES['TITLE_NOT_VALID'], ValidationException::VALUE_IS_NOT_VALID);
 
         return TRUE;
