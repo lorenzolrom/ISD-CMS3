@@ -21,6 +21,10 @@ div.button-bar {
     color: #000000;
 }
 
+.table-button {
+    padding: 2px;
+}
+
 .required::after {
     content: "*";
     font-weight: 600;
