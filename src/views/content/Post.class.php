@@ -27,7 +27,12 @@ class Post extends View
         $this->setTemplateFromHTML("Post", self::TEMPLATE_CONTENT);
 
         $this->setVariable("postTitle", $post->getTitle());
-        $this->setVariable("postImgSrc", $post->getPreviewImage());
+
+        if($post->getPreviewImage() !== NULL)
+            $this->setVariable("postImgSrc", "site/files/" . $post->getPreviewImage());
+        else
+            $this->setVariable("postImgSrc", "themes/" . \CMSConfiguration::CMS_CONFIG['theme'] . "/media/post.jpg");
+
         $this->setVariable("postId", $post->getId());
     }
 }

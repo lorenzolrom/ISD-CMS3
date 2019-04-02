@@ -28,7 +28,12 @@ class PostCategory extends View
         $this->setTemplateFromHTML("PostCategory", self::TEMPLATE_CONTENT);
 
         $this->setVariable("categoryTitle", $category->getTitle());
-        $this->setVariable("categoryImgSrc", $category->getPreviewImage());
+
+        if($category->getPreviewImage() !== NULL)
+            $this->setVariable("categoryImgSrc", "site/files/" . $category->getPreviewImage());
+        else
+            $this->setVariable("categoryImgSrc", "themes/" . \CMSConfiguration::CMS_CONFIG['theme'] . "/media/post.jpg");
+
         $this->setVariable("categoryId", $category->getId());
     }
 }

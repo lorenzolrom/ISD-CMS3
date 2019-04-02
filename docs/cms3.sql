@@ -89,7 +89,7 @@ CREATE TABLE cms_Content (
 CREATE TABLE cms_PostCategory (
   id BIGINT(20) NOT NULL AUTO_INCREMENT,
   title VARCHAR(64) NOT NULL,
-  previewImage TEXT NOT NULL,
+  previewImage TEXT DEFAULT NULL,
   displayed TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (id)
 );
@@ -102,7 +102,7 @@ CREATE TABLE cms_Post (
   date DATE NOT NULL,
   title VARCHAR(64) NOT NULL,
   content TEXT NOT NULL,
-  previewImage TEXT NOT NULL,
+  previewImage TEXT DEFAULT NULL,
   displayed TINYINT(1) NOT NULL DEFAULT 1,
   featured TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (id),

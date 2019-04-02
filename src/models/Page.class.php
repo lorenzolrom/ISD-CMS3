@@ -92,17 +92,17 @@ class Page
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getNavTitle()
+    public function getNavTitle(): ?string
     {
         return $this->navTitle;
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getPreviewImage()
+    public function getPreviewImage(): ?string
     {
         return $this->previewImage;
     }

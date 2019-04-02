@@ -164,14 +164,9 @@ class PostCategoryController extends Controller
             $errors[] = $e->getMessage();
         }
 
-        try
-        {
-            PostCategory::validatePreviewImage($fields['previewImage']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
+        //Preview image
+        if(!isset($_POST['previewImage']) OR strlen($_POST['previewImage']) == 0)
+            $_POST['previewImage'] = NULL;
 
         try
         {

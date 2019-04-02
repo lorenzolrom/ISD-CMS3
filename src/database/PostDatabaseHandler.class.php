@@ -154,14 +154,14 @@ class PostDatabaseHandler
      * @param string $date
      * @param string $title
      * @param string $content
-     * @param string $previewImage
+     * @param string|null $previewImage
      * @param int $displayed
      * @param int $featured
      * @return Post
      * @throws PostNotFoundException
      * @throws \exceptions\DatabaseException
      */
-    public static function insert(?int $category, ?int $author, string $date, string $title, string $content, string $previewImage, int $displayed, int $featured): Post
+    public static function insert(?int $category, ?int $author, string $date, string $title, string $content, ?string $previewImage, int $displayed, int $featured): Post
     {
         $handler = new DatabaseConnection();
 
@@ -190,14 +190,14 @@ class PostDatabaseHandler
      * @param string $date
      * @param string $title
      * @param string $content
-     * @param string $previewImage
+     * @param string|null $previewImage
      * @param int $displayed
      * @param int $featured
      * @return Post
      * @throws PostNotFoundException
      * @throws \exceptions\DatabaseException
      */
-    public static function update(int $id, ?int $category, ?int $author, string $date, string $title, string $content, string $previewImage, int $displayed, int $featured): Post
+    public static function update(int $id, ?int $category, ?int $author, string $date, string $title, string $content, ?string $previewImage, int $displayed, int $featured): Post
     {
         $handler = new DatabaseConnection();
 

@@ -28,7 +28,6 @@ class PostCategory
     const MESSAGES = array(
         'TITLE_LENGTH_ERROR' => 'Title Must Be Between 1 And 64 Characters',
         'TITLE_NOT_VALID' => "Name Must Contain Only Letters, Numbers, '.', '&', or '-'",
-        'PREVIEW_IMAGE_REQUIRED' => 'Preview Image Required',
         'DISPLAYED_NOT_VALID' => 'Displayed Not Valid'
     );
 
@@ -54,9 +53,9 @@ class PostCategory
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPreviewImage(): string
+    public function getPreviewImage(): ?string
     {
         return $this->previewImage;
     }
@@ -84,21 +83,6 @@ class PostCategory
             throw new ValidationException(self::MESSAGES['TITLE_LENGTH_ERROR'], ValidationException::VALUE_TOO_LONG);
         else if(!preg_match("/^[A-Za-z0-9.&\-\s\/]+$/",$title))
             throw new ValidationException(self::MESSAGES['TITLE_NOT_VALID'], ValidationException::VALUE_IS_NOT_VALID);
-
-        return TRUE;
-    }
-
-    /**
-     * @param string|null $previewImage
-     * @return bool
-     * @throws ValidationException
-     */
-    public static function validatePreviewImage(?string $previewImage): bool
-    {
-        if($previewImage === NULL)
-            throw new ValidationException(self::MESSAGES['PREVIEW_IMAGE_REQUIRED'], ValidationException::VALUE_IS_NULL);
-        else if(strlen($previewImage) < 1)
-            throw new ValidationException(self::MESSAGES['PREVIEW_IMAGE_REQUIRED'], ValidationException::VALUE_TOO_SHORT);
 
         return TRUE;
     }

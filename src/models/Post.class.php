@@ -36,7 +36,6 @@ class Post
         'CONTENT_REQUIRED' => "Content Required",
         'DISPLAYED_NOT_VALID' => "Displayed Not Valid",
         'FEATURED_NOT_VALID' => "Featured Not Valid",
-        'PREVIEW_IMAGE_REQUIRED' => "Preview Image Required"
     );
 
     private $id;
@@ -111,9 +110,9 @@ class Post
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPreviewImage(): string
+    public function getPreviewImage(): ?string
     {
         return $this->previewImage;
     }
@@ -202,21 +201,6 @@ class Post
             throw new ValidationException(self::MESSAGES['CONTENT_REQUIRED'], ValidationException::VALUE_IS_NULL);
         else if(strlen($content) < 1)
             throw new ValidationException(self::MESSAGES['CONTENT_REQUIRED'], ValidationException::VALUE_TOO_SHORT);
-
-        return TRUE;
-    }
-
-    /**
-     * @param string|null $previewImage
-     * @return bool
-     * @throws ValidationException
-     */
-    public static function validatePreviewImage(?string $previewImage): bool
-    {
-        if($previewImage === NULL)
-            throw new ValidationException(self::MESSAGES['PREVIEW_IMAGE_REQUIRED'], ValidationException::VALUE_IS_NULL);
-        else if(strlen($previewImage) < 1)
-            throw new ValidationException(self::MESSAGES['PREVIEW_IMAGE_REQUIRED'], ValidationException::VALUE_TOO_SHORT);
 
         return TRUE;
     }
