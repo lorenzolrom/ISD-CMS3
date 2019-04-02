@@ -35,6 +35,7 @@ class PageView extends AdminView
         $this->setVariable("title", htmlentities($page->getTitle()));
         $this->setVariable("navTitle", htmlentities($page->getNavTitle()));
         $this->setVariable("type", $page->getType());
+        $this->setVariable("previewImage", $page->getPreviewImage());
         $this->setVariable("isOnNav", ($page->getIsOnNav() == 1 ? "Yes" : "No"));
         $this->setVariable("protected", ($page->getProtected() == 1 ? "Yes" : "No"));
         $this->setVariable("weight", $page->getWeight());

@@ -55,3 +55,7 @@ input.list-table-filter {
 h2.region-title+input.list-table-filter {
     margin-top: 10px;
 }
+
+form.table-form input[type="text"], form.table-form select {
+    width: 100%;
+}

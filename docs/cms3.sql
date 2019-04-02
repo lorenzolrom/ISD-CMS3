@@ -43,6 +43,7 @@ CREATE TABLE cms_Page (
   uri VARCHAR(255) NOT NULL UNIQUE,
   title VARCHAR(64) NOT NULL,
   navTitle VARCHAR(64) DEFAULT NULL,
+  previewImage TEXT DEFAULT NULL,
   isOnNav TINYINT(1) DEFAULT 1,
   weight INT(11) NOT NULL DEFAULT 0,
   protected TINYINT(1) DEFAULT 0,
@@ -116,3 +117,6 @@ INSERT INTO cms_Role (code, displayName) VALUES ('administrator', 'Site Administ
                                                 ('author', 'Post Author'),
                                                 ('user', 'User');
 
+INSERT INTO cms_User (username, password, firstName, lastName, email, role) VALUES ('user',
+                                                                              'afe99137967ee6f5ec8f08df89dd8076db932e13d4ca8d7b32feda3dc919ae3e1657cf30616523d28500727755eddad5a6e18fe255b407a9c5f6dd8de1a43b99',
+                                                                              'Default', 'User', 'default@user.com', 'administrator');

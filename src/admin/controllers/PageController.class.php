@@ -102,7 +102,7 @@ class PageController extends Controller
             }
             else
             {
-                $newPage = PageDatabaseHandler::insert($_POST['type'], SessionValidationController::validateSession()->getId(), trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight'], (int)$_POST['protected']);
+                $newPage = PageDatabaseHandler::insert($_POST['type'], SessionValidationController::validateSession()->getId(), trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], $_POST['previewImage'], (int)$_POST['isOnNav'], (int)$_POST['weight'], (int)$_POST['protected']);
                 header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages/view/{$newPage->getId()}?NOTICE=Page Created");
                 exit;
             }
@@ -132,7 +132,7 @@ class PageController extends Controller
                 $editPage->setErrors($errors);
             else
             {
-                PageDatabaseHandler::update($page->getId(), $_POST['type'], trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], (int)$_POST['isOnNav'], (int)$_POST['weight'], (int)$_POST['protected']);
+                PageDatabaseHandler::update($page->getId(), $_POST['type'], trim(rtrim($_POST['uri'], '/')), $_POST['title'], $_POST['navTitle'], $_POST['previewImage'], (int)$_POST['isOnNav'], (int)$_POST['weight'], (int)$_POST['protected']);
                 header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages/view/{$page->getId()}?NOTICE=Page Updated");
                 exit;
             }
@@ -208,13 +208,17 @@ class PageController extends Controller
         {
             Page::validateNavTitle($fields['navTitle']);
 
-            if(isset($_POST['navTitle']) AND strlen($_POST['navTitle']) == 0)
+            if(!isset($_POST['navTitle']) OR (isset($_POST['navTitle']) AND strlen($_POST['navTitle']) == 0))
                 $_POST['navTitle'] = NULL;
         }
         catch(ValidationException $e)
         {
             $errors[] = $e->getMessage();
         }
+
+        //? PreviewImage
+        if(!isset($_POST['previewImage']) OR (isset($_POST['previewImage']) AND strlen($_POST['previewImage']) == 0))
+            $_POST['previewImage'] = NULL;
 
         // TYPE
         try

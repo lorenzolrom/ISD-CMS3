@@ -15,6 +15,7 @@ namespace admin\views\forms;
 
 
 use database\UserDatabaseHandler;
+use files\FileLister;
 use models\Page;
 
 class PageForm extends Form
@@ -49,6 +50,21 @@ class PageForm extends Form
                 catch(\Exception $e){}
 }
         }
+
+        // Generate Preview Image List
+        $previewImageSelect = "";
+
+        foreach(FileLister::getUploadedFilesByType(FileLister::FILETYPE_IMAGE) as $image)
+        {
+            if(($page !== NULL AND $page->getPreviewImage() == $image) OR (isset($_POST['previewImage']) AND $_POST['previewImage'] == $image))
+                $selected = self::SELECTED;
+            else
+                $selected = "";
+
+            $previewImageSelect .= "<option value='$image' $selected>$image</option>\n";
+        }
+
+        $this->setVariable("previewImageSelect", $previewImageSelect);
 
         // Generate page select
         $options = "";

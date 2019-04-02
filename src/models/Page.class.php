@@ -26,7 +26,7 @@ class Page
     // Valid page types
     const TYPES = array('Basic', 'No Title', 'Home');
 
-    const FIELDS = array('type', 'uri', 'title', 'navTitle', 'isOnNav', 'weight', 'protected');
+    const FIELDS = array('type', 'uri', 'title', 'navTitle', 'isOnNav', 'weight', 'protected', 'previewImage');
 
     const MESSAGES = array(
         'TYPE_INVALID' => 'Type Not Valid',
@@ -46,6 +46,7 @@ class Page
     private $uri;
     private $title;
     private $navTitle;
+    private $previewImage;
     private $isOnNav;
     private $weight;
     private $protected;
@@ -97,6 +98,15 @@ class Page
     {
         return $this->navTitle;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPreviewImage()
+    {
+        return $this->previewImage;
+    }
+
 
     /**
      * @return mixed
