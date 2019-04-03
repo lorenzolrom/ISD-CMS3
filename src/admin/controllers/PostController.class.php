@@ -20,8 +20,6 @@ use admin\views\pages\PostListPage;
 use admin\views\pages\PostNewPage;
 use database\PostDatabaseHandler;
 use exceptions\PageNotFoundException;
-use exceptions\ValidationException;
-use models\Post;
 
 class PostController extends Controller
 {
@@ -74,7 +72,7 @@ class PostController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
             {
@@ -111,7 +109,7 @@ class PostController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -145,83 +143,5 @@ class PostController extends Controller
 
         header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "posts?NOTICE=Post Deleted");
         exit;
-    }
-
-    /**
-     * @return array
-     * @throws \exceptions\DatabaseException
-     */
-    private function validateForm(): array
-    {
-        $errors = array();
-
-        $fields = array();
-
-        foreach(Post::FIELDS as $field)
-        {
-            $fields[$field] = NULL;
-        }
-
-        foreach(array_keys($_POST) as $field)
-        {
-            $fields[$field] = $_POST[$field];
-        }
-
-        try
-        {
-            Post::validateTitle($fields['title']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            Post::validateDate($fields['date']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            // Needed because no category is a valid option
-            if($fields['category'] == "")
-                $fields['category'] = NULL;
-            else
-                $fields['category'] = (int)$fields['category'];
-
-            Post::validateCategory($fields['category']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        //Preview image
-        if(!isset($_POST['previewImage']) OR strlen($_POST['previewImage']) == 0)
-            $_POST['previewImage'] = NULL;
-
-        try
-        {
-            Post::validateDisplayed((int)$fields['displayed']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            Post::validateFeatured((int)$fields['featured']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        return $errors;
     }
 }

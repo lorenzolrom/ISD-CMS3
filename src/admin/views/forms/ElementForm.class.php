@@ -14,6 +14,7 @@
 namespace admin\views\forms;
 
 
+use exceptions\ValidationException;
 use models\Element;
 use models\Page;
 
@@ -53,5 +54,58 @@ class ElementForm extends Form
         }
 
         $this->setVariable("typeSelect", $options);
+    }
+
+    /**
+     * Returns any validation errors encountered when the form is submitted
+     * @return array
+     */
+    public function validate(): array
+    {
+        $errors = array();
+
+        $fields = array();
+
+        foreach(Element::FIELDS as $field)
+        {
+            $fields[$field] = NULL;
+        }
+
+        foreach(array_keys($_POST) as $formField)
+        {
+            $fields[$formField] = $_POST[$formField];
+        }
+
+        // Name
+        try
+        {
+            Element::validateName($fields['name']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        // Type
+        try
+        {
+            Element::validateType($fields['type']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        // Weight
+        try
+        {
+            Element::validateWeight((int)$fields['type']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        return $errors;
     }
 }

@@ -16,7 +16,7 @@ namespace admin\views\pages;
 
 use admin\views\forms\PostForm;
 
-class PostNewPage extends UserDocument
+class PostNewPage extends FormDocument
 {
     /**
      * PostNewPage constructor.
@@ -27,13 +27,9 @@ class PostNewPage extends UserDocument
      */
     public function __construct()
     {
-        parent::__construct(array('author', 'editor', 'administrator'));
+        parent::__construct(new PostForm(), array('author', 'editor', 'administrator'));
 
         $this->setVariable("tabTitle", "New Post");
-
-        $form = new PostForm();
-
-        $this->setVariable("mainContent", $form->getHTML());
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}posts");
     }
 }

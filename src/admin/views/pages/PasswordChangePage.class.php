@@ -15,16 +15,14 @@ namespace admin\views\pages;
 
 
 use admin\views\forms\PasswordChangeForm;
+use models\User;
 
-class PasswordChangePage extends UserDocument
+class PasswordChangePage extends FormDocument
 {
-    public function __construct()
+    public function __construct(User $user)
     {
-        parent::__construct();
+        parent::__construct(new PasswordChangeForm($user));
 
         $this->setVariable("tabTitle", "Change Password");
-
-        $form = new PasswordChangeForm();
-        $this->setVariable("mainContent", $form->getHTML());
     }
 }

@@ -21,8 +21,6 @@ use database\ContentDatabaseHandler;
 use database\ElementDatabaseHandler;
 use exceptions\PageNotFoundException;
 use exceptions\PageParameterException;
-use exceptions\ValidationException;
-use models\Content;
 
 class ContentController extends Controller
 {
@@ -81,7 +79,7 @@ class ContentController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -115,7 +113,7 @@ class ContentController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -128,61 +126,6 @@ class ContentController extends Controller
         }
 
         return $page->getHTML();
-    }
-
-    private function validateForm():array
-    {
-        $errors = array();
-
-        $fields = array();
-
-        foreach(Content::FIELDS as $field)
-        {
-            $fields[$field] = NULL;
-        }
-
-        foreach(array_keys($_POST) as $formField)
-        {
-            $fields[$formField] = $_POST[$formField];
-        }
-
-        try
-        {
-            Content::validateName($fields['name']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            Content::validateArea($fields['area']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            Content::validateWeight((int)$fields['weight']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            Content::validateContent($fields['content']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        return $errors;
     }
 
     /**

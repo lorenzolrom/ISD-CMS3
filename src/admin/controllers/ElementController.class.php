@@ -22,8 +22,6 @@ use database\ElementDatabaseHandler;
 use database\PageDatabaseHandler;
 use exceptions\PageNotFoundException;
 use exceptions\PageParameterException;
-use exceptions\ValidationException;
-use models\Element;
 
 class ElementController extends Controller
 {
@@ -119,7 +117,7 @@ class ElementController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
             {
@@ -153,7 +151,7 @@ class ElementController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -166,54 +164,5 @@ class ElementController extends Controller
         }
 
         return $page->getHTML();
-    }
-
-    private function validateForm(): array
-    {
-        $errors = array();
-
-        $fields = array();
-
-        foreach(Element::FIELDS as $field)
-        {
-            $fields[$field] = NULL;
-        }
-
-        foreach(array_keys($_POST) as $formField)
-        {
-            $fields[$formField] = $_POST[$formField];
-        }
-
-        // Name
-        try
-        {
-            Element::validateName($fields['name']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        // Type
-        try
-        {
-            Element::validateType($fields['type']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        // Weight
-        try
-        {
-            Element::validateWeight((int)$fields['type']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        return $errors;
     }
 }

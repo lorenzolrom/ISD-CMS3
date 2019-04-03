@@ -20,7 +20,6 @@ use admin\views\pages\UserListPage;
 use admin\views\pages\UserNewPage;
 use database\UserDatabaseHandler;
 use exceptions\PageNotFoundException;
-use exceptions\ValidationException;
 use models\User;
 
 class UserController extends Controller
@@ -72,7 +71,7 @@ class UserController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -109,7 +108,7 @@ class UserController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm($user);
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
             {
@@ -159,105 +158,5 @@ class UserController extends Controller
         UserDatabaseHandler::delete($user->getId());
         header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "cpanel/users?NOTICE=User Deleted");
         exit;
-    }
-
-    private function validateForm(?User $user = NULL): array
-    {
-        $errors = array();
-
-        $fields = array();
-
-        foreach(User::FIELDS as $field)
-        {
-            $fields[$field] = NULL;
-        }
-
-        foreach(array_keys($_POST) as $field)
-        {
-            $fields[$field] = $_POST[$field];
-        }
-
-        if($user !== NULL AND $user->getUsername() != $fields['username'])
-        {
-            try
-            {
-                User::validateUsername($fields['username']);
-            }
-            catch(ValidationException $e)
-            {
-                $errors[] = $e->getMessage();
-            }
-        }
-
-        try
-        {
-            User::validateFirstName($fields['firstName']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            User::validateLastName($fields['lastName']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            User::validateDisplayName($fields['displayName']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        if($user !== NULL AND $user->getEmail() != $fields['email'])
-        {
-            try
-            {
-                User::validateEmail($fields['email']);
-            }
-            catch(ValidationException $e)
-            {
-                $errors[] = $e->getMessage();
-            }
-        }
-
-        try
-        {
-            User::validateDisabled((int)$fields['disabled']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            User::validateRole($fields['role']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        if($user !== NULL AND ($fields['password'] !== NULL AND strlen($fields['password']) > 0))
-        {
-            try
-            {
-                User::validatePassword($fields['password'], $fields['confirm']);
-            }
-            catch(ValidationException $e)
-            {
-                $errors[] = $e->getMessage();
-            }
-        }
-
-        return $errors;
     }
 }

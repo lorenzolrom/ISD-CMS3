@@ -15,6 +15,7 @@ namespace admin\views\forms;
 
 
 use database\UserDatabaseHandler;
+use exceptions\ValidationException;
 use factories\ViewFactory;
 use models\Content;
 use models\Element;
@@ -70,5 +71,63 @@ class ContentForm extends Form
         }
 
         $this->setVariable("areaSelect", $areaSelect);
+    }
+
+    /**
+     * @return array
+     */
+    public function validate(): array
+    {
+        $errors = array();
+
+        $fields = array();
+
+        foreach(Content::FIELDS as $field)
+        {
+            $fields[$field] = NULL;
+        }
+
+        foreach(array_keys($_POST) as $formField)
+        {
+            $fields[$formField] = $_POST[$formField];
+        }
+
+        try
+        {
+            Content::validateName($fields['name']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        try
+        {
+            Content::validateArea($fields['area']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        try
+        {
+            Content::validateWeight((int)$fields['weight']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        try
+        {
+            Content::validateContent($fields['content']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        return $errors;
     }
 }

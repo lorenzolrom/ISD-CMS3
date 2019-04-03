@@ -17,7 +17,7 @@ use admin\views\forms\ContentForm;
 use exceptions\PageNotFoundException;
 use models\Element;
 
-class ContentNewPage extends UserDocument
+class ContentNewPage extends FormDocument
 {
     /**
      * ContentNewPage constructor.
@@ -31,13 +31,9 @@ class ContentNewPage extends UserDocument
      */
     public function __construct(Element $element)
     {
-        parent::__construct(array('editor', 'administrator'));
+        parent::__construct(new ContentForm($element), array('editor', 'administrator'));
 
         $this->setVariable("tabTitle", "New Content");
-
-        $form = new ContentForm($element);
-
-        $this->setVariable("mainContent", $form->getHTML());
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}elements/view/{$element->getId()}");
     }
 }

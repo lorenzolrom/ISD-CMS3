@@ -16,7 +16,7 @@ namespace admin\views\pages;
 
 use admin\views\forms\DoorwayForm;
 
-class DoorwayNewPage extends UserDocument
+class DoorwayNewPage extends FormDocument
 {
     /**
      * DoorwayNewPage constructor.
@@ -25,13 +25,9 @@ class DoorwayNewPage extends UserDocument
      */
     public function __construct()
     {
-        parent::__construct(array('editor', 'administrator'));
+        parent::__construct(new DoorwayForm(), array('editor', 'administrator'));
 
         $this->setVariable("tabTitle", "New Doorway");
-
-        $form = new DoorwayForm();
-        $this->setVariable("mainContent", $form->getHTML());
-
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}doorways");
     }
 }

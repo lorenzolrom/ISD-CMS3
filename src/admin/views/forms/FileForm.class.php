@@ -37,4 +37,13 @@ class FileForm extends Form
 
         return parent::getHTML();
     }
+
+    /**
+     * Returns any validation errors encountered when the form is submitted
+     * @return array
+     */
+    public function validate(): array
+    {
+        return array(); // file form will not be validated this way
+    }
 }

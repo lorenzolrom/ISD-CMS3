@@ -19,8 +19,6 @@ use admin\views\pages\DoorwayListPage;
 use admin\views\pages\DoorwayNewPage;
 use database\DoorwayDatabaseHandler;
 use exceptions\PageNotFoundException;
-use exceptions\ValidationException;
-use models\Doorway;
 
 class DoorwayController extends Controller
 {
@@ -71,7 +69,7 @@ class DoorwayController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
             {
@@ -103,7 +101,7 @@ class DoorwayController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm($doorway);
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
             {
@@ -136,60 +134,5 @@ class DoorwayController extends Controller
 
         header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "doorways?NOTICE=Doorway Deleted");
         exit;
-    }
-
-    /**
-     * @param Doorway|null $doorway Doorway to use for validation (to check for existing URI)
-     * @return array Error messages (or empty if none)
-     */
-    private function validateForm(?Doorway $doorway = NULL): array
-    {
-        $errors = array();
-
-        $uri = NULL;
-        $destination = NULL;
-        $enabled = NULL;
-
-        if(isset($_POST['uri']))
-            $uri = $_POST['uri'];
-
-        if(isset($_POST['destination']))
-            $destination = $_POST['destination'];
-
-        if(isset($_POST['enabled']))
-            $enabled = (int)$_POST['enabled'];
-
-        // If we are editing a doorway and the URI has not changed do not validate it
-        if($doorway === NULL OR $doorway->getUri() != $uri)
-        {
-            try
-            {
-                Doorway::validateURI($uri);
-            }
-            catch (ValidationException $e)
-            {
-                $errors[] = $e->getMessage();
-            }
-        }
-
-        try
-        {
-            Doorway::validateDestination($destination);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        try
-        {
-            Doorway::validateEnabled($enabled);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        return $errors;
     }
 }

@@ -55,11 +55,11 @@ class AccountController extends Controller
     {
         $user = SessionValidationController::validateSession();
 
-        $page = new PasswordChangePage();
+        $page = new PasswordChangePage($user);
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm($user);
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -74,27 +74,4 @@ class AccountController extends Controller
         return $page->getHTML();
     }
 
-    private function validateForm(User $user): array
-    {
-        $errors = array();
-
-        if(!isset($_POST['current']) OR strlen($_POST['current']) < 1)
-        {
-            $errors[] = "Current Password Required";
-        }
-        else if(!$user->isCorrectPassword($_POST['current']))
-        {
-            $errors[] = "Current Password Is Incorrect";
-        }
-        else if(!isset($_POST['new']) OR strlen($_POST['new']) < 1)
-        {
-            $errors[] = "New Password Required";
-        }
-        else if(!isset($_POST['confirm']) OR $_POST['new'] != $_POST['confirm'])
-        {
-            $errors[] = "New Passwords Do Not Match";
-        }
-
-        return $errors;
-    }
 }

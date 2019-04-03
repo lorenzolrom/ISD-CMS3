@@ -16,7 +16,7 @@ namespace admin\views\pages;
 
 use admin\views\forms\UserForm;
 
-class UserNewPage extends UserDocument
+class UserNewPage extends FormDocument
 {
     /**
      * UserNewPage constructor.
@@ -27,10 +27,7 @@ class UserNewPage extends UserDocument
      */
     public function __construct()
     {
-        parent::__construct(array('administrator'));
-
-        $form = new UserForm();
-        $this->setVariable("mainContent", $form->getHTML());
+        parent::__construct(new UserForm(), array('administrator'));
 
         $this->setVariable("tabTitle", "New User");
     }

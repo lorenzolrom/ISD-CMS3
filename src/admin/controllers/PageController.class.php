@@ -21,8 +21,6 @@ use admin\views\pages\PageNewPage;
 use admin\views\pages\PageViewPage;
 use database\PageDatabaseHandler;
 use exceptions\PageNotFoundException;
-use exceptions\ValidationException;
-use models\Page;
 
 class PageController extends Controller
 {
@@ -94,7 +92,7 @@ class PageController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if (!empty($errors))
             {
@@ -126,7 +124,7 @@ class PageController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm($page);
+            $errors = $editPage->getFormErrors();
 
             if(!empty($errors))
                 $editPage->setErrors($errors);
@@ -157,109 +155,5 @@ class PageController extends Controller
 
         header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "pages?NOTICE=Page Deleted");
         exit;
-    }
-
-    /**
-     * @param Page|null $page
-     * @return array
-     */
-    private function validateForm(?Page $page = NULL): array
-    {
-        $errors = array();
-
-        $fields = array();
-
-        foreach(Page::FIELDS as $field)
-        {
-            $fields[$field] = NULL;
-        }
-
-        foreach(array_keys($_POST) as $formField)
-        {
-            $fields[$formField] = $_POST[$formField];
-        }
-
-
-        // URI
-        if($page === NULL OR $page->getUri() != $fields['uri'])
-        {
-            try
-            {
-                Page::validateURI($fields['uri']);
-            }
-            catch(ValidationException $e)
-            {
-                $errors[] = $e->getMessage();
-            }
-        }
-
-        // Title
-        try
-        {
-            Page::validateTitle($fields['title']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        // ?NavTitle
-        try
-        {
-            Page::validateNavTitle($fields['navTitle']);
-
-            if(!isset($_POST['navTitle']) OR (isset($_POST['navTitle']) AND strlen($_POST['navTitle']) == 0))
-                $_POST['navTitle'] = NULL;
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        //? PreviewImage
-        if(!isset($_POST['previewImage']) OR (isset($_POST['previewImage']) AND strlen($_POST['previewImage']) == 0))
-            $_POST['previewImage'] = NULL;
-
-        // TYPE
-        try
-        {
-            Page::validateType($fields['type']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        // Is On Nav
-        try
-        {
-            Page::validateIsOnNav((int)$fields['isOnNav']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        // Weight
-        try
-        {
-            Page::validateWeight((int)$fields['weight']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        // Protected
-        try
-        {
-            Page::validateProtected((int)$fields['protected']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        return $errors;
     }
 }

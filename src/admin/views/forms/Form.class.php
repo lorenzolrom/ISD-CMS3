@@ -34,4 +34,10 @@ abstract class Form extends AdminView
 
         return parent::getTemplate();
     }
+
+    /**
+     * Returns any validation errors encountered when the form is submitted
+     * @return array
+     */
+    abstract public function validate(): array;
 }

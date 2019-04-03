@@ -13,7 +13,7 @@
 
 namespace admin\views\forms;
 
-
+use exceptions\ValidationException;
 use files\FileLister;
 use models\PostCategory;
 
@@ -62,5 +62,49 @@ class PostCategoryForm extends Form
             $this->setVariable("displayedNo", self::SELECTED);
 
         return parent::getHTML();
+    }
+
+    /**
+     * @return array
+     */
+    public function validate(): array
+    {
+        $errors = array();
+
+        $fields = array();
+
+        foreach(PostCategory::FIELDS as $field)
+        {
+            $fields[$field] = NULL;
+        }
+
+        foreach(array_keys($_POST) as $field)
+        {
+            $fields[$field] = $_POST[$field];
+        }
+
+        try
+        {
+            PostCategory::validateTitle($fields['title']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        //Preview image
+        if(!isset($_POST['previewImage']) OR strlen($_POST['previewImage']) == 0)
+            $_POST['previewImage'] = NULL;
+
+        try
+        {
+            PostCategory::validateDisplayed((int)$fields['displayed']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        return $errors;
     }
 }

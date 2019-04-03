@@ -17,7 +17,7 @@ namespace admin\views\pages;
 use admin\views\forms\UserForm;
 use models\User;
 
-class UserEditPage extends UserDocument
+class UserEditPage extends FormDocument
 {
     /**
      * UserEditPage constructor.
@@ -29,10 +29,7 @@ class UserEditPage extends UserDocument
      */
     public function __construct(User $user)
     {
-        parent::__construct(array('administrator'));
-
-        $form = new UserForm($user);
-        $this->setVariable("mainContent", $form->getHTML());
+        parent::__construct(new UserForm($user), array('administrator'));
 
         $this->setVariable("tabTitle", "Edit User: " . $user->getUsername());
     }

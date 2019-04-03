@@ -16,7 +16,7 @@ namespace admin\views\pages;
 
 use admin\views\forms\PostCategoryForm;
 
-class PostCategoryNewPage extends UserDocument
+class PostCategoryNewPage extends FormDocument
 {
     /**
      * PostCategoryNewPage constructor.
@@ -25,13 +25,9 @@ class PostCategoryNewPage extends UserDocument
      */
     public function __construct()
     {
-        parent::__construct(array('author', 'editor', 'administrator'));
+        parent::__construct(new PostCategoryForm(), array('author', 'editor', 'administrator'));
 
         $this->setVariable("tabTitle", "New Category");
-
-        $form = new PostCategoryForm();
-        $this->setVariable("mainContent", $form->getHTML());
-
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}categories");
     }
 }

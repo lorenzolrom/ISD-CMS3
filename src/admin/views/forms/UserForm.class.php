@@ -15,10 +15,13 @@ namespace admin\views\forms;
 
 
 use database\RoleDatabaseHandler;
+use exceptions\ValidationException;
 use models\User;
 
 class UserForm extends Form
 {
+    private $user;
+
     /**
      * UserForm constructor.
      * @param User|null $user
@@ -28,6 +31,7 @@ class UserForm extends Form
      */
     public function __construct(?User $user = NULL)
     {
+        $this->user = $user;
         $this->setTemplateFromHTML("UserForm", self::ADMIN_TEMPLATE_FORM);
 
         if($user !== NULL)
@@ -65,5 +69,109 @@ class UserForm extends Form
         }
 
         $this->setVariable("roleSelect", $roleSelect);
+    }
+
+    /**
+     * Returns any validation errors encountered when the form is submitted
+     * @return array
+     */
+    public function validate(): array
+    {
+        $errors = array();
+
+        $fields = array();
+
+        foreach(User::FIELDS as $field)
+        {
+            $fields[$field] = NULL;
+        }
+
+        foreach(array_keys($_POST) as $field)
+        {
+            $fields[$field] = $_POST[$field];
+        }
+
+        if($this->user !== NULL AND $this->user->getUsername() != $fields['username'])
+        {
+            try
+            {
+                User::validateUsername($fields['username']);
+            }
+            catch(ValidationException $e)
+            {
+                $errors[] = $e->getMessage();
+            }
+        }
+
+        try
+        {
+            User::validateFirstName($fields['firstName']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        try
+        {
+            User::validateLastName($fields['lastName']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        try
+        {
+            User::validateDisplayName($fields['displayName']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        if($this->user !== NULL AND $this->user->getEmail() != $fields['email'])
+        {
+            try
+            {
+                User::validateEmail($fields['email']);
+            }
+            catch(ValidationException $e)
+            {
+                $errors[] = $e->getMessage();
+            }
+        }
+
+        try
+        {
+            User::validateDisabled((int)$fields['disabled']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        try
+        {
+            User::validateRole($fields['role']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        if($this->user !== NULL AND ($fields['password'] !== NULL AND strlen($fields['password']) > 0))
+        {
+            try
+            {
+                User::validatePassword($fields['password'], $fields['confirm']);
+            }
+            catch(ValidationException $e)
+            {
+                $errors[] = $e->getMessage();
+            }
+        }
+
+        return $errors;
     }
 }

@@ -17,17 +17,19 @@ namespace admin\views\pages;
 use admin\views\forms\PostCategoryForm;
 use models\PostCategory;
 
-class PostCategoryEditPage extends UserDocument
+class PostCategoryEditPage extends FormDocument
 {
+    /**
+     * PostCategoryEditPage constructor.
+     * @param PostCategory $category
+     * @throws \exceptions\SecurityException
+     * @throws \exceptions\ViewException
+     */
     public function __construct(PostCategory $category)
     {
-        parent::__construct(array('author', 'editor', 'administrator'));
+        parent::__construct(new PostCategoryForm($category), array('author', 'editor', 'administrator'));
 
         $this->setVariable("tabTitle", "Edit Category: " . $category->getTitle());
-
-        $form = new PostCategoryForm($category);
-        $this->setVariable("mainContent", $form->getHTML());
-
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}categories");
     }
 }

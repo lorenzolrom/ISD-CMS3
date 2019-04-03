@@ -15,11 +15,14 @@ namespace admin\views\forms;
 
 
 use database\UserDatabaseHandler;
+use exceptions\ValidationException;
 use files\FileLister;
 use models\Page;
 
 class PageForm extends Form
 {
+    private $page;
+
     /**
      * PageForm constructor.
      * @param Page|null $page
@@ -27,6 +30,7 @@ class PageForm extends Form
      */
     public function __construct(?Page $page = NULL)
     {
+        $this->page = $page;
         $this->setTemplateFromHTML("PageForm", self::ADMIN_TEMPLATE_FORM);
 
         if($page !== NULL)
@@ -91,5 +95,109 @@ class PageForm extends Form
             $this->setVariable("isOnNavNo", self::SELECTED);
 
         return parent::getHTML();
+    }
+
+    /**
+     * Returns any validation errors encountered when the form is submitted
+     * @return array
+     */
+    public function validate(): array
+    {
+        $errors = array();
+
+        $fields = array();
+
+        foreach(Page::FIELDS as $field)
+        {
+            $fields[$field] = NULL;
+        }
+
+        foreach(array_keys($_POST) as $formField)
+        {
+            $fields[$formField] = $_POST[$formField];
+        }
+
+
+        // URI
+        if($this->page === NULL OR $this->page->getUri() != $fields['uri'])
+        {
+            try
+            {
+                Page::validateURI($fields['uri']);
+            }
+            catch(ValidationException $e)
+            {
+                $errors[] = $e->getMessage();
+            }
+        }
+
+        // Title
+        try
+        {
+            Page::validateTitle($fields['title']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        // ?NavTitle
+        try
+        {
+            Page::validateNavTitle($fields['navTitle']);
+
+            if(!isset($_POST['navTitle']) OR (isset($_POST['navTitle']) AND strlen($_POST['navTitle']) == 0))
+                $_POST['navTitle'] = NULL;
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        //? PreviewImage
+        if(!isset($_POST['previewImage']) OR (isset($_POST['previewImage']) AND strlen($_POST['previewImage']) == 0))
+            $_POST['previewImage'] = NULL;
+
+        // TYPE
+        try
+        {
+            Page::validateType($fields['type']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        // Is On Nav
+        try
+        {
+            Page::validateIsOnNav((int)$fields['isOnNav']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        // Weight
+        try
+        {
+            Page::validateWeight((int)$fields['weight']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        // Protected
+        try
+        {
+            Page::validateProtected((int)$fields['protected']);
+        }
+        catch(ValidationException $e)
+        {
+            $errors[] = $e->getMessage();
+        }
+
+        return $errors;
     }
 }

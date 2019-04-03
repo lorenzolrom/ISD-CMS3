@@ -18,7 +18,7 @@ use admin\views\forms\ElementForm;
 use database\PageDatabaseHandler;
 use models\Element;
 
-class ElementEditPage extends UserDocument
+class ElementEditPage extends FormDocument
 {
     /**
      * ElementEditPage constructor.
@@ -30,15 +30,10 @@ class ElementEditPage extends UserDocument
      */
     public function __construct(Element $element)
     {
-        parent::__construct(array('editor', 'administrator'));
+        $page = PageDatabaseHandler::selectById($element->getPage());
+        parent::__construct(new ElementForm($page, $element), array('editor', 'administrator'));
 
         $this->setVariable("tabTitle", "Edit Element: " . $element->getName());
-
-        $page = PageDatabaseHandler::selectById($element->getPage());
-
-        $form = new ElementForm($page, $element);
-        $this->setVariable("mainContent", $form->getHTML());
-
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}elements/view/{$element->getId()}");
     }
 }

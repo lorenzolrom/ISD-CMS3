@@ -17,17 +17,13 @@ namespace admin\views\pages;
 use admin\views\forms\PageForm;
 use models\Page;
 
-class PageEditPage extends UserDocument
+class PageEditPage extends FormDocument
 {
     public function __construct(Page $page)
     {
-        parent::__construct(array('editor', 'administrator'));
+        parent::__construct(new PageForm($page), array('editor', 'administrator'));
 
         $this->setVariable("tabTitle", "Edit Page: " . $page->getUri());
-
-        $form = new PageForm($page);
-        $this->setVariable("mainContent", $form->getHTML());
-
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}pages/view/{$page->getId()}");
     }
 }

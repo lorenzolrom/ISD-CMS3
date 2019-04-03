@@ -17,7 +17,7 @@ namespace admin\views\pages;
 use admin\views\forms\PostForm;
 use models\Post;
 
-class PostEditPage extends UserDocument
+class PostEditPage extends FormDocument
 {
     /**
      * PostEditPage constructor.
@@ -29,13 +29,9 @@ class PostEditPage extends UserDocument
      */
     public function __construct(Post $post)
     {
-        parent::__construct(array('editor', 'author', 'administrator'));
+        parent::__construct(new PostForm($post), array('editor', 'author', 'administrator'));
 
         $this->setVariable("tabTitle", "Edit Post: " . $post->getTitle());
-
-        $form = new PostForm($post);
-        $this->setVariable("mainContent", $form->getHTML());
-
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}posts");
     }
 }

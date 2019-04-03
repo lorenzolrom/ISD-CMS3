@@ -20,8 +20,6 @@ use admin\views\pages\PostCategoryListPage;
 use admin\views\pages\PostCategoryNewPage;
 use database\PostCategoryDatabaseHandler;
 use exceptions\PageNotFoundException;
-use exceptions\ValidationException;
-use models\PostCategory;
 
 class PostCategoryController extends Controller
 {
@@ -72,7 +70,7 @@ class PostCategoryController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -103,7 +101,7 @@ class PostCategoryController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $this->validateForm();
+            $errors = $page->getFormErrors();
 
             if(!empty($errors))
                 $page->setErrors($errors);
@@ -134,49 +132,5 @@ class PostCategoryController extends Controller
 
         header("Location: " . \CMSConfiguration::CMS_CONFIG['baseURI'] . \CMSConfiguration::CMS_CONFIG['adminURI'] . "categories?NOTICE=Category Deleted");
         exit;
-    }
-
-    /**
-     * @return array
-     */
-    private function validateForm(): array
-    {
-        $errors = array();
-
-        $fields = array();
-
-        foreach(PostCategory::FIELDS as $field)
-        {
-            $fields[$field] = NULL;
-        }
-
-        foreach(array_keys($_POST) as $field)
-        {
-            $fields[$field] = $_POST[$field];
-        }
-
-        try
-        {
-            PostCategory::validateTitle($fields['title']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        //Preview image
-        if(!isset($_POST['previewImage']) OR strlen($_POST['previewImage']) == 0)
-            $_POST['previewImage'] = NULL;
-
-        try
-        {
-            PostCategory::validateDisplayed((int)$fields['displayed']);
-        }
-        catch(ValidationException $e)
-        {
-            $errors[] = $e->getMessage();
-        }
-
-        return $errors;
     }
 }

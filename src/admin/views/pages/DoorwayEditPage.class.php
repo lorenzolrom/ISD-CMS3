@@ -17,17 +17,13 @@ namespace admin\views\pages;
 use admin\views\forms\DoorwayForm;
 use models\Doorway;
 
-class DoorwayEditPage extends UserDocument
+class DoorwayEditPage extends FormDocument
 {
     public function __construct(Doorway $doorway)
     {
-        parent::__construct(array('editor', 'administrator'));
+        parent::__construct( new DoorwayForm($doorway), array('editor', 'administrator'));
 
         $this->setVariable("tabTitle", "Edit Doorway: " . $doorway->getUri());
-
-        $form = new DoorwayForm($doorway);
-        $this->setVariable("mainContent", $form->getHTML());
-
         $this->setVariable("cancelURI", "{{@baseURI}}{{@adminURI}}doorways");
     }
 }
