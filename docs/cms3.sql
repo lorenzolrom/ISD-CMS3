@@ -110,6 +110,13 @@ CREATE TABLE cms_Post (
   FOREIGN KEY (category) REFERENCES cms_PostCategory(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
+-- PAGE VIEW
+CREATE TABLE `cms_PageView` (
+  `url` TEXT NOT NULL,
+  `address` TEXT NOT NULL,
+  `time` DATETIME NOT NULL
+);
+
 -- DATA INSERTION
 
 INSERT INTO cms_Role (code, displayName) VALUES ('administrator', 'Site Administrator'),
@@ -118,5 +125,5 @@ INSERT INTO cms_Role (code, displayName) VALUES ('administrator', 'Site Administ
                                                 ('user', 'User');
 
 INSERT INTO cms_User (username, password, firstName, lastName, email, role) VALUES ('user',
-                                                                              'afe99137967ee6f5ec8f08df89dd8076db932e13d4ca8d7b32feda3dc919ae3e1657cf30616523d28500727755eddad5a6e18fe255b407a9c5f6dd8de1a43b99',
+                                                                              '$argon2id$v=19$m=1024,t=2,p=2$SGFWd3lTR2g3Y1lNbm9MUQ$WW47FdSR+GZCjj20/j3IuvSoAK/qESHuzSq0hk5RtAU',
                                                                               'Default', 'User', 'default@user.com', 'administrator');

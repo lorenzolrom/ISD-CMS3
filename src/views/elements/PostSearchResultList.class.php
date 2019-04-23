@@ -27,7 +27,7 @@ class PostSearchResultList extends View
     public function __construct(array $postResults)
     {
         $this->setTemplateFromHTML("SearchResultList", self::TEMPLATE_ELEMENT);
-        $this->setVariable("resultType", "Posts");
+        $this->setVariable("resultType", "Projects");
 
         $resultList = "";
 

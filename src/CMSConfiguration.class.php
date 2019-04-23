@@ -25,6 +25,8 @@ abstract class CMSConfiguration
 
         'adminURI' => 'user/',
 
+        'enableLogging' => FALSE,
+
         'databaseHost' => 'my.database.server',
         'databaseName' => 'my.database',
         'databaseUser' => 'my.username',

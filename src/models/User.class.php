@@ -128,7 +128,7 @@ class User
      */
     public function isCorrectPassword(string $password): bool
     {
-        if(self::hashPassword($password) == $this->password)
+        if(password_verify($password, $this->getPassword()))
             return TRUE;
 
         return FALSE;
@@ -154,7 +154,7 @@ class User
      */
     public static function hashPassword(string $password): string
     {
-        return hash('SHA512', hash('SHA512', $password));
+        return password_hash($password, PASSWORD_ARGON2ID);
     }
 
     /**
