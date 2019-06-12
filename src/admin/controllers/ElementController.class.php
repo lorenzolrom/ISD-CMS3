@@ -117,7 +117,7 @@ class ElementController extends Controller
 
         if(!empty($_POST))
         {
-            $errors = $page->getFormErrors();
+            $errors = $view->getFormErrors();
 
             if(!empty($errors))
             {
