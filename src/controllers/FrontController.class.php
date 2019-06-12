@@ -13,7 +13,6 @@
 
 namespace controllers;
 
-use database\PageViewDatabaseHandler;
 use factories\ControllerFactory;
 use views\pages\FatalErrorPage;
 
@@ -34,12 +33,6 @@ class FrontController
             try
             {
                 $uri = self::getURI();
-
-                // Log this page visit if it is enabled
-                if(\CMSConfiguration::CMS_CONFIG['enableLogging'] === TRUE)
-                {
-                    PageViewDatabaseHandler::insert($uri, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'));
-                }
 
                 $controller = ControllerFactory::getController($uri);
                 return $controller->getPage();

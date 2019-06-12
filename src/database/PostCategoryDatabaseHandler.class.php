@@ -74,7 +74,7 @@ class PostCategoryDatabaseHandler
      * @throws PostCategoryNotFoundException
      * @throws \exceptions\DatabaseException
      */
-    public static function insert(string $title, string $previewImage, int $displayed): PostCategory
+    public static function insert(string $title, ?string $previewImage, int $displayed): PostCategory
     {
         $handler = new DatabaseConnection();
 
