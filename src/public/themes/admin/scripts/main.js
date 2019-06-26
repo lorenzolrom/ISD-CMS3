@@ -110,8 +110,8 @@ function tinymceSetup()
     tinymce.init({
         selector: 'textarea#content-editor',
         height: 500,
-        plugins: "code image lists link textcolor table",
-        relative_urls:false,
+        plugins: "code image lists link table",
+        relative_urls: false,
         remove_script_host: false,
         convert_urls: false,
         toolbar: "formatselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | link image | forecolor backcolor | table"
