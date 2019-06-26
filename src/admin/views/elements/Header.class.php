@@ -44,7 +44,6 @@ class Header extends AdminView
         if(in_array($user->getRole(), array('author', 'editor', 'administrator')))
         {
             $postLink = new MenuLink('Posts', 'posts');
-
             $navigationContent .= $postLink->getHTML();
         }
 
@@ -53,9 +52,10 @@ class Header extends AdminView
         {
             $pageLink = new MenuLink('Pages', 'pages');
             $doorwayLink = new MenuLink('Doorways', 'doorways');
+            $contactLink = new MenuLink('Contact Submissions', 'contacts');
             $fileLink = new MenuLink('Files', 'files');
 
-            $navigationContent .= $pageLink->getHTML() . $doorwayLink->getHTML() . $fileLink->getHTML();
+            $navigationContent .= $pageLink->getHTML() . $doorwayLink->getHTML() . $contactLink->getHTML() . $fileLink->getHTML();
         }
 
         // Control Panel (administrator)

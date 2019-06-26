@@ -164,6 +164,41 @@ div.main p {
     padding-bottom: 10px;
 }
 
+form.form {
+    display: inline-block;
+    position: relative;
+}
+
+form.form label {
+    display: inline-block;
+    min-width: 100px;
+    vertical-align: top;
+}
+
+form.form label.required::after {
+    content: '*';
+    color: red;
+}
+
+form.form input[type='text'], form.form textarea {
+    display: inline-block;
+    border: 1px solid var(--font-color);
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+form.form input[type='submit'] {
+    color: var(--font-color);
+    background-color: var(--accent-color);
+    border: none;
+    padding: 3px 5px;
+    float: right;
+
+    position: absolute;
+    right: 0;
+
+}
+
 @media screen and (max-device-width: 600px) {
     div.split {
         display: block;

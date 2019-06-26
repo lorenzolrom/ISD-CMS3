@@ -15,6 +15,7 @@ namespace admin\factories;
 
 
 use admin\controllers\AccountController;
+use admin\controllers\ContactFormSubmissionController;
 use admin\controllers\CPanelController;
 use admin\controllers\FileController;
 use admin\controllers\PostCategoryController;
@@ -76,6 +77,9 @@ class ControllerFactory
                 break;
             case "cpanel":
                 return new CPanelController($uriParts);
+                break;
+            case "contacts":
+                return new ContactFormSubmissionController($uriParts);
                 break;
             default:
                 throw new PageNotFoundException(PageNotFoundException::MESSAGES[PageNotFoundException::PRIMARY_KEY_NOT_FOUND], PageNotFoundException::PRIMARY_KEY_NOT_FOUND);

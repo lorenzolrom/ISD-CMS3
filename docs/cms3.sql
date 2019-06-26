@@ -117,6 +117,17 @@ CREATE TABLE `cms_PageView` (
   `time` DATETIME NOT NULL
 );
 
+-- CONTACT FORM
+CREATE TABLE `cms_ContactFormSubmission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` datetime NOT NULL,
+  `ipAddress` text NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `comment` text NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
 -- DATA INSERTION
 
 INSERT INTO cms_Role (code, displayName) VALUES ('administrator', 'Site Administrator'),

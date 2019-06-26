@@ -21,6 +21,7 @@ use views\elements\LeftSidebarMain;
 use views\elements\Main;
 use views\elements\Split;
 use views\pages\BasicPage;
+use views\pages\ContactPage;
 use views\pages\HomePage;
 use views\pages\NoTitlePage;
 use views\View;
@@ -87,6 +88,8 @@ class ViewFactory
             case "Home":
                 return new HomePage($page);
                 break;
+            case "Contact":
+                return new ContactPage($page);
             default:
                 throw new ViewException(ViewException::MESSAGES[ViewException::PAGE_NOT_FOUND], ViewException::PAGE_NOT_FOUND);
         }

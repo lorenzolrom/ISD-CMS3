@@ -1,0 +1,17 @@
+<h1>{{@pageTitle}}</h1>
+{{@mainContent}}
+<form class="form" id="contact" method="post">
+    <p>
+        <label for="name" class="required">Your name:</label>
+        <input id="name" type="text" name="name" required>
+    </p>
+    <p>
+        <label for="email">Your email:</label>
+        <input id="email" type="text" name="email">
+    </p>
+    <p>
+        <label for="comments" class="required">Comments:</label>
+        <textarea id="comments" name="comments" required></textarea>
+    </p>
+    <input type="submit" value="Submit">
+</form>
