@@ -66,6 +66,7 @@ class PageController extends Controller
         }
         catch(PageNotFoundException $e)
         {
+            http_response_code(404);
             // Create new page not found page
             $page = new PageNotFoundPage($e);
             return $page->getHTML();

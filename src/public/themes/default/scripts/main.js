@@ -4,7 +4,7 @@
 function randomBanner()
 {
     // Get count of files in the banner directory
-    let limit = 11;
+    let limit = 14;
 
     let rand = Math.floor(Math.random() * Math.floor(limit) + 1);
     let background = rand.toString() + ".gif";
