@@ -54,8 +54,8 @@ class FrontController
      */
     public static function getURI(): string
     {
-        // Remove the baseURI and convert to lowercase
-        $reqURI = explode(\CMSConfiguration::CMS_CONFIG['baseURI'], strtolower($_SERVER['REQUEST_URI']))[1];
+        // Remove baseURI and convert to lowercase
+        $reqURI = strtolower(preg_replace('/\\' . \CMSConfiguration::CMS_CONFIG['baseURI'] . '/', '', $_SERVER['REQUEST_URI'], 1));
 
         // Remove Query Params
         $reqURI = explode('?', $reqURI)[0];
