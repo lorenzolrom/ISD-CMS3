@@ -16,7 +16,10 @@ namespace exceptions;
 
 class PostNotFoundException extends EntryNotFoundException
 {
+    public const POST_IS_DISABLED = 601;
+
     const MESSAGES = array(
-        self::PRIMARY_KEY_NOT_FOUND => "Requested post was not found"
+        self::PRIMARY_KEY_NOT_FOUND => "Requested post was not found",
+        self::POST_IS_DISABLED => "Requested post was not found"
     );
 }

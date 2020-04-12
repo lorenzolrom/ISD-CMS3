@@ -67,7 +67,8 @@ class SearchController extends Controller
 
             foreach($posts as $post)
             {
-                $results['posts'][] = $post;
+                if($post->getDisplayed())
+                    $results['posts'][] = $post;
             }
 
             foreach($contents as $content)

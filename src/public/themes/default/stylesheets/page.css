@@ -52,7 +52,6 @@ header #header-greeting, header #header-navigation {
     font-family: Verdana, Arial, sans-serif;
 
     background-color: var(--header-footer-background-color);
-    box-shadow: var(--box-shadow);
 }
 
 header #header-navigation li {
@@ -104,7 +103,6 @@ header #header-search input[type='text'] {
     border: 1px var(--accent-color);
     padding: 2px;
     color: var(--font-color);
-    border-radius: 5px;
 }
 
 #content {

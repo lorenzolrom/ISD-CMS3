@@ -81,6 +81,10 @@ class PostController extends Controller
             else if (sizeof($uriParts) == 1)
             {
                 $post = PostDatabaseHandler::selectById((int)(array_shift($uriParts)));
+
+                if(!$post->getDisplayed())
+                    throw new PostNotFoundException(PostNotFoundException::MESSAGES[PostNotFoundException::POST_IS_DISABLED], PostNotFoundException::POST_IS_DISABLED);
+
                 $page = new PostPage($post);
                 return $page->getHTML();
             }
